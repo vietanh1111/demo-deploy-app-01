@@ -22,6 +22,19 @@ app.get('/listUsers', function (req, res) {
 
 app.post('/sayHello', function (req, res) {
     console.log("1")
+    var POST = {};
+    if (req.method == 'POST') {
+        req.on('data', function(data) {
+            data = data.toString();
+            data = data.split('&');
+            for (var i = 0; i < data.length; i++) {
+                var _data = data[i].split("=");
+                POST[_data[0]] = _data[1];
+            }
+            console.log(POST);
+        })
+    }    
+    
     var request = require('request');
     console.log("2")
     request.post(
@@ -34,6 +47,7 @@ app.post('/sayHello', function (req, res) {
             } else {
                 console.log("got error")
             }
+            console.log("vietanh12")
         }
     );
 
