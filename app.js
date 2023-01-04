@@ -22,16 +22,21 @@ app.get('/listUsers', function (req, res) {
 
 app.post('/sayHello', function (req, res) {
     var request = require('request');
-
+    console.log("say hello request start post")
     request.post(
         'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
         { json: { "text": 'helllo' } },
         function (error, response, body) {
+            console.log("vietanh11")
             if (!error && response.statusCode == 200) {
                 console.log(body);
+            } else {
+                console.log("got error")
             }
         }
     );
+
+    res.end("sayHello End");
 })
 var server = app.listen(port, function () {
    var host = server.address().address
