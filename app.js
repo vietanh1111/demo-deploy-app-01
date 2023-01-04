@@ -21,8 +21,9 @@ app.get('/listUsers', function (req, res) {
 })
 
 app.post('/sayHello', function (req, res) {
+    console.log("1")
     var request = require('request');
-    console.log("say hello request start post")
+    console.log("2")
     request.post(
         'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
         { json: { "text": 'helllo' } },
