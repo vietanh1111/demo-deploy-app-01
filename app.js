@@ -20,18 +20,14 @@ app.get('/listUsers', function (req, res) {
    });
 })
 
-app.post('/sayHello', function (req, res) {
-    var request = require('request');
-
-    request.post(
-        'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
-        { json: { "text": 'helllo' } },
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(body);
-            }
-        }
-    );
+app.post('/addUser', function (req, res) {
+   // First read existing users.
+   fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
+      data = JSON.parse( data );
+      data["user4"] = user["user4"];
+      console.log( data );
+      res.end( JSON.stringify(data));
+   });
 })
 var server = app.listen(port, function () {
    var host = server.address().address

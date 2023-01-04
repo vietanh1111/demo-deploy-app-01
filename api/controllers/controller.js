@@ -1,3 +1,8 @@
+'use strict'
+
+
+const table = 'products'
+
 module.exports = {
     get: (req, res) => {
         res.json({message: 'Get success!'})
