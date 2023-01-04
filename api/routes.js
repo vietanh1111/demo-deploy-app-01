@@ -1,4 +1,3 @@
-'use strict';
 module.exports = function(app) {
   var my_controller = require('./controllers/controller');
 
