@@ -22,9 +22,15 @@ app.get('/listUsers', function (req, res) {
 
 app.post('/sayHello', function (req, res) {
     console.log("1")
+    console.log("req===========")
+    console.log(req)
+    console.log("res===========")
+    console.log(res)
     var POST = {};
     if (req.method == 'POST') {
         req.on('data', function(data) {
+            console.log("data===========")
+            console.log(data)
             data = data.toString();
             data = data.split('&');
             for (var i = 0; i < data.length; i++) {
@@ -42,8 +48,11 @@ app.post('/sayHello', function (req, res) {
         { json: { "text": 'helllo' } },
         function (error, response, body) {
             console.log("vietanh11")
+            console.log("error===========")
             console.log(error)
+            console.log("response===========")
             console.log(response)
+            console.log("body===========")
             console.log(body)
             if (!error && response.statusCode == 200) {
                 console.log(body);
