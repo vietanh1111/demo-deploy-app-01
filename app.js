@@ -47,19 +47,19 @@ app.post('/sayHello', function (req, res) {
         'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
         { json: { "text": 'helllo' } },
         function (error, response, body) {
-            console.log("vietanh11")
-            console.log("error===========")
-            console.log(error)
-            console.log("response===========")
-            console.log(response)
-            console.log("body===========")
-            console.log(body)
+            // console.log("vietanh11")
+            // console.log("error===========")
+            // console.log(error)
+            // console.log("response===========")
+            // console.log(response)
+            // console.log("body===========")
+            // console.log(body)
             if (!error && response.statusCode == 200) {
-                console.log(body);
+                // console.log(body);
             } else {
-                console.log("got error")
+                // console.log("got error")
             }
-            console.log("vietanh12")
+            // console.log("vietanh12")
         }
     );
 
