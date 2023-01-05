@@ -34,7 +34,7 @@ app.post('/sayHello', function (req, res) {
             console.log(POST);
         })
     }    
-    
+
     var request = require('request');
     console.log("2")
     request.post(
@@ -42,6 +42,9 @@ app.post('/sayHello', function (req, res) {
         { json: { "text": 'helllo' } },
         function (error, response, body) {
             console.log("vietanh11")
+            console.log(error)
+            console.log(response)
+            console.log(body)
             if (!error && response.statusCode == 200) {
                 console.log(body);
             } else {
