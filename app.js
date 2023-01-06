@@ -81,7 +81,19 @@ app.post('/sayHello', function (req, res) {
                 },
                 "Minh Nguyen Chinh" : {
                     "email": "minh.nguyenchinh@gameloft.com"
-                }             
+                },  
+                "Duy Nguyen Khanh" : {
+                    "email": "duy.nguyenkhanh@gameloft.com"
+                }, 
+                "Giang Trinh Thuy" : {
+                    "email": "giang.trinhthuy@gameloft.com"
+                }, 
+                "Anh Bui Thi Ngoc" : {
+                    "email": "anh.buithingoc@gameloft.com"
+                }, 
+                "Dung Nguyen Phuong 2" : {
+                    "email": "dung.nguyenphuong2@gameloft.com"
+                }                                                                                                                      
             }
             const keys = Object.keys(team_member);
             for (let i = 0; i < keys.length; i++) {
