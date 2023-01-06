@@ -25,7 +25,7 @@ app.post('/sayHello', function (req, res) {
     if (req.method == 'POST') {
         req.on('data', function(data) {
             console.log("data===========")
-            console.log(data)
+            // console.log(data)
             data = data.toString();
             data = data.split('&');
             for (var i = 0; i < data.length; i++) {
