@@ -21,11 +21,6 @@ app.get('/listUsers', function (req, res) {
 })
 
 app.post('/sayHello', function (req, res) {
-    console.log("1")
-    console.log("req===========")
-    console.log(req)
-    console.log("res===========")
-    console.log(res)
     var POST = {};
     if (req.method == 'POST') {
         req.on('data', function(data) {
@@ -42,24 +37,15 @@ app.post('/sayHello', function (req, res) {
     }    
 
     var request = require('request');
-    console.log("2")
     request.post(
         'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
         { json: { "text": 'helllo' } },
         function (error, response, body) {
-            // console.log("vietanh11")
-            // console.log("error===========")
-            // console.log(error)
-            // console.log("response===========")
-            // console.log(response)
-            // console.log("body===========")
-            // console.log(body)
             if (!error && response.statusCode == 200) {
-                // console.log(body);
+                console.log(body);
             } else {
-                // console.log("got error")
+                console.log("got error")
             }
-            // console.log("vietanh12")
         }
     );
 
