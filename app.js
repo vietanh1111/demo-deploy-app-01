@@ -24,14 +24,19 @@ app.post('/sayHello', function (req, res) {
     var POST = {};
     if (req.method == 'POST') {
         req.on('data', function(data) {
-            console.log("data===========")
-            // console.log(data)
+            console.log("data=========== 1")
+            console.log(data)
             data = data.toString();
+            console.log("data=========== 2")
+            console.log(data);
             data = data.split('&');
+            console.log("data=========== 3")
+            console.log(data);            
             for (var i = 0; i < data.length; i++) {
                 var _data = data[i].split("=");
                 POST[_data[0]] = _data[1];
             }
+            console.log("data=========== 4")
             console.log(POST);
         })
     }    
