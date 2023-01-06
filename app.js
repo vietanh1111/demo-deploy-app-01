@@ -33,7 +33,8 @@ app.post('/sayHello', function (req, res) {
         })
     }    
 
-    var list = []
+    console.log("jsonData")
+    console.log(jsonData)
     var membersData = jsonData.text.split('\n');
     var idx = 0
     var myname = ""
