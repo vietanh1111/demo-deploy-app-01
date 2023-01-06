@@ -111,7 +111,7 @@ app.post('/sayHello', function (req, res) {
             var request = require('request');
             request.post(
                 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
-                { json: { "text": "**THANK YOU!** " + good_members +  "\nYour reports were recorded :pepe_xmasclap: :pepe_xmasclap: :pepe_xmasclap: \n\n :pepe-dao: :pepe-dao: :pepe-dao:" + bad_members } },
+                { json: { "text": "**THANK YOU!** \n" + good_members +  "\nYour reports were recorded :pepe_xmasclap: :pepe_xmasclap: :pepe_xmasclap: \n\n# :pepe-dao: :pepe-dao: :pepe-dao: \n" + bad_members } },
                 function (error, response, body) {
                     if (!error && response.statusCode == 200) {
                         console.log(body);
