@@ -99,9 +99,9 @@ app.post('/sayHello', function (req, res) {
             for (let i = 0; i < keys.length; i++) {
                 const key = keys[i];
                 if (key in myData) {
-                    good_members.push(key)
+                    good_members.push(team_member[key])
                 } else {
-                    bad_members.push(key)
+                    bad_members.push(team_member[key])
                 }
             }
 
@@ -112,7 +112,7 @@ app.post('/sayHello', function (req, res) {
                     // if (myData[value]["stuck"].includes('1. no') || myData[value]["stuck"].includes('1. No'))
                     //     console.log(value)
                     // else
-                        stuck_members.push(value)
+                        stuck_members.push(team_member[value])
                 }
             }
             
