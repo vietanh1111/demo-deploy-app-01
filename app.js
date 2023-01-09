@@ -61,8 +61,8 @@ function convertToEmail(list) {
         }
     }
     console.log("email_list")
-    console.log(email_list.toString())
-    return email_list.toString()
+    console.log(email_list)
+    return email_list
 } 
 
 app.post('/sayHello', function (req, res) {
