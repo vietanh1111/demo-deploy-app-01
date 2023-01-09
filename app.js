@@ -57,6 +57,8 @@ function convertToEmail(list) {
     list.forEach(getEmail)
     function getEmail(name) {
         if (team_member[name] != null) {
+            console.log(name)
+            console.log(team_member[name])
             email_list.push(team_member[name])
         }
     }
