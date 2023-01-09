@@ -60,6 +60,7 @@ function convertToEmail(list) {
             email_list.push(team_member[name])
         }
     }
+    console.log("email_list")
     console.log(email_list.toString())
     return email_list.toString()
 } 
@@ -130,9 +131,9 @@ app.post('/sayHello', function (req, res) {
                 }
             }
             
-            console.log(good_members)
-            console.log(stuck_members.toString())
-            console.log(bad_members)
+            // console.log(good_members)
+            // console.log(stuck_members.toString())
+            // console.log(bad_members)
 
             var request = require('request');
             request.post(
