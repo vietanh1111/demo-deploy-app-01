@@ -2,6 +2,36 @@ var express = require('express');
 var app = express();
 var fs = require("fs");
 
+team_member = {
+    "Anh Nguyen Viet 6" : {
+        "email": "anh.nguyenviet6@gameloft.com"
+    },
+    "Quy Nguyen Ngoc" : {
+        "email": "quy.nguyenngoc@gameloft.com"
+    },  
+    "Duc Luu Trong" : {
+        "email": "duc.luutrong@gameloft.com"
+    },
+    "Trung Mai Duc 2" : {
+        "email": "trung.maiduc2@gameloft.com"
+    },
+    "Minh Nguyen Chinh" : {
+        "email": "minh.nguyenchinh@gameloft.com"
+    },  
+    "Duy Nguyen Khanh" : {
+        "email": "duy.nguyenkhanh@gameloft.com"
+    }, 
+    "Giang Trinh Thuy" : {
+        "email": "giang.trinhthuy@gameloft.com"
+    }, 
+    "Anh Bui Thi Ngoc" : {
+        "email": "anh.buithingoc@gameloft.com"
+    }, 
+    "Dung Nguyen Phuong 2" : {
+        "email": "dung.nguyenphuong2@gameloft.com"
+    }                                                                                                                      
+}
+
 const port = process.env.PORT || 3000
 
 var user = {
@@ -21,6 +51,18 @@ app.get('/listUsers', function (req, res) {
       res.end( data );
    });
 })
+
+function convertToEmail(list) {
+    var email_list = []
+    list.forEach(getEmail)
+    function getEmail(name) {
+        if (team_member[name] != null) {
+            email_list.push(team_member[name])
+        }
+    }
+    console.log(email_list.toString())
+    return email_list.toString()
+} 
 
 app.post('/sayHello', function (req, res) {
     var jsonData = {};
@@ -66,42 +108,14 @@ app.post('/sayHello', function (req, res) {
 
             good_members = []
             bad_members = []
-            team_member = {
-                "Anh Nguyen Viet 6" : {
-                    "email": "anh.nguyenviet6@gameloft.com"
-                },
-                "Quy Nguyen Ngoc" : {
-                    "email": "quy.nguyenngoc@gameloft.com"
-                },  
-                "Duc Luu Trong" : {
-                    "email": "duc.luutrong@gameloft.com"
-                },
-                "Trung Mai Duc 2" : {
-                    "email": "trung.maiduc2@gameloft.com"
-                },
-                "Minh Nguyen Chinh" : {
-                    "email": "minh.nguyenchinh@gameloft.com"
-                },  
-                "Duy Nguyen Khanh" : {
-                    "email": "duy.nguyenkhanh@gameloft.com"
-                }, 
-                "Giang Trinh Thuy" : {
-                    "email": "giang.trinhthuy@gameloft.com"
-                }, 
-                "Anh Bui Thi Ngoc" : {
-                    "email": "anh.buithingoc@gameloft.com"
-                }, 
-                "Dung Nguyen Phuong 2" : {
-                    "email": "dung.nguyenphuong2@gameloft.com"
-                }                                                                                                                      
-            }
+
             const keys = Object.keys(team_member);
             for (let i = 0; i < keys.length; i++) {
                 const key = keys[i];
                 if (key in myData) {
-                    good_members.push(team_member[key])
+                    good_members.push(key)
                 } else {
-                    bad_members.push(team_member[key])
+                    bad_members.push(key)
                 }
             }
 
@@ -109,10 +123,10 @@ app.post('/sayHello', function (req, res) {
             good_members.forEach(checkStuck)
             function checkStuck(value, index, array) {
                 if (myData[value]["stuck"] != null) {
-                    // if (myData[value]["stuck"].includes('1. no') || myData[value]["stuck"].includes('1. No'))
-                    //     console.log(value)
-                    // else
-                        stuck_members.push(team_member[value])
+                    if (myData[value]["stuck"].includes('1. no') || myData[value]["stuck"].includes('1. No'))
+                        console.log(value)
+                    else
+                        stuck_members.push(value)
                 }
             }
             
@@ -123,7 +137,7 @@ app.post('/sayHello', function (req, res) {
             var request = require('request');
             request.post(
                 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
-                { json: { "text": "**THANK YOU!** \n" + good_members +  " Your reports were recorded\n :pepe_xmasclap: :pepe_xmasclap: :pepe_xmasclap: \n\n--------------------------------\n\n:pepe-dao: :pepe-dao: :pepe-dao: \n" + bad_members + "\n\n--------------------------------\n" + stuck_members + " You seems got issues, Could i help you?" } },
+                { json: { "text": "**THANK YOU!** \n" + convertToEmail(good_members) +  " Your reports were recorded\n :pepe_xmasclap: :pepe_xmasclap: :pepe_xmasclap: \n\n--------------------------------\n\n:pepe-dao: :pepe-dao: :pepe-dao: \n" + convertToEmail(bad_members) + "\n\n--------------------------------\n" + convertToEmail(stuck_members) + " You seems got issues, Could i help you?" } },
                 function (error, response, body) {
                     if (!error && response.statusCode == 200) {
                         console.log(body);
