@@ -57,14 +57,12 @@ function convertToEmail(list) {
     list.forEach(getEmail)
     function getEmail(name) {
         if (team_member[name] != null) {
-            console.log(name)
-            console.log(team_member[name])
-            email_list.push(team_member[name])
+            email_list.push(team_member[name][email])
         }
     }
     console.log("email_list")
-    console.log(email_list)
-    return email_list
+    console.log(email_list.toString())
+    return email_list.toString()
 } 
 
 app.post('/sayHello', function (req, res) {
