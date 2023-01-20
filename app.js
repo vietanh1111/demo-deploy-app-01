@@ -46,9 +46,20 @@ var user = {
 app.get('/listUsers', function (req, res) {
    fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
     //   console.log( data );
-      jsonData = JSON.parse(data)
-      console.log( jsonData.user1 );
-      res.end( data );
+
+    console.log( "vietanh git" );
+    var execProcess = require("./exec_process.js");
+    execProcess.result("sh temp.sh", function(err, response){
+        if(!err){
+            console.log(response);
+        }else {
+            console.log(err);
+        }
+    });
+
+    jsonData = JSON.parse(data)
+    console.log( jsonData.user1 );
+    res.end( data );
    });
 })
 
