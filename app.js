@@ -47,6 +47,39 @@ app.get('/listUsers', function (req, res) {
    fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
     //   console.log( data );
 
+
+
+    const fs = require('fs')
+      
+    // // Data which will write in a file.
+    // let data2 = "Learning how to write in a file."
+      
+    // // Write data in 'Output.txt' .
+    // fs.writeFile('Output.txt', data2, (err) => {
+          
+    //     // In case of a error throw err.
+    //     if (err) throw err;
+    // })
+
+    const path = "./Output.txt";
+
+    if (fs.existsSync(path)) {
+        // path exists
+        console.log("exists:", path);
+        fs.appendFile('Output.txt', '\ndata to append', function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+        });        
+    } else {
+        console.log("DOES NOT exist:", path);
+        // Write data in 'Output.txt' .
+        fs.writeFile('Output.txt', "aaaaa", (err) => {
+            
+            // In case of a error throw err.
+            if (err) throw err;
+        })
+    }
+
     console.log( "vietanh git" );
     var execProcess = require("./exec_process.js");
     execProcess.result("sh temp.sh", function(err, response){
@@ -56,7 +89,7 @@ app.get('/listUsers', function (req, res) {
             console.log(err);
         }
     });
-
+    
     jsonData = JSON.parse(data)
     console.log( jsonData.user1 );
     res.end( data );
@@ -165,5 +198,6 @@ app.post('/sayHello', function (req, res) {
 var server = app.listen(port, function () {
    var host = server.address().address
    var port = server.address().port
+   // http://127.0.0.1:3000/listUsers
    console.log("Example app listening at http://%s:%s", host, port)
 })
