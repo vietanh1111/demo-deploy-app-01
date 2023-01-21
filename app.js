@@ -196,7 +196,8 @@ app.post('/sayHello', function (req, res) {
             if (fs.existsSync(path)) {
                 // path exists
                 console.log("exists:", path);
-                fs.appendFile('Output.txt', jsonData.text, function (err) {
+                // fs.appendFile('Output.txt', jsonData.text, function (err) {
+                fs.appendFile('Output.txt', "jsonData.text", function (err) {
                 if (err) throw err;
                 console.log('Saved!');
                 });        
