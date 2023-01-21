@@ -15,4 +15,4 @@ python --version
 echo "aaaaaa"
 git add .
 git commit -m "asadsa"
-# git push origin HEAD:main
+git push origin HEAD:main
