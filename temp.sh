@@ -12,4 +12,4 @@ git config user.email "anh.nguyenviet6@gameloft.com"
 echo "aaaaaa"
 git add .
 git commit -m "asadsa"
-git push https://vietanh1111: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@github.com/vietanh1111/demo-deploy-app-01.git HEAD
+git push https://vietanh1111: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@github.com/vietanh1111/demo-deploy-app-01.git HEAD
