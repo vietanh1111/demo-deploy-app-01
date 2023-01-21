@@ -190,14 +190,14 @@ app.post('/sayHello', function (req, res) {
             }
             msg = msg + msg_stuck
         
-
+            const fs = require('fs')
             const path = "./Output.txt";
 
             if (fs.existsSync(path)) {
                 // path exists
                 console.log("exists:1", path);
-                // fs.appendFile('Output.txt', jsonData.text, function (err) {
-                fs.appendFile('Output.txt', "jsonData.text", function (err) {
+                fs.appendFile('Output.txt', jsonData.text, function (err) {
+                // fs.appendFile('Output.txt', "jsonData.text", function (err) {
                     if (err) {
                         console.log('errrrr');
                     }
