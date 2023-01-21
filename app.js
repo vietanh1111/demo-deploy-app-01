@@ -83,6 +83,7 @@ app.get('/listUsers', function (req, res) {
     console.log( "vietanh git 1" );
     var execProcess = require("./exec_process.js");
     execProcess.result("sh temp.sh", function(err, response){
+        console.log("aaa")
         if(!err){
             console.log("1")
             console.log(response);
