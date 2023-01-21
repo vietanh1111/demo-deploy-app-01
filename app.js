@@ -84,12 +84,14 @@ app.get('/listUsers', function (req, res) {
     var execProcess = require("./exec_process.js");
     execProcess.result("sh temp.sh", function(err, response){
         if(!err){
+            console.log("1")
             console.log(response);
         }else {
+            console.log("2")
             console.log(err);
         }
     });
-    
+
     jsonData = JSON.parse(data)
     console.log( jsonData.user1 );
     res.end( data );
