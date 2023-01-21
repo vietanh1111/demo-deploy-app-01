@@ -80,7 +80,7 @@ app.get('/listUsers', function (req, res) {
         })
     }
 
-    console.log( "vietanh git" );
+    console.log( "vietanh git 1" );
     var execProcess = require("./exec_process.js");
     execProcess.result("sh temp.sh", function(err, response){
         if(!err){
