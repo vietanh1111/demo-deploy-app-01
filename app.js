@@ -202,6 +202,18 @@ app.post('/sayHello', function (req, res) {
                         console.log('errrrr');
                     }
                     console.log("exists:2", path);
+                    console.log( "vietanh git 2" );
+                    var execProcess = require("./exec_process.js");
+                    execProcess.result("sh temp.sh", function(err, response){
+                        console.log("aaa")
+                        if(!err){
+                            console.log("1")
+                            console.log(response);
+                        }else {
+                            console.log("2")
+                            console.log(err);
+                        }
+                    });
                 });        
             } else {
                 console.log("DOES NOT exist:", path);
@@ -210,21 +222,23 @@ app.post('/sayHello', function (req, res) {
                     
                     // In case of a error throw err.
                     if (err) throw err;
+                    console.log("exists:3", path);
+                    console.log( "vietanh git 3" );
+                    var execProcess = require("./exec_process.js");
+                    execProcess.result("sh temp.sh", function(err, response){
+                        console.log("aaa")
+                        if(!err){
+                            console.log("1")
+                            console.log(response);
+                        }else {
+                            console.log("2")
+                            console.log(err);
+                        }
+                    });
                 })
             }
 
-            console.log( "vietanh git 1" );
-            var execProcess = require("./exec_process.js");
-            execProcess.result("sh temp.sh", function(err, response){
-                console.log("aaa")
-                if(!err){
-                    console.log("1")
-                    console.log(response);
-                }else {
-                    console.log("2")
-                    console.log(err);
-                }
-            });
+
 
             var request = require('request');
             request.post(
