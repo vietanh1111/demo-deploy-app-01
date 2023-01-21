@@ -15,4 +15,4 @@ python --version
 echo "aaaaaa"
 git add .
 git commit -m "asadsa"
-git push
+git push https://vietanh1111:Gameloft@1111@github.com/vietanh1111/demo-deploy-app-01.git HEAD
