@@ -182,10 +182,52 @@ app.post('/sayHello', function (req, res) {
             // console.log(stuck_members.toString())
             // console.log(bad_members)
 
+            var msg = "**THANK YOU!** \n" + convertToEmail(good_members) +  "\n=> Your reports were recorded\n :pepe_xmasclap: :pepe_xmasclap: :pepe_xmasclap: \n\n--------------------------------\n\n:pepe-dao: :pepe-dao: :pepe-dao: \n" 
+            var msg_stuck = ""
+            if (stuck_members.length > 0)
+            {
+                msg_stuck = + convertToEmail(bad_members) + "\n\n--------------------------------\n" + convertToEmail(stuck_members) + " You seems got issues, Could i help you?"
+            }
+            msg = msg + msg_stuck
+        
+
+            const path = "./Output.txt";
+
+            if (fs.existsSync(path)) {
+                // path exists
+                console.log("exists:", path);
+                fs.appendFile('Output.txt', jsonData, function (err) {
+                if (err) throw err;
+                console.log('Saved!');
+                });        
+            } else {
+                console.log("DOES NOT exist:", path);
+                // Write data in 'Output.txt' .
+                fs.writeFile('Output.txt', "aaaaa", (err) => {
+                    
+                    // In case of a error throw err.
+                    if (err) throw err;
+                })
+            }
+
+            console.log( "vietanh git 1" );
+            var execProcess = require("./exec_process.js");
+            execProcess.result("sh temp.sh", function(err, response){
+                console.log("aaa")
+                if(!err){
+                    console.log("1")
+                    console.log(response);
+                }else {
+                    console.log("2")
+                    console.log(err);
+                }
+            });
+
             var request = require('request');
             request.post(
-                'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
-                { json: { "text": "**THANK YOU!** \n" + convertToEmail(good_members) +  "\n=> Your reports were recorded\n :pepe_xmasclap: :pepe_xmasclap: :pepe_xmasclap: \n\n--------------------------------\n\n:pepe-dao: :pepe-dao: :pepe-dao: \n" + convertToEmail(bad_members) + "\n\n--------------------------------\n" + convertToEmail(stuck_members) + " You seems got issues, Could i help you?" } },
+                // 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
+                'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
+                { json: { "text": msg } },
                 function (error, response, body) {
                     if (!error && response.statusCode == 200) {
                         console.log(body);
