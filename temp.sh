@@ -10,4 +10,4 @@ git config user.name "vietanh6"
 git config user.email "anh.nguyenviet6@gameloft.com"
 git add .
 git commit -m "asadsa"
-git push origin
+git push origin HEAD:main
