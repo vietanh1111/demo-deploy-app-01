@@ -31,3 +31,5 @@ data to append#### Standup Report for *20 Jan 2023*
 ##### What do you plan today?
 1. re-check game server build script
 
+#### Standup Report for *23 Jan 2023*
+:warning: **No user has submitted their standup.**
