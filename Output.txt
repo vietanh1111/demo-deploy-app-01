@@ -65,3 +65,35 @@ data to append#### Standup Report for *20 Jan 2023*
 ##### What do you plan today?
 1. re-check game server build script
 
+#### Standup Report for *20 Jan 2023*
+
+@duy.nguyenkhanh, @anh.buithingoc, @duc.luutrong, @giang.trinhthuy, @dat.letien2, @trung.maiduc2 have not submitted their standup
+
+#### ![User Avatar](/api/v4/users/nig1sq5m9tdx8mhxi7oy9gorer/image =20x20) Anh Nguyen Viet 6
+
+##### What did you do/learn yesterday ?
+1. Crashlytics: crash ruinrewards (cont)
+1. Minor update in premake android
+1. Non-project: check android studio module with the lib owners
+
+#### ![User Avatar](/api/v4/users/fj31qg9kxbdpjx4pwgwbye4bpe/image =20x20) Minh Nguyen Chinh
+
+##### What did you do/learn yesterday ?
+1. Did resignation things
+1. Created a new feature gamestate
+1. Check bugs in Jira
+
+##### Is there any problems which need to be help?
+1. No
+
+##### What do you plan today?
+1. Continue implement new feature gamestate
+
+#### ![User Avatar](/api/v4/users/7j19qibd43ynjdj6ubxzr6epfe/image =20x20) Quy Nguyen Ngoc
+
+##### What did you do/learn yesterday ?
+1. fix use_alipay_sandbox hpk config
+
+##### What do you plan today?
+1. re-check game server build script
+
