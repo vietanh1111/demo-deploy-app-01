@@ -142,7 +142,7 @@ app.post('/report', function (req, res) {
                     console.log(filters[2])
                     myname = filters[2].trim()
                     myData[currentDate][myname] = {}
-                } else if (filters = value.match(reReports) && myname) {
+                } else if (filters = value.match(reReports)) {
                     console.log("Parsing data 2")
                     console.log(myname)
                     console.log(myData[currentDate][myname]["reports"])
