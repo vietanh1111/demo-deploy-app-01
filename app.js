@@ -132,11 +132,13 @@ app.post('/report', function (req, res) {
             const reReports = /(.*)/
             membersData.forEach(readData)
             function readData(value, index, array) {
+                console.log("value")
                 console.log(value)
                 if (filters = value.match(reName)) {
+                    console.log("Parsing data 1")
                     myname = filters[2].trim()
                     myData[currentDate][myname] = {}
-                } else if (filters = value.match(reReports)) {
+                } else if (filters = value.match(reReports) && myname) {
                     console.log("Parsing data 2")
                     console.log(myname)
                     console.log(myData[currentDate][myname]["reports"])
