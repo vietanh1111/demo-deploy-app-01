@@ -160,7 +160,7 @@ app.post('/report', function (req, res) {
             if (fs.existsSync(data_path)) {
                 // path exists
                 const myJSON = JSON.stringify(merged, null, 3);
-                fs.writeFile('Output.txt', myJSON, (err) => {
+                fs.writeFile(data_path, myJSON, (err) => {
                     // In case of a error throw err.
                     if (err) throw err;
                     console.log("exists:3", data_path);
@@ -183,7 +183,7 @@ app.post('/report', function (req, res) {
 
             let myQuest = {
                 "model": "text-davinci-003",
-                "prompt": "Could you help to thank the report of " + myname + "?",
+                "prompt": "Could you help me to thank the report of " + myname + "?",
             }            
             try {
                 const completion = await openaiObj.createCompletion(myQuest);
