@@ -154,6 +154,7 @@ app.post('/sayHello', function (req, res) {
         req.on('data', function(data) {
             data = data.toString()
             jsonData = JSON.parse(data)
+            console.log("jsonData.text")
             console.log(jsonData.text)
             var membersData = jsonData.text.split('\n');
             var myname = ""
@@ -168,6 +169,7 @@ app.post('/sayHello', function (req, res) {
             let currentDate = `${year}-${month}-${day}`;
 
             myData[currentDate] = {}
+
             console.log("Parsing data")
             const reName = /(Reporting for )(.*)/;
             const reReports = /(.*)/
