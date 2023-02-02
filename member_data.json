@@ -1,5 +1,11 @@
 {
    "2023-2-2": {
+      "giang.trinhthuy@gameloft.com": {
+         "reports": [
+            "+ successfully posted sigils with abnormal amount in inventory to mattermost upon detection",
+            "+ try to reproduce the sigil amount bug"
+         ]
+      },
       "@trung.maiduc2:": {
          "reports": [
             "- Update UC and 4399 SDK",
