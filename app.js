@@ -178,12 +178,12 @@ app.post('/report', function (req, res) {
                     console.log("exists:3", data_path);
                     console.log("vietanh git 3");
                     var execProcess = require("./exec_process.js");
-                    execProcess.result("sh temp.sh", function(err, response){
+                    execProcess.result("sh temp.sh", function (err, response) {
                         console.log("aaa")
-                        if(!err){
+                        if (!err) {
                             console.log("1")
                             console.log(response);
-                        }else {
+                        } else {
                             console.log("2")
                             console.log(err);
                         }
@@ -192,11 +192,18 @@ app.post('/report', function (req, res) {
             }
 
             let msg = ""
-
+            console.log(myData[currentDate][myname]["reports"] + "?")
             let myQuest = {
                 "model": "text-davinci-003",
-                "prompt": "Could you help me to thank the report of " + myname + "?",
-            }            
+                // "prompt": "Say thank the report of " + myname + "?",
+                "prompt": "Give me an very short explain of the report: " + myData[currentDate][myname]["reports"] + "?",
+                "max_tokens": 1000,
+                // "temperature": 0,
+                "top_p": 0.2,
+                "n": 1,
+                "stream": false,
+                "logprobs": null,             
+            }
             try {
                 const completion = await openaiObj.createCompletion(myQuest);
                 console.log(completion.data.choices[0].text);
@@ -212,8 +219,14 @@ app.post('/report', function (req, res) {
 
             let myQuest2 = {
                 "model": "text-davinci-003",
-                "prompt": "can you wish me" + " a good day?"
-            }            
+                "prompt": "Say thank the report of " + myname + "?" + "say wish me a good working day",
+                "max_tokens": 1000,
+                // "temperature": 0,
+                "top_p": 0.9,
+                "n": 1,
+                "stream": false,
+                "logprobs": null,                
+            }
             try {
                 const completion = await openaiObj.createCompletion(myQuest2);
                 console.log(completion.data.choices[0].text);
@@ -225,7 +238,7 @@ app.post('/report', function (req, res) {
                 } else {
                     console.log(error.message);
                 }
-            }            
+            }
             var request = require('request');
             request.post(
                 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
@@ -244,7 +257,69 @@ app.post('/report', function (req, res) {
     }
 })
 
-app.post('/numOfReport', function (req, res) {
+app.post('/sendMsg', function (req, res) {
+    if (req.method == 'POST') {
+        req.on('data', async function (data) {
+            let msg = ""
+
+            let myQuest = {
+                "model": "text-davinci-003",
+                "prompt": "hello bot",
+            }
+            try {
+                const completion = await openaiObj.createCompletion(myQuest);
+                let myQuest2 = {
+                    "model": "text-davinci-003",
+                    "prompt": "Help me give my teammates reminder that \"you need to fill out the daily task today\"",
+                    "max_tokens": 1000,
+                    // "temperature": 0,
+                    "top_p": 0.5,
+                    "n": 1,
+                    "stream": false,
+                    "logprobs": null,
+                    // "stop": "\n",
+                }
+                try {
+                    const completion = await openaiObj.createCompletion(myQuest2);
+                    console.log(completion.data.choices[0].text);
+                    msg = completion.data.choices[0].text
+                    msg = "# " + msg.trim()
+                } catch (error) {
+                    if (error.response) {
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                    } else {
+                        console.log(error.message);
+                    }
+                }
+            } catch (error) {
+                if (error.response) {
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                } else {
+                    console.log(error.message);
+                }
+            }
+
+            var request = require('request');
+            request.post(
+                'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
+                // 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
+                { json: { "text": msg } },
+                function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                        console.log(body);
+                    } else {
+                        console.log("got error")
+                    }
+                }
+            );
+            res.end("sayHello End");
+        })
+    }
+})
+
+app.post('/sendMsg', function (req, res) {
     if (req.method == 'POST') {
         req.on('data', async function (data) {
             let dataStr = data.toString()
@@ -263,11 +338,10 @@ app.post('/numOfReport', function (req, res) {
 
             }
 
-            res.end("numOfReport End");     
+            res.end("numOfReport End");
         })
     }
 })
-
 
 function getUserDataFromFile() {
 

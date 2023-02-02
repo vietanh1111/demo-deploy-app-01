@@ -9,7 +9,7 @@ myobj = {}
 
 if sys.argv[1] == 'report':
     print(sys.argv[1])
-    my_text = 'Reporting for anh.nguyenviet6@gameloft.com:\n- aaaa\n- bbbb.\n- cccc'
+    my_text = 'Reporting for anh.nguyenviet6@gameloft.com:\n- Update UC and 4399 SDK\n- Research about modified profile.'
     url = 'http://127.0.0.1:3000/report'
     myobj = {'text': my_text}    
 
@@ -17,6 +17,11 @@ elif sys.argv[1] == 'get_reports':
     print(sys.argv[1])
     url = 'http://127.0.0.1:3000/numOfReport'
     myobj = {'name': "anh.nguyenviet6@gameloft.com"}
+
+elif sys.argv[1] == 'send_msg':
+    print(sys.argv[1])
+    url = 'http://127.0.0.1:3000/sendMsg'
+    myobj = {'name': "anh.nguyenviet6@gameloft.com"}   
 
 x = requests.post(url, json = myobj)
 # # x2 = requests.post(url2, json = myobj2)
