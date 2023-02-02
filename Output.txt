@@ -1,5 +1,11 @@
 {
    "2023-2-2": {
+      "@giang.trinhthuy :": {
+         "reports": [
+            "+ successfully posted sigils with abnormal amount in inventory to mattermost upon detection",
+            "+ try to reproduce the sigil amount bug"
+         ]
+      },
       "@anh.nguyenviet6": {
          "reports": [
             "- check iap_validation Unity",
