@@ -1,5 +1,11 @@
 {
    "2023-2-2": {
+      "@trung.maiduc2:": {
+         "reports": [
+            "- Update UC and 4399 SDK",
+            "- Research about modified profile"
+         ]
+      },
       "@quy.nguyenngoc": {
          "reports": [
             " - built sample unity app and connected it to unity distribution portal",
