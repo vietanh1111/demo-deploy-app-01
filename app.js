@@ -196,7 +196,7 @@ app.post('/report', function (req, res) {
             let myQuest = {
                 "model": "text-davinci-003",
                 // "prompt": "Say thank the report of " + myname + "?",
-                "prompt": "Give me an very short explain of the report: " + myData[currentDate][myname]["reports"] + "?",
+                "prompt": "Give me a short explain of the report: " + myData[currentDate][myname]["reports"] + "?",
                 "max_tokens": 1000,
                 // "temperature": 0,
                 "top_p": 0.2,
