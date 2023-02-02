@@ -211,8 +211,8 @@ app.post('/report', function (req, res) {
             }
             var request = require('request');
             request.post(
-                // 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
-                'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
+                'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
+                // 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
                 { json: { "text": msg } },
                 function (error, response, body) {
                     if (!error && response.statusCode == 200) {
