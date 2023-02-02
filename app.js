@@ -148,7 +148,7 @@ app.post('/report', function (req, res) {
             let readDataStr = ""
             let readDataJson = ""
             try {
-                readDataStr = fs.readFileSync('./Output.txt', 'utf8');
+                readDataStr = fs.readFileSync(data_path, 'utf8');
                 readDataJson = JSON.parse(readDataStr);
             } catch (err) {
             }
