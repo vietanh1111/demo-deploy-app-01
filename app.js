@@ -182,7 +182,8 @@ app.post('/report', function (req, res) {
 
             let myQuest = {
                 "model": "text-davinci-003",
-                "prompt": "Could you help to thank the report of " + myname + "?",
+                // "prompt": "Could you help to thank the report of " + myname + "?",
+                "prompt": "Can you help me compliment the report of " + myname + "?",
             }            
             try {
                 const completion = await openaiObj.createCompletion(myQuest);
