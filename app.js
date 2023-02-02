@@ -184,8 +184,8 @@ app.post('/sayHello', function (req, res) {
 
 
 
-            // console.log("\nShow myData")
-            // console.log('myData : %j', myData);
+            console.log("\nShow myData")
+            console.log('myData : %j', myData);
 
             const fs = require('fs');
             let readDataStr = "" 
