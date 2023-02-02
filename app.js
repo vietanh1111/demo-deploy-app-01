@@ -130,7 +130,7 @@ app.post('/report', function (req, res) {
             myData[currentDate] = {}
 
             console.log("Parsing data")
-            const reName = /Reporting for anh.nguyenviet6@gameloft.com/;
+            const reName = /(Reporting for )(anh.nguyenviet6@gameloft.com)/;
             const reReports = /(.*)/
             membersData.forEach(readData)
             function readData(value, index, array) {
