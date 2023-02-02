@@ -1,5 +1,11 @@
 {
    "2023-2-2": {
+      "@quy.nguyenngoc": {
+         "reports": [
+            " - built sample unity app and connected it to unity distribution portal",
+            " - trying to implement Huawei IAP with UDP"
+         ]
+      },
       "@Anh Bui Thi Ngoc:": {
          "reports": [
             "- Done Update and build newest src",
