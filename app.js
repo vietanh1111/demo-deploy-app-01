@@ -43,24 +43,60 @@ var user = {
    }
 }
 
+// class Member {
+//     /*
+//         name: name of the member
+//         report_contents: contents of the report
+//         report_nums: how many times was the member reported
+//     */
+//     constructor(name, report_contents, report_nums ) {
+//         this.name = name
+//         this.report_contents = report_contents
+//         this.report_nums = report_nums
+//     }
+// }
+
+
+/*
+Steps:
+- Read data.json to initialize member objects from data.json
+e.g.:
+{
+    "20230130" : {
+        "anh.nguyenviet6": {
+            "name":"Vietanh6",
+            "report_contents":"",
+            "report_nums":"0"
+        },
+        "trung.maiduc2": {
+            "name":"MaiDucTrung2",
+            "report_contents":"",
+            "report_nums":0
+        }
+    },
+    "20230131" : {
+        "anh.nguyenviet6": {
+            "name":"Vietanh6",
+            "report_contents":"",
+            "report_nums":"0"
+        },
+        "trung.maiduc2": {
+            "name":"MaiDucTrung2",
+            "report_contents":"",
+            "report_nums":0
+        }
+    }    
+}
+
+- Read data from MM to update each members
+- Save to data.json
+*/
+
 app.get('/listUsers', function (req, res) {
    fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
-    //   console.log( data );
-
-
 
     const fs = require('fs')
       
-    // // Data which will write in a file.
-    // let data2 = "Learning how to write in a file."
-      
-    // // Write data in 'Output.txt' .
-    // fs.writeFile('Output.txt', data2, (err) => {
-          
-    //     // In case of a error throw err.
-    //     if (err) throw err;
-    // })
-
     const path = "./Output.txt";
 
     if (fs.existsSync(path)) {
@@ -119,90 +155,67 @@ app.post('/sayHello', function (req, res) {
             data = data.toString()
             jsonData = JSON.parse(data)
             console.log(jsonData.text)
-            console.log(jsonData.trigger_word)
-            console.log("jsonData")
-            console.log(jsonData)
             var membersData = jsonData.text.split('\n');
-            var idx = 0
             var myname = ""
-            var step = 0
+ 
+            // No Raven
             var myData = {}
 
-            const reName = /([#]{4}\s[!].*[)])(.*)/;
-            const reDoAndLearn = /##### What did you do/;  
-            const reTasks = /1.\s.*/;
-            const reStucksStart = /Is there any problems/;  
-            const reStucks = /1.\s.*/;
+            const date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();            
+            let currentDate = `${year}-${month}-${day}`;
+
+            myData[currentDate] = {}
+            console.log("Parsing data")
+            const reName = /(Reporting for )(.*)/;
+            const reReports = /(.*)/
             membersData.forEach(readData)
             function readData(value, index, array) {
                 if (filters = value.match(reName)) {
-                    step = 0
-                    idx = idx + 1
                     myname = filters[2].trim()
-                    myData[myname] = {}
-
-                } else if (filters = value.match(reDoAndLearn)) {
-                    step = 1
-                    myData[myname]["doAndLearn"] = [];
-                } else if ((filters = value.match(reTasks))&& step == 1) {
-                    myData[myname]["doAndLearn"].push(filters[0])
-                } else if (filters = value.match(reStucksStart)) {
-                    step = 2
-                    myData[myname]["stuck"] = [];
-                } else if ((filters = value.match(reStucks)) && step == 2 ) {
-                    myData[myname]["stuck"].push(filters[0])
+                    myData[currentDate][myname] = {}
+                } else if (filters = value.match(reReports)) {
+                    if(myname != "" && !myData[currentDate][myname]["reports"]) myData[currentDate][myname]["reports"] = [];
+                    myData[currentDate][myname]["reports"].push(filters[0])
                 }
             }
 
-            good_members = []
-            bad_members = []
 
-            const keys = Object.keys(team_member);
-            for (let i = 0; i < keys.length; i++) {
-                const key = keys[i];
-                if (key in myData) {
-                    good_members.push(key)
-                } else {
-                    bad_members.push(key)
-                }
+
+            // console.log("\nShow myData")
+            // console.log('myData : %j', myData);
+
+            const fs = require('fs');
+            let readDataStr = "" 
+            let readDataJson = "" 
+            try {
+                readDataStr = fs.readFileSync('./Output.txt', 'utf8');
+                readDataJson = JSON.parse(readDataStr);
+            } catch (err) {
             }
 
-            stuck_members = []
-            good_members.forEach(checkStuck)
-            function checkStuck(value, index, array) {
-                if (myData[value]["stuck"] != null) {
-                    if (myData[value]["stuck"].includes('1. no') || myData[value]["stuck"].includes('1. No'))
-                        console.log(value)
-                    else
-                        stuck_members.push(value)
-                }
-            }
-            
-            // console.log(good_members)
-            // console.log(stuck_members.toString())
-            // console.log(bad_members)
+            const JSONObjectMerge = require("json-object-merge");
+            const merged = JSONObjectMerge.default(myData, readDataJson);
 
-            var msg = "**THANK YOU!** \n" + convertToEmail(good_members) +  "\n=> Your reports were recorded\n :pepe_xmasclap: :pepe_xmasclap: :pepe_xmasclap: \n\n--------------------------------\n\n:pepe-dao: :pepe-dao: :pepe-dao: \n" 
-            var msg_stuck = ""
-            if (stuck_members.length > 0)
-            {
-                msg_stuck = + convertToEmail(bad_members) + "\n\n--------------------------------\n" + convertToEmail(stuck_members) + " You seems got issues, Could i help you?"
-            }
-            msg = msg + msg_stuck
-        
-            const fs = require('fs')
+            console.log(JSON.stringify(merged, null, 3));
+
+            // merge myDataJson to readDataJson
+
+    
             const path = "./Output.txt";
 
             if (fs.existsSync(path)) {
                 // path exists
                 console.log("exists:1", path);
-                fs.appendFile('Output.txt', jsonData.text, function (err) {
-                // fs.appendFile('Output.txt', "jsonData.text", function (err) {
-                    if (err) {
-                        console.log('errrrr');
-                    }
-                    console.log("exists:2", path);
-                    console.log( "vietanh git 2" );
+                const myJSON = JSON.stringify(merged, null, 3);
+
+                fs.writeFile('Output.txt', myJSON, (err) => {
+                    // In case of a error throw err.
+                    if (err) throw err;
+                    console.log("exists:3", path);
+                    console.log( "vietanh git 3" );
                     var execProcess = require("./exec_process.js");
                     execProcess.result("sh temp.sh", function(err, response){
                         console.log("aaa")
@@ -214,11 +227,11 @@ app.post('/sayHello', function (req, res) {
                             console.log(err);
                         }
                     });
-                });        
+                })      
             } else {
                 console.log("DOES NOT exist:", path);
                 // Write data in 'Output.txt' .
-                fs.writeFile('Output.txt', "aaaaa", (err) => {
+                fs.writeFile('Output.txt', " ", (err) => {
                     
                     // In case of a error throw err.
                     if (err) throw err;
@@ -238,21 +251,19 @@ app.post('/sayHello', function (req, res) {
                 })
             }
 
-
-
-            var request = require('request');
-            request.post(
-                // 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
-                'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
-                { json: { "text": msg } },
-                function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                        console.log(body);
-                    } else {
-                        console.log("got error")
-                    }
-                }
-            );
+            // var request = require('request');
+            // request.post(
+            //     // 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
+            //     'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
+            //     { json: { "text": msg } },
+            //     function (error, response, body) {
+            //         if (!error && response.statusCode == 200) {
+            //             console.log(body);
+            //         } else {
+            //             console.log("got error")
+            //         }
+            //     }
+            // );
             res.end("sayHello End");            
         })
     }    
