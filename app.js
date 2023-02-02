@@ -110,6 +110,8 @@ app.post('/report', function (req, res) {
     if (req.method == 'POST') {
         req.on('data', async function (data) {
             data = data.toString()
+            console.log("data")
+            console.log(data)
             jsonData = JSON.parse(data)
             console.log("jsonData.text")
             console.log(jsonData.text)
