@@ -1,5 +1,5 @@
 {
-   "2023-2-3": {
+   "2023-2-2": {
       "anh.nguyenviet6@gameloft.com": {
          "reports": [
             "- aaaa",
@@ -7,15 +7,6 @@
             "- cccc"
          ]
       },
-      "@anh.nguyenviet6:": {
-         "reports": [
-            "- aaaa",
-            "- bbbb.",
-            "- cccc"
-         ]
-      }
-   },
-   "2023-2-2": {
       "@anh.nguyenviet6:": {
          "reports": [
             "- aaaa",
@@ -51,6 +42,22 @@
          "reports": [
             "+ successfully posted sigils with abnormal amount in inventory to mattermost upon detection",
             "+ try to reproduce the sigil amount bug"
+         ]
+      }
+   },
+   "2023-2-3": {
+      "anh.nguyenviet6@gameloft.com": {
+         "reports": [
+            "- aaaa",
+            "- bbbb.",
+            "- cccc"
+         ]
+      },
+      "@anh.nguyenviet6:": {
+         "reports": [
+            "- aaaa",
+            "- bbbb.",
+            "- cccc"
          ]
       }
    }

@@ -5,10 +5,11 @@ var fs = require("fs");
 const openai = require("openai");
 const Configuration = openai.Configuration;
 const OpenAIApi = openai.OpenAIApi;
-
+let key = "sk-cdJTv8Crc6sp9IdUaZcPT3BlbkFJ4dNzhY0ne52NvyaU"
+let key2 = "NjZl"
 const configuration = new Configuration({
     organization: "org-kZkL4Z0rkGFT2U9PH5n4aBJy",
-    apiKey: "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",
+    apiKey: key + key2,
 });
 console.log(process.env.OPENAI_API_KEY)
 const openaiObj = new OpenAIApi(configuration);
@@ -182,8 +183,7 @@ app.post('/report', function (req, res) {
 
             let myQuest = {
                 "model": "text-davinci-003",
-                // "prompt": "Could you help to thank the report of " + myname + "?",
-                "prompt": "Can you help me compliment the report of " + myname + "?",
+                "prompt": "Could you help to thank the report of " + myname + "?",
             }            
             try {
                 const completion = await openaiObj.createCompletion(myQuest);
