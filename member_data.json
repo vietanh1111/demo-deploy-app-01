@@ -1,5 +1,12 @@
 {
    "2023-2-2": {
+      "anh.nguyenviet6@gameloft.com:": {
+         "reports": [
+            "- Check google play services and firebase service with BEI team",
+            "- Do research Unity for China Store following iOS team.",
+            "- Non-project: working on android studio premake with the gameloft libs(cont)"
+         ]
+      },
       "giang.trinhthuy@gameloft.com": {
          "reports": [
             "+ successfully posted sigils with abnormal amount in inventory to mattermost upon detection",
