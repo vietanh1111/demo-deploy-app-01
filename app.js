@@ -132,10 +132,16 @@ app.post('/report', function (req, res) {
             const reReports = /(.*)/
             membersData.forEach(readData)
             function readData(value, index, array) {
+                console.log(value)
                 if (filters = value.match(reName)) {
                     myname = filters[2].trim()
                     myData[currentDate][myname] = {}
                 } else if (filters = value.match(reReports)) {
+                    console.log("Parsing data 2")
+                    console.log(myname)
+                    console.log(myData[currentDate][myname]["reports"])
+                    console.log(filters[0])
+
                     if (myname != "" && !myData[currentDate][myname]["reports"]) myData[currentDate][myname]["reports"] = [];
                     myData[currentDate][myname]["reports"].push(filters[0])
                 }
@@ -232,61 +238,6 @@ app.post('/numOfReport', function (req, res) {
                     }
                 }
 
-            }
-
-            //             var request = require('request');
-            //             var jsonDataObj = {
-            //   "model": "text-davinci-003",
-            //   "prompt": "Say this is a test",
-            //   "max_tokens": 7,
-            //   "temperature": 0,
-            //   "top_p": 1,
-            //   "n": 1,
-            //   "stream": false,
-            //   "logprobs": null,
-            //   "stop": "\n"
-            // }
-
-            //             request.post({
-            //             headers: {'content-type' : 'application/json'},
-            //             url:     'https://api.openai.com/v1/completions',
-            //             body:    jsonDataObj
-            //             }, function(error, response, body){
-            //                 console.log("body");
-            //                 console.log(body);
-            //             });
-
-            //             res.end("numOfReport End");         
-
-            // response = openaiObj.createCompletion(
-            // model="text-davinci-003",
-            // prompt="This is a test",
-            // max_tokens=5,
-            // user="user123456"
-            // )
-            let mydataa = {
-                "giang.trinhthuy@gameloft.com": {
-                    "reports": [
-                        "+ successfully posted sigils with abnormal amount in inventory to mattermost upon detection",
-                        "+ try to reproduce the sigil amount bug"
-                    ]
-                }
-            }
-            let myQuest = {
-                "model": "text-davinci-003",
-                "prompt": "Could you help to thank Minh?",
-            }
-
-            try {
-                const completion = await openaiObj.createCompletion(myQuest);
-                console.log(completion.data.choices[0].text);
-            } catch (error) {
-                if (error.response) {
-                    console.log(error.response.status);
-                    console.log(error.response.data);
-                } else {
-                    console.log(error.message);
-                }
             }
 
             res.end("numOfReport End");     
