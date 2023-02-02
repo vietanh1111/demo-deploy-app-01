@@ -132,7 +132,7 @@ app.post('/report', function (req, res) {
             const reReports = /(.*)/
             membersData.forEach(readData)
             function readData(value, index, array) {
-                console.log("value")
+                console.log("value222")
                 console.log(value)
                 if (filters = value.match(reName)) {
                     console.log("Parsing data 1")
