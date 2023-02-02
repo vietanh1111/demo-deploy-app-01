@@ -209,6 +209,23 @@ app.post('/report', function (req, res) {
                     console.log(error.message);
                 }
             }
+
+            let myQuest2 = {
+                "model": "text-davinci-003",
+                "prompt": "can you wish me" + " a good day?"
+            }            
+            try {
+                const completion = await openaiObj.createCompletion(myQuest2);
+                console.log(completion.data.choices[0].text);
+                msg += completion.data.choices[0].text
+            } catch (error) {
+                if (error.response) {
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                } else {
+                    console.log(error.message);
+                }
+            }            
             var request = require('request');
             request.post(
                 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
