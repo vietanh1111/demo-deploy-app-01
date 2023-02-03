@@ -1,5 +1,11 @@
 {
    "2023-2-3": {
+      "@quy.nguyenngoc": {
+         "reports": [
+            " - experiment with building android server using WSL2",
+            " - trying to implement Huawei IAP with UDP"
+         ]
+      },
       "anh.nguyenviet6@gameloft.com": {
          "reports": [
             "- learn iap_validation Unity project",
