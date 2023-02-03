@@ -387,14 +387,14 @@ app.post('/chatToVietanh', function (req, res) {
                 let myQuest2 = {
                     "model": "text-davinci-003",
                     // "prompt": question,
-                    "prompt":"context:" + context_2 + "\n\n" + "prompt:" + prompt_2,
-                    "max_tokens": 2000,
-                    // "temperature": 0,
-                    "top_p": 0.1,
-                    "n": 1,
-                    "stream": false,
-                    "logprobs": null,
-                    // "stop": "\n",
+                    "prompt": "context_2:" + context_2 + "\n\n" + "prompt_2:" + prompt_2,
+                    "max_tokens": 4000,
+                    "temperature": 0.7,
+                    "top_p": 1,
+                    // "n": 1,
+                    // "stream": false,
+                    // "logprobs": null,
+                    "stop": "\n",
                 }
                 try {
                     let msg = ""
@@ -402,7 +402,7 @@ app.post('/chatToVietanh', function (req, res) {
                     console.log(completion.data.choices[0].text);
                     msg = completion.data.choices[0].text
                     msg = msg.trim()
-                    context_2 += "\n"+ context_2+ prompt_2+ msg
+                    context_2 += "\n"+ context_2 + prompt_2 + msg
 
                     var request = require('request');
                     request.post(
@@ -528,8 +528,8 @@ function getCurrentDate() {
 }
 
 function getDestinationMMUrl() {
-    return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
-    // return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
+    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
 }
 
 var server = app.listen(port, function () {
