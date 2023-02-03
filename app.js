@@ -202,7 +202,7 @@ app.post('/report', function (req, res) {
                 "top_p": 0.2,
                 "n": 1,
                 "stream": false,
-                "logprobs": null,             
+                "logprobs": null,
             }
             try {
                 const completion = await openaiObj.createCompletion(myQuest);
@@ -225,7 +225,7 @@ app.post('/report', function (req, res) {
                 "top_p": 0.9,
                 "n": 1,
                 "stream": false,
-                "logprobs": null,                
+                "logprobs": null,
             }
             try {
                 const completion = await openaiObj.createCompletion(myQuest2);
@@ -319,7 +319,7 @@ app.post('/sendMsg', function (req, res) {
     }
 })
 
-app.post('/sendMsg', function (req, res) {
+app.post('/getNumOfReports', function (req, res) {
     if (req.method == 'POST') {
         req.on('data', async function (data) {
             let dataStr = data.toString()
@@ -343,6 +343,64 @@ app.post('/sendMsg', function (req, res) {
     }
 })
 
+
+app.post('/chatToVietanh', function (req, res) {
+    if (req.method == 'POST') {
+        req.on('data', async function (data) {
+            let dataStr = data.toString()
+            console.log("data.toString()")
+            console.log(data.toString())
+            jsonData = JSON.parse(dataStr)
+            console.log("jsonData.text")
+            console.log(jsonData.text)
+            console.log(jsonData.user_name)
+
+            if (jsonData.user_name == "anh.nguyenviet6") {
+                console.log("chat to vietanh")
+                let myQuest2 = {
+                    "model": "text-davinci-003",
+                    "prompt": jsonData.text,
+                    "max_tokens": 2000,
+                    // "temperature": 0,
+                    "top_p": 0.5,
+                    "n": 1,
+                    "stream": false,
+                    "logprobs": null,
+                    // "stop": "\n",
+                }
+                try {
+                    let msg = ""
+                    const completion = await openaiObj.createCompletion(myQuest2);
+                    console.log(completion.data.choices[0].text);
+                    msg = completion.data.choices[0].text
+                    msg = "# " + msg.trim()
+                    var request = require('request');
+                    request.post(
+                        // 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
+                        'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
+                        { json: { "text": msg } },
+                        function (error, response, body) {
+                            if (!error && response.statusCode == 200) {
+                                console.log(body);
+                            } else {
+                                console.log("got error")
+                            }
+                        }
+                    );                    
+                } catch (error) {
+                    if (error.response) {
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                    } else {
+                        console.log(error.message);
+                    }
+                }
+                
+            }
+            res.end("numOfReport End");
+        })
+    }
+})
 function getUserDataFromFile() {
 
     let readDataStr = ""
