@@ -347,13 +347,12 @@ app.post('/getNumOfReports', function (req, res) {
 app.post('/chatToVietanh', function (req, res) {
     if (req.method == 'POST') {
         req.on('data', async function (data) {
-            let dataStr = data.toString()
-            console.log("data.toString()")
-            console.log(data.toString())
-            jsonData = JSON.parse(dataStr)
+            data = data.toString()
+            console.log("data")
+            console.log(data)
+            jsonData = JSON.parse(data)
             console.log("jsonData.text")
             console.log(jsonData.text)
-            console.log(jsonData.user_name)
 
             if (jsonData.user_name == "anh.nguyenviet6") {
                 console.log("chat to vietanh")
