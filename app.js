@@ -356,7 +356,8 @@ app.post('/chatToVietanh', function (req, res) {
             console.log(jsonData.text)
 
             // if (jsonData.user_name == "anh.nguyenviet6" && jsonData.text.toLowerCase().indexOf("Quạ im nhé") === -1) {
-            if (jsonData.user_name == "anh.nguyenviet6") {
+            // if (jsonData.user_name == "anh.nguyenviet6") {
+            if (jsonData.text.startsWith("Question:")) {
                 console.log("chat to vietanh")
                 let myQuest2 = {
                     "model": "text-davinci-003",
@@ -379,7 +380,7 @@ app.post('/chatToVietanh', function (req, res) {
                     request.post(
                         'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
                         // 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
-                        { json: { "text": msg } },
+                        { json: { "text": "Answer:\n" + msg } },
                         function (error, response, body) {
                             if (!error && response.statusCode == 200) {
                                 console.log(body);
