@@ -207,7 +207,8 @@ app.post('/report', function (req, res) {
             try {
                 const completion = await openaiObj.createCompletion(myQuest);
                 console.log(completion.data.choices[0].text);
-                msg = completion.data.choices[0].text
+                // msg = completion.data.choices[0].text
+                msg = ""
             } catch (error) {
                 if (error.response) {
                     console.log(error.response.status);
@@ -354,6 +355,7 @@ app.post('/chatToVietanh', function (req, res) {
             console.log("jsonData.text")
             console.log(jsonData.text)
 
+            // if (jsonData.user_name == "anh.nguyenviet6" && jsonData.text.toLowerCase().indexOf("Quạ im nhé") === -1) {
             if (jsonData.user_name == "anh.nguyenviet6") {
                 console.log("chat to vietanh")
                 let myQuest2 = {
