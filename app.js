@@ -7,7 +7,7 @@ var ENV_SERVER = "https://demo-deploy-app-01.onrender.com/"
 
 const cron = require("node-cron");
 
-cron.schedule("30 12 * * *", function() {
+cron.schedule("38 12 * * *", function() {
   console.log("Tác vụ đã được thực hiện lúc 12h28 giờ mỗi ngày!");
     var request = require('request');
     request.post(
