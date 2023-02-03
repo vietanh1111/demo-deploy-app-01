@@ -381,16 +381,17 @@ app.post('/chatToVietanh', function (req, res) {
             if (jsonData.text.startsWith("Question:")) {
                 var question = jsonData.text.replace('Question:','');
 
-                prompt_2=question
+                prompt_2= prompt_2 + "\n" + question + "\n"
 
                 console.log("chat to vietanh")
                 let myQuest2 = {
                     "model": "text-davinci-003",
                     // "prompt": question,
-                    "prompt": "context_2:" + context_2 + "\n\n" + "prompt_2:" + prompt_2,
+                    // "prompt": "context_2:" + context_2 + "\n\n" + "prompt_2:" + prompt_2,
+                    "prompt": prompt_2,
                     "max_tokens": 4000,
-                    "temperature": 0.7,
-                    "top_p": 1,
+                    // "temperature": 0.7,
+                    "top_p": 0.1,
                     // "n": 1,
                     // "stream": false,
                     // "logprobs": null,
@@ -402,7 +403,7 @@ app.post('/chatToVietanh', function (req, res) {
                     console.log(completion.data.choices[0].text);
                     msg = completion.data.choices[0].text
                     msg = msg.trim()
-                    context_2 += "\n"+ context_2 + prompt_2 + msg
+                    // context_2 += "\n"+ context_2 + prompt_2 + msg
 
                     var request = require('request');
                     request.post(
