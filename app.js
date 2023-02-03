@@ -372,11 +372,11 @@ app.post('/chatToVietanh', function (req, res) {
                     const completion = await openaiObj.createCompletion(myQuest2);
                     console.log(completion.data.choices[0].text);
                     msg = completion.data.choices[0].text
-                    msg = "# " + msg.trim()
+                    msg = msg.trim()
                     var request = require('request');
                     request.post(
-                        // 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
-                        'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
+                        'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
+                        // 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
                         { json: { "text": msg } },
                         function (error, response, body) {
                             if (!error && response.statusCode == 200) {
