@@ -358,10 +358,12 @@ app.post('/chatToVietanh', function (req, res) {
             // if (jsonData.user_name == "anh.nguyenviet6" && jsonData.text.toLowerCase().indexOf("Quạ im nhé") === -1) {
             // if (jsonData.user_name == "anh.nguyenviet6") {
             if (jsonData.text.startsWith("Question:")) {
+                var question = jsonData.text.replace('Question:','');
+
                 console.log("chat to vietanh")
                 let myQuest2 = {
                     "model": "text-davinci-003",
-                    "prompt": jsonData.text,
+                    "prompt": question,
                     "max_tokens": 2000,
                     // "temperature": 0,
                     "top_p": 0.5,
