@@ -1,6 +1,6 @@
 {
    "2023-2-3": {
-      "@trung.maiduc2:": {
+      "trung.maiduc2@gameloft.com": {
          "reports": [
             "",
             "- Update 4399 (with local lib)",
@@ -8,7 +8,7 @@
             "- Research something about Unity"
          ]
       },
-      "@Minh Nguyen Chinh :": {
+      "minh.nguyenchinh@gameloft.com": {
          "reports": [
             "",
             "continued making new feature and fix bugs(done to step 9)",
@@ -26,20 +26,20 @@
             ""
          ]
       },
-      "@duc.luutrong": {
+      "duc.luutrong@gameloft.com": {
          "reports": [
             "- Fixed script notify when upload dSyms ",
             "- Learning Unreal Engine"
          ]
       },
-      "@anh.nguyenviet6@gameloft.com:": {
+      "anh.buithingoc@gameloft.com": {
          "reports": [
             "•\tLearned how to use Manhattan",
             "•\tLearn iris assets",
             ""
          ]
       },
-      "@quy.nguyenngoc": {
+      "quy.nguyenngoc@gameloft.com": {
          "reports": [
             " - experiment with building android server using WSL2",
             " - trying to implement Huawei IAP with UDP"

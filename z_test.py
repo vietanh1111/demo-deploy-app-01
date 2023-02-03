@@ -23,6 +23,11 @@ elif sys.argv[1] == 'send_msg':
     url = 'http://127.0.0.1:3000/sendMsg'
     myobj = {'name': "anh.nguyenviet6@gameloft.com"}   
 
+elif sys.argv[1] == 'check_records':
+    print(sys.argv[1])
+    url = 'http://127.0.0.1:3000/checkMemberMissingRecord'
+    myobj = {'name': "anh.nguyenviet6@gameloft.com"}   
+
 x = requests.post(url, json = myobj)
 # # x2 = requests.post(url2, json = myobj2)
 # x3 = requests.post(url3, json = myobj3)

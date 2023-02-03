@@ -2,6 +2,29 @@ var express = require('express');
 var app = express();
 var fs = require("fs");
 
+// var ENV_SERVER = "http://127.0.0.1:3000/"
+var ENV_SERVER = "https://demo-deploy-app-01.onrender.com/"
+
+const cron = require("node-cron");
+
+cron.schedule("25 12 * * *", function() {
+  console.log("Tác vụ đã được thực hiện lúc 12h25 giờ mỗi ngày!");
+    var request = require('request');
+    request.post(
+        ENV_SERVER + "checkMemberMissingRecord",
+        { json: { "text":  "hello" } },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+            } else {
+                console.log("got error")
+            }
+        }
+    ); 
+    res.end("checkMemberMissingRecord End");   
+});
+
+
 const openai = require("openai");
 const Configuration = openai.Configuration;
 const OpenAIApi = openai.OpenAIApi;
@@ -31,18 +54,15 @@ team_member = {
     "Minh Nguyen Chinh": {
         "email": "minh.nguyenchinh@gameloft.com"
     },
-    "Duy Nguyen Khanh": {
-        "email": "duy.nguyenkhanh@gameloft.com"
-    },
     "Giang Trinh Thuy": {
         "email": "giang.trinhthuy@gameloft.com"
     },
     "Anh Bui Thi Ngoc": {
         "email": "anh.buithingoc@gameloft.com"
     },
-    "Dung Nguyen Phuong 2": {
-        "email": "dung.nguyenphuong2@gameloft.com"
-    }
+    "Duy Nguyen Khanh": {
+        "email": "duy.nguyenkhanh@gameloft.com"
+    }    
 }
 
 const port = process.env.PORT || 3000
@@ -242,8 +262,7 @@ app.post('/report', function (req, res) {
             }
             var request = require('request');
             request.post(
-                'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
-                // 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
+                getDestinationMMUrl(),
                 { json: { "text": msg } },
                 function (error, response, body) {
                     if (!error && response.statusCode == 200) {
@@ -304,8 +323,7 @@ app.post('/sendMsg', function (req, res) {
 
             var request = require('request');
             request.post(
-                'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
-                // 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
+                getDestinationMMUrl(),
                 { json: { "text": msg } },
                 function (error, response, body) {
                     if (!error && response.statusCode == 200) {
@@ -380,8 +398,7 @@ app.post('/chatToVietanh', function (req, res) {
                     msg = msg.trim()
                     var request = require('request');
                     request.post(
-                        'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
-                        // 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
+                        getDestinationMMUrl(),
                         { json: { "text":  msg } },
                         function (error, response, body) {
                             if (!error && response.statusCode == 200) {
@@ -405,6 +422,68 @@ app.post('/chatToVietanh', function (req, res) {
         })
     }
 })
+
+app.post('/checkMemberMissingRecord', function (req, res) {
+    if (req.method == 'POST') {
+        req.on('data', async function (data) {
+            data = data.toString()
+            console.log("data")
+            console.log(data)
+            jsonData = JSON.parse(data)
+            console.log("jsonData.text")
+            console.log(jsonData.text)
+
+            let missingRec = getMemberMissingRecord()
+            let myQuestion = 'Help me(iam DMLCN Team) remind ' + missingRec + " to fill in daily tasks politely and gently"
+            requestOpenAIAndSendMM(myQuestion)
+                
+            res.end("checkMemberMissingRecord End")
+        })
+    }
+})
+
+
+async function requestOpenAIAndSendMM(myQuestion) {
+    console.log("chat to vietanh")
+    let myQuest2 = {
+        "model": "text-davinci-003",
+        "prompt": myQuestion,
+        "max_tokens": 2000,
+        // "temperature": 0,
+        "top_p": 0.3,
+        "n": 1,
+        "stream": false,
+        "logprobs": null,
+        // "stop": "\n",
+    }
+    try {
+        let msg = ""
+        const completion = await openaiObj.createCompletion(myQuest2);
+        console.log(completion.data.choices[0].text);
+        msg = completion.data.choices[0].text
+        msg = msg.trim()
+        var request = require('request');
+        request.post(
+            getDestinationMMUrl(),
+            { json: { "text":  msg } },
+            function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body);
+                } else {
+                    console.log("got error")
+                }
+            }
+        );                    
+    } catch (error) {
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data);
+        } else {
+            console.log(error.message);
+        }
+    }
+}
+
 function getUserDataFromFile() {
 
     let readDataStr = ""
@@ -416,6 +495,33 @@ function getUserDataFromFile() {
     }
 
     return readDataJson
+}
+
+function getMemberMissingRecord() {
+    let missingRec = []
+    let membersData = getUserDataFromFile()
+    for (var member of Object.keys(team_member)) {
+        team_member_email = team_member[member]["email"]
+        number_records = 0
+        if (!membersData[getCurrentDate()][team_member_email]) {
+            console.log(team_member[member]["email"])
+            missingRec.push(team_member[member]["email"])
+        } 
+    }
+    return missingRec
+}
+
+function getCurrentDate() {
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();    
+    return `${year}-${month}-${day}`
+}
+
+function getDestinationMMUrl() {
+    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
 }
 
 var server = app.listen(port, function () {
