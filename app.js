@@ -362,6 +362,9 @@ app.post('/getNumOfReports', function (req, res) {
     }
 })
 
+// Initializing the prompt and context variables
+prompt_2 = ""
+context_2 = ""
 
 app.post('/chatToVietanh', function (req, res) {
     if (req.method == 'POST') {
@@ -378,13 +381,16 @@ app.post('/chatToVietanh', function (req, res) {
             if (jsonData.text.startsWith("Question:")) {
                 var question = jsonData.text.replace('Question:','');
 
+                prompt_2=question
+
                 console.log("chat to vietanh")
                 let myQuest2 = {
                     "model": "text-davinci-003",
-                    "prompt": question,
+                    // "prompt": question,
+                    "prompt":"context:" + context_2 + "\n\n" + "prompt:" + prompt_2,
                     "max_tokens": 2000,
                     // "temperature": 0,
-                    "top_p": 0.5,
+                    "top_p": 0.1,
                     "n": 1,
                     "stream": false,
                     "logprobs": null,
@@ -396,6 +402,8 @@ app.post('/chatToVietanh', function (req, res) {
                     console.log(completion.data.choices[0].text);
                     msg = completion.data.choices[0].text
                     msg = msg.trim()
+                    context_2 += "\n"+ context_2+ prompt_2+ msg
+
                     var request = require('request');
                     request.post(
                         getDestinationMMUrl(),
