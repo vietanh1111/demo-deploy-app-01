@@ -1,4 +1,58 @@
 {
+   "2023-2-3": {
+      "@trung.maiduc2:": {
+         "reports": [
+            "",
+            "- Update 4399 (with local lib)",
+            "- Research about modifing profile with script",
+            "- Research something about Unity"
+         ]
+      },
+      "@Minh Nguyen Chinh :": {
+         "reports": [
+            "",
+            "continued making new feature and fix bugs(done to step 9)",
+            "Step:",
+            "- create new gamestate with 1 dragon, 1 habitat and fireBall falling",
+            "- control the dragon with the cursor",
+            "- destroy fireBall when falling to the bottom",
+            "- let the fireball fall at the dragon position",
+            "- let the fireball fall at the dragon's position when the dragon moves",
+            "- let the dragon disappear when fireBall drops the dragon",
+            "- force fireBall disappears when chasing dragon",
+            "- create gifts boxs with random position in this gamestate",
+            "- make the gift box disapears whenever the dragon get them and a new one appears.",
+            "- create UI which counts points for user",
+            ""
+         ]
+      },
+      "@duc.luutrong": {
+         "reports": [
+            "- Fixed script notify when upload dSyms ",
+            "- Learning Unreal Engine"
+         ]
+      },
+      "@anh.nguyenviet6@gameloft.com:": {
+         "reports": [
+            "•\tLearned how to use Manhattan",
+            "•\tLearn iris assets",
+            ""
+         ]
+      },
+      "@quy.nguyenngoc": {
+         "reports": [
+            " - experiment with building android server using WSL2",
+            " - trying to implement Huawei IAP with UDP"
+         ]
+      },
+      "anh.nguyenviet6@gameloft.com": {
+         "reports": [
+            "- learn iap_validation Unity project",
+            "- Non-project: working on android studio premake with the gameloft libs(cont)",
+            ""
+         ]
+      }
+   },
    "2023-2-2": {
       "anh.nguyenviet6@gameloft.com:": {
          "reports": [
