@@ -458,7 +458,7 @@ async function requestOpenAIAndSendMM(myQuestion) {
         "prompt": myQuestion,
         "max_tokens": 2000,
         // "temperature": 0,
-        "top_p": 0.3,
+        "top_p": 0.1,
         "n": 1,
         "stream": false,
         "logprobs": null,
@@ -528,8 +528,8 @@ function getCurrentDate() {
 }
 
 function getDestinationMMUrl() {
-    return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
-    // return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
+    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
 }
 
 var server = app.listen(port, function () {
