@@ -380,7 +380,7 @@ app.post('/chatToVietanh', function (req, res) {
                     request.post(
                         'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a',
                         // 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa',
-                        { json: { "text": "Answer:\n" + msg } },
+                        { json: { "text":  msg } },
                         function (error, response, body) {
                             if (!error && response.statusCode == 200) {
                                 console.log(body);
