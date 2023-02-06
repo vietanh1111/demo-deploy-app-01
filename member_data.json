@@ -1,4 +1,14 @@
 {
+   "2023-2-6": {
+      "anh.nguyenviet6@gameloft.com": {
+         "reports": [
+            "- learn iap_validation Unity project",
+            "- implementation a demo on xiaomi",
+            "- Non-project: working on android studio premake with the gameloft libs(done with the [MR](https://git.gameloft.org/tools/premake/-/merge_requests/351))",
+            ""
+         ]
+      }
+   },
    "2023-2-3": {
       "@giang.trinhthuy :": {
          "reports": [
