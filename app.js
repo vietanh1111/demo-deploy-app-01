@@ -23,13 +23,12 @@ var ENV_SERVER = "https://demo-deploy-app-01.onrender.com/"
 //     );
 //     res.end("checkMemberMissingRecord End");
 // });
-// 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
 
 const openai = require("openai");
 const Configuration = openai.Configuration;
 const OpenAIApi = openai.OpenAIApi;
-let key = "sk-cdJTv8Crc6sp9IdUaZcPT3BlbkFJ4dNzhY0ne52NvyaU"
-let key2 = "NjZl"
+let key = "sk-TSz275JV5fMrM1jCpV5XT3BlbkFJLblwOpYhW2lBwPud"
+let key2 = "6BT0"
 const configuration = new Configuration({
     organization: "org-kZkL4Z0rkGFT2U9PH5n4aBJy",
     apiKey: key + key2,
@@ -186,6 +185,9 @@ app.post('/report', function (req, res) {
 
             const JSONObjectMerge = require("json-object-merge");
             const merged = JSONObjectMerge.default(myData, readDataJson);
+            console.log("merging....");
+            console.log(JSON.stringify(myData, null, 3));
+            console.log(JSON.stringify(readDataJson, null, 3));
             console.log(JSON.stringify(merged, null, 3));
 
             if (fs.existsSync(data_path)) {
