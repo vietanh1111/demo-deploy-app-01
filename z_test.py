@@ -33,7 +33,20 @@ elif sys.argv[1] == 'chat':
     url = 'http://127.0.0.1:3000/chatToVietanh'
     myobj = {'text': "Question: Do you know my name?"}   
     # myobj = {'text': "Question: Hi, Im Vietanh"}   
+elif sys.argv[1] == 'send_thank':
+    print(sys.argv[1])
+    url = 'http://127.0.0.1:3000/sendThank'
+    myobj = {'text': "Question: Do you know my name?"}   
+    # myobj = {'text': "Question: Hi, Im Vietanh"}   
+elif sys.argv[1] == 'get_num_records':
+    print(sys.argv[1])
+    url = 'http://127.0.0.1:3000/getNumOfReports'
+    myobj = {'text': "Question: Do you know my name?"}   
+    # myobj = {'text': "Question: Hi, Im Vietanh"}   
 
+
+
+print("hello") 
 x = requests.post(url, json = myobj)
 # # x2 = requests.post(url2, json = myobj2)
 # x3 = requests.post(url3, json = myobj3)

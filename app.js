@@ -40,7 +40,7 @@ const openaiObj = new OpenAIApi(configuration);
 team_member = {
     "Anh Nguyen Viet 6": {
         "email": "anh.nguyenviet6@gameloft.com",
-        "name": "anh.nguyenveit6"
+        "name": "anh.nguyenviet6"
     },
     "Quy Nguyen Ngoc": {
         "email": "quy.nguyenngoc@gameloft.com",
@@ -65,10 +65,6 @@ team_member = {
     "Anh Bui Thi Ngoc": {
         "email": "anh.buithingoc@gameloft.com",
         "name": "anh.buithingoc"
-    },
-    "Duy Nguyen Khanh": {
-        "email": "duy.nguyenkhanh@gameloft.com",
-        "name": "duy.nguyenkhanh"
     }
 }
 
@@ -342,6 +338,87 @@ app.post('/sendMsg', function (req, res) {
     }
 })
 
+function getRecords() {
+    let missRec = []
+    let doneRec = []
+    let membersData = getUserDataFromFile()
+    for (var member of Object.keys(team_member)) {
+        team_member_email = team_member[member]["name"]
+        number_records = 0
+        if (!membersData[getCurrentDate()][team_member_email]) {
+            console.log(team_member[member]["name"])
+            missRec.push(team_member[member]["name"])
+        } else {
+            console.log(team_member[member]["name"])
+            doneRec.push(team_member[member]["name"])           
+        }
+    }
+    let rec_today = {}
+    rec_today["miss"] = missRec
+    rec_today["done"] = doneRec
+    console.log(console.log(JSON.stringify(rec_today, null, 3)))
+    return rec_today
+}
+app.post('/sendThank', function (req, res) {
+    if (req.method == 'POST') {
+        req.on('data', async function (data) {
+            let msg = ""
+            let rec = getRecords();
+            let myQuest = {
+                "model": "text-davinci-003",
+                "prompt": "hello bot",
+            }
+            try {
+                const completion = await openaiObj.createCompletion(myQuest);
+                let myQuest2 = {
+                    "model": "text-davinci-003",
+                    "prompt": "On behalf of \"Dragon Mania Legends China Team\". Send a short email to thank my team for reporting"  + " then warning " + rec["miss"]  + " because missing report.",
+                    "max_tokens": 1000,
+                    // "temperature": 0,
+                    "top_p": 0.1,
+                    "n": 1,
+                    "stream": false,
+                    "logprobs": null,
+                    // "stop": "\n",
+                }
+                try {
+                    const completion = await openaiObj.createCompletion(myQuest2);
+                    console.log(completion.data.choices[0].text);
+                    msg = completion.data.choices[0].text
+                    msg = "# " + msg.trim()
+                } catch (error) {
+                    if (error.response) {
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                    } else {
+                        console.log(error.message);
+                    }
+                }
+            } catch (error) {
+                if (error.response) {
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                } else {
+                    console.log(error.message);
+                }
+            }
+
+            var request = require('request');
+            request.post(
+                getDestinationMMUrl(),
+                { json: { "text": msg } },
+                function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                        console.log(body);
+                    } else {
+                        console.log("got error")
+                    }
+                }
+            );
+            res.end("sayHello End");
+        })
+    }
+})
 app.post('/getNumOfReports', function (req, res) {
     if (req.method == 'POST') {
         req.on('data', async function (data) {
@@ -349,18 +426,84 @@ app.post('/getNumOfReports', function (req, res) {
             let membersData = getUserDataFromFile()
             console.log(dataStr)
 
-            for (var member of Object.keys(team_member)) {
-                team_member_email = team_member[member]["email"]
-                number_records = 0
-                for (var memberData of Object.keys(membersData)) {
-                    if (membersData[memberData][team_member_email]) {
-                        console.log("find record: " + team_member_email)
-                        number_records += 1
-                    }
-                }
+            // for (var member of Object.keys(team_member)) {
+            //     team_member_email = team_member[member]["email"]
+            //     number_records = 0
+            //     for (var memberData of Object.keys(membersData)) {
+            //         if (membersData[memberData][team_member_email]) {
+            //             console.log("find record: " + team_member_email)
+            //             number_records += 1
+            //         }
+            //     }
 
+            // }
+            getNumRecords()
+
+            res.end("numOfReport End");
+        })
+    }
+})
+
+//
+function getNumRecords() {
+    let all_data = getUserDataFromFile()
+
+    let all_records = {}
+
+    for (var member of Object.keys(team_member)) {
+        team_member_email = team_member[member]["name"]
+        number_records = 0
+        for (var date of Object.keys(all_data)) {
+            console.log(date)
+            if (all_data[date][team_member[member]["name"]]) {
+                number_records += 1
             }
+        }
+        all_records[team_member[member]["name"]] = number_records
 
+    }
+
+    console.log(console.log(JSON.stringify(all_records, null, 3)))
+
+}
+
+// show help
+app.post('/help', function (req, res) {
+    if (req.method == 'POST') {
+        req.on('data', async function (data) {
+            data = data.toString()
+            console.log(data)
+            jsonData = JSON.parse(data)
+            console.log(jsonData.text)
+
+            // if (jsonData.text.startsWith("Raven Help")) {
+            //     var msg = jsonData.text.replace('Raven Help','');
+
+            //     let msg = "\nTo chat with the raven --> Raven oi:  "
+            //     + "\nTo query all records --> Please Give Me Records  "
+
+            //     try {
+            //         var request = require('request');
+            //         request.post(
+            //             getDestinationMMUrl(),
+            //             { json: { "text":  msg } },
+            //             function (error, response, body) {
+            //                 if (!error && response.statusCode == 200) {
+            //                     console.log(body);
+            //                 } else {
+            //                     console.log("got error")
+            //                 }
+            //             }
+            //         );                    
+            //     } catch (error) {
+            //         if (error.response) {
+            //             console.log(error.response.status);
+            //             console.log(error.response.data);
+            //         } else {
+            //             console.log(error.message);
+            //         }
+            //     }
+            // }
             res.end("numOfReport End");
         })
     }
