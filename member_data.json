@@ -6,24 +6,26 @@
             "+ prepare compliancylib workshop (cont)"
          ]
       },
-      "@trung.maiduc2:": {
+      "trung.maiduc2@gameloft.com": {
          "reports": [
-            "- "
+            "- Research about modifing profile (cont)",
+            "- Research something about Unity ",
          ]
       },
-      "@quy.nguyenngoc": {
+      "quy.nguyenngoc@gameloft.com": {
          "reports": [
-            " - trying to implement Huawei IAP with UDP"
+            " - trying to implement Huawei IAP with UDP",
+			"learning Unity for objective project"
          ]
       },
-      "@Anh Bui Thi Ngoc@gameloft.com:": {
+      "anh.buithingoc@gameloft.com": {
          "reports": [
             "•    Learned iris assets",
             "•    Research more on confluen https://confluence.gameloft.org/display/GLHN/%5BDML%5D%5BCN%5D+Technical+Documentations",
             ""
          ]
       },
-      "@duc.luutrong": {
+      "duc.luutrong@gameloft.com": {
          "reports": [
             "- Upfate Meizu SDK",
             "- Learning Unreal Engine"
@@ -39,7 +41,7 @@
       }
    },
    "2023-2-3": {
-      "@giang.trinhthuy :": {
+      "giang.trinhthuy@gameloft.com": {
          "reports": [
             "+ could not reproduce sigil bug  :pepedie: ",
             "+ prepare for compliancylib workshop",
