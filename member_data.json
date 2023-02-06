@@ -1,4 +1,12 @@
 {
+   "2023-2-7": {
+      "Reporting for @giang.trinhthuy :\n+ test sigil detection on android\n+ prepare compliancylib workshop (cont)": {
+         "reports": [
+            "+ test sigil detection on android",
+            "+ prepare compliancylib workshop (cont)"
+         ]
+      }
+   },
    "2023-2-6": {
       "giang.trinhthuy": {
          "reports": [
@@ -15,7 +23,7 @@
       "quy.nguyenngoc": {
          "reports": [
             " - trying to implement Huawei IAP with UDP",
-			"learning Unity for objective project"
+            "learning Unity for objective project"
          ]
       },
       "anh.buithingoc": {
