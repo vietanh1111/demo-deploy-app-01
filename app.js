@@ -5,24 +5,24 @@ var fs = require("fs");
 // var ENV_SERVER = "http://127.0.0.1:3000/"
 var ENV_SERVER = "https://demo-deploy-app-01.onrender.com/"
 
-const cron = require("node-cron");
+// const cron = require("node-cron");
 
-cron.schedule("38 12 * * *", function () {
-    console.log("Tác vụ đã được thực hiện lúc 12h28 giờ mỗi ngày!");
-    var request = require('request');
-    request.post(
-        ENV_SERVER + "checkMemberMissingRecord",
-        { json: { "text": "hello" } },
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(body);
-            } else {
-                console.log("got error")
-            }
-        }
-    );
-    res.end("checkMemberMissingRecord End");
-});
+// cron.schedule("38 12 * * *", function () {
+//     console.log("Tác vụ đã được thực hiện lúc 12h28 giờ mỗi ngày!");
+//     var request = require('request');
+//     request.post(
+//         ENV_SERVER + "checkMemberMissingRecord",
+//         { json: { "text": "hello" } },
+//         function (error, response, body) {
+//             if (!error && response.statusCode == 200) {
+//                 console.log(body);
+//             } else {
+//                 console.log("got error")
+//             }
+//         }
+//     );
+//     res.end("checkMemberMissingRecord End");
+// });
 // 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
 
 const openai = require("openai");
@@ -40,42 +40,41 @@ const openaiObj = new OpenAIApi(configuration);
 
 team_member = {
     "Anh Nguyen Viet 6": {
-        "email": "anh.nguyenviet6@gameloft.com"
+        "email": "anh.nguyenviet6@gameloft.com",
+        "name": "anh.nguyenveit6"
     },
     "Quy Nguyen Ngoc": {
-        "email": "quy.nguyenngoc@gameloft.com"
+        "email": "quy.nguyenngoc@gameloft.com",
+        "name": "quy.nguyenngoc"
     },
     "Duc Luu Trong": {
-        "email": "duc.luutrong@gameloft.com"
+        "email": "duc.luutrong@gameloft.com",
+        "name": "duc.luutrong"
     },
     "Trung Mai Duc 2": {
-        "email": "trung.maiduc2@gameloft.com"
+        "email": "trung.maiduc2@gameloft.com",
+        "name": "trung.maiduc2"
     },
     "Minh Nguyen Chinh": {
-        "email": "minh.nguyenchinh@gameloft.com"
+        "email": "minh.nguyenchinh@gameloft.com",
+        "name": "minh.nguyenchinh"
     },
     "Giang Trinh Thuy": {
-        "email": "giang.trinhthuy@gameloft.com"
+        "email": "giang.trinhthuy@gameloft.com",
+        "name": "giang.trinhthuy"
     },
     "Anh Bui Thi Ngoc": {
-        "email": "anh.buithingoc@gameloft.com"
+        "email": "anh.buithingoc@gameloft.com",
+        "name": "anh.buithingoc"
     },
     "Duy Nguyen Khanh": {
-        "email": "duy.nguyenkhanh@gameloft.com"
+        "email": "duy.nguyenkhanh@gameloft.com",
+        "name": "duy.nguyenkhanh"
     }
 }
 
 const port = process.env.PORT || 3000
 const data_path = "./member_data.json";
-
-var user = {
-    "user4": {
-        "name": "mohit",
-        "password": "password4",
-        "profession": "teacher",
-        "id": 4
-    }
-}
 
 /*
 Steps:
@@ -142,7 +141,7 @@ app.post('/report', function (req, res) {
             var myData = {}
 
             const date = new Date();
-            let day = date.getDate();
+            let day = date.getDate() + 1;
             let month = date.getMonth() + 1;
             let year = date.getFullYear();
             let currentDate = `${year}-${month}-${day}`;
@@ -150,7 +149,7 @@ app.post('/report', function (req, res) {
             myData[currentDate] = {}
 
             console.log("Parsing data")
-            const reName = /(Reporting for )(.*)/;
+            const reName = /(^Report)(.*)/;
             const reReports = /(.*)/
             membersData.forEach(readData)
             function readData(value, index, array) {
@@ -160,7 +159,7 @@ app.post('/report', function (req, res) {
                     console.log("Parsing data 1")
                     console.log(filters[1])
                     console.log(filters[2])
-                    myname = filters[2].trim()
+                    myname = jsonData.text
                     myData[currentDate][myname] = {}
                 } else if (filters = value.match(reReports)) {
                     console.log("Parsing data 2")
@@ -519,8 +518,8 @@ function getCurrentDate() {
 }
 
 function getDestinationMMUrl() {
-    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
-    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
+    return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    // return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
 }
 
 var server = app.listen(port, function () {

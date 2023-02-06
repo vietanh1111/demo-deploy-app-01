@@ -1,37 +1,37 @@
 {
    "2023-2-6": {
-      "@giang.trinhthuy :": {
+      "giang.trinhthuy": {
          "reports": [
             "+ test sigil detection on android",
             "+ prepare compliancylib workshop (cont)"
          ]
       },
-      "trung.maiduc2@gameloft.com": {
+      "trung.maiduc2": {
          "reports": [
             "- Research about modifing profile (cont)",
             "- Research something about Unity ",
          ]
       },
-      "quy.nguyenngoc@gameloft.com": {
+      "quy.nguyenngoc": {
          "reports": [
             " - trying to implement Huawei IAP with UDP",
 			"learning Unity for objective project"
          ]
       },
-      "anh.buithingoc@gameloft.com": {
+      "anh.buithingoc": {
          "reports": [
             "•    Learned iris assets",
             "•    Research more on confluen https://confluence.gameloft.org/display/GLHN/%5BDML%5D%5BCN%5D+Technical+Documentations",
             ""
          ]
       },
-      "duc.luutrong@gameloft.com": {
+      "duc.luutrong": {
          "reports": [
             "- Upfate Meizu SDK",
             "- Learning Unreal Engine"
          ]
       },
-      "anh.nguyenviet6@gameloft.com": {
+      "anh.nguyenviet6": {
          "reports": [
             "- learn iap_validation Unity project",
             "- implementation a demo on xiaomi",
@@ -41,14 +41,14 @@
       }
    },
    "2023-2-3": {
-      "giang.trinhthuy@gameloft.com": {
+      "giang.trinhthuy": {
          "reports": [
             "+ could not reproduce sigil bug  :pepedie: ",
             "+ prepare for compliancylib workshop",
             "+ research glf debugger"
          ]
       },
-      "trung.maiduc2@gameloft.com": {
+      "trung.maiduc2": {
          "reports": [
             "",
             "- Update 4399 (with local lib)",
@@ -56,7 +56,7 @@
             "- Research something about Unity"
          ]
       },
-      "minh.nguyenchinh@gameloft.com": {
+      "minh.nguyenchinh": {
          "reports": [
             "",
             "continued making new feature and fix bugs(done to step 9)",
@@ -74,26 +74,26 @@
             ""
          ]
       },
-      "duc.luutrong@gameloft.com": {
+      "duc.luutrong": {
          "reports": [
             "- Fixed script notify when upload dSyms ",
             "- Learning Unreal Engine"
          ]
       },
-      "anh.buithingoc@gameloft.com": {
+      "anh.buithingoc": {
          "reports": [
             "•\tLearned how to use Manhattan",
             "•\tLearn iris assets",
             ""
          ]
       },
-      "quy.nguyenngoc@gameloft.com": {
+      "quy.nguyenngoc": {
          "reports": [
             " - experiment with building android server using WSL2",
             " - trying to implement Huawei IAP with UDP"
          ]
       },
-      "anh.nguyenviet6@gameloft.com": {
+      "anh.nguyenviet6": {
          "reports": [
             "- learn iap_validation Unity project",
             "- Non-project: working on android studio premake with the gameloft libs(cont)",
@@ -102,20 +102,14 @@
       }
    },
    "2023-2-2": {
-      "anh.nguyenviet6@gameloft.com:": {
+      "anh.nguyenviet6:": {
          "reports": [
             "- Check google play services and firebase service with BEI team",
             "- Do research Unity for China Store following iOS team.",
             "- Non-project: working on android studio premake with the gameloft libs(cont)"
          ]
       },
-      "giang.trinhthuy@gameloft.com": {
-         "reports": [
-            "+ successfully posted sigils with abnormal amount in inventory to mattermost upon detection",
-            "+ try to reproduce the sigil amount bug"
-         ]
-      },
-      "@trung.maiduc2:": {
+      "@trung.maiduc2": {
          "reports": [
             "- Update UC and 4399 SDK",
             "- Research about modified profile"
@@ -127,7 +121,7 @@
             " - trying to implement Huawei IAP with UDP"
          ]
       },
-      "@Anh Bui Thi Ngoc:": {
+      "anh.buithingoc": {
          "reports": [
             "- Done Update and build newest src",
             "- Applied for permission to Manhattan",
@@ -135,13 +129,13 @@
             ""
          ]
       },
-      "@duc.luutrong": {
+      "duc.luutrong": {
          "reports": [
             "- Implement script notify when upload dSyms",
             "- Learning Unity"
          ]
       },
-      "@Minh Nguyen Chinh :": {
+      "minh.nguyenchinh": {
          "reports": [
             "",
             "continued making new feature (done to step 8 with bugs)",
@@ -159,14 +153,14 @@
             ""
          ]
       },
-      "@anh.nguyenviet6": {
+      "anh.nguyenviet6": {
          "reports": [
             "- check iap_validation Unity",
             "- Non-project: working on android studio premake with the gameloft libs(cont)",
             ""
          ]
       },
-      "@giang.trinhthuy :": {
+      "giang.trinhthuy": {
          "reports": [
             "+ successfully posted sigils with abnormal amount in inventory to mattermost upon detection",
             "+ try to reproduce the sigil amount bug"
