@@ -1,5 +1,11 @@
 {
    "2023-2-6": {
+      "@giang.trinhthuy :": {
+         "reports": [
+            "+ test sigil detection on android",
+            "+ prepare compliancylib workshop (cont)"
+         ]
+      },
       "@trung.maiduc2:": {
          "reports": [
             "- "
