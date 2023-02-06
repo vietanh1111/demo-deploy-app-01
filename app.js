@@ -176,18 +176,20 @@ app.post('/report', function (req, res) {
 
             const fs = require('fs');
             let readDataStr = ""
-            let readDataJson = ""
+            let readDataJson = {}
             try {
                 readDataStr = fs.readFileSync(data_path, 'utf8');
                 readDataJson = JSON.parse(readDataStr);
             } catch (err) {
             }
 
-            const JSONObjectMerge = require("json-object-merge");
-            const merged = JSONObjectMerge.default(myData, readDataJson);
-            console.log("merging....");
+
+            console.log("merging....1");
             console.log(JSON.stringify(myData, null, 3));
             console.log(JSON.stringify(readDataJson, null, 3));
+            const JSONObjectMerge = require("json-object-merge");
+            const merged = JSONObjectMerge.default(myData, readDataJson);    
+            console.log("merging....2");
             console.log(JSON.stringify(merged, null, 3));
 
             if (fs.existsSync(data_path)) {
@@ -239,40 +241,40 @@ app.post('/report', function (req, res) {
                 }
             }
 
-            let myQuest2 = {
-                "model": "text-davinci-003",
-                "prompt": "Say thank the report of " + myname + "?" + "say wish me a good working day",
-                "max_tokens": 1000,
-                // "temperature": 0,
-                "top_p": 0.9,
-                "n": 1,
-                "stream": false,
-                "logprobs": null,
-            }
-            try {
-                const completion = await openaiObj.createCompletion(myQuest2);
-                console.log(completion.data.choices[0].text);
-                msg += completion.data.choices[0].text
-            } catch (error) {
-                if (error.response) {
-                    console.log(error.response.status);
-                    console.log(error.response.data);
-                } else {
-                    console.log(error.message);
-                }
-            }
-            var request = require('request');
-            request.post(
-                getDestinationMMUrl(),
-                { json: { "text": msg } },
-                function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                        console.log(body);
-                    } else {
-                        console.log("got error")
-                    }
-                }
-            );
+            // let myQuest2 = {
+            //     "model": "text-davinci-003",
+            //     "prompt": "Say thank the report of " + myname + "?" + "say wish me a good working day",
+            //     "max_tokens": 1000,
+            //     // "temperature": 0,
+            //     "top_p": 0.9,
+            //     "n": 1,
+            //     "stream": false,
+            //     "logprobs": null,
+            // }
+            // try {
+            //     const completion = await openaiObj.createCompletion(myQuest2);
+            //     console.log(completion.data.choices[0].text);
+            //     msg += completion.data.choices[0].text
+            // } catch (error) {
+            //     if (error.response) {
+            //         console.log(error.response.status);
+            //         console.log(error.response.data);
+            //     } else {
+            //         console.log(error.message);
+            //     }
+            // }
+            // var request = require('request');
+            // request.post(
+            //     getDestinationMMUrl(),
+            //     { json: { "text": msg } },
+            //     function (error, response, body) {
+            //         if (!error && response.statusCode == 200) {
+            //             console.log(body);
+            //         } else {
+            //             console.log("got error")
+            //         }
+            //     }
+            // );
             res.end("sayHello End");
         })
     }
@@ -520,8 +522,8 @@ function getCurrentDate() {
 }
 
 function getDestinationMMUrl() {
-    return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
-    // return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
+    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
 }
 
 var server = app.listen(port, function () {
