@@ -31,8 +31,8 @@ elif sys.argv[1] == 'check_records':
 elif sys.argv[1] == 'chat':
     print(sys.argv[1])
     url = 'http://127.0.0.1:3000/chatToVietanh'
-    # myobj = {'text': "Question: bạn có thể nhắc lại tên tôi không?"}   
-    myobj = {'text': "Question: Hi, tôi là Vietanh."}   
+    myobj = {'text': "Question: Do you know my name?"}   
+    # myobj = {'text': "Question: Hi, Im Vietanh"}   
 
 x = requests.post(url, json = myobj)
 # # x2 = requests.post(url2, json = myobj2)

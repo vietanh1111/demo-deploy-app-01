@@ -7,12 +7,12 @@ var ENV_SERVER = "https://demo-deploy-app-01.onrender.com/"
 
 const cron = require("node-cron");
 
-cron.schedule("38 12 * * *", function() {
-  console.log("Tác vụ đã được thực hiện lúc 12h28 giờ mỗi ngày!");
+cron.schedule("38 12 * * *", function () {
+    console.log("Tác vụ đã được thực hiện lúc 12h28 giờ mỗi ngày!");
     var request = require('request');
     request.post(
         ENV_SERVER + "checkMemberMissingRecord",
-        { json: { "text":  "hello" } },
+        { json: { "text": "hello" } },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log(body);
@@ -20,10 +20,10 @@ cron.schedule("38 12 * * *", function() {
                 console.log("got error")
             }
         }
-    ); 
-    res.end("checkMemberMissingRecord End");   
+    );
+    res.end("checkMemberMissingRecord End");
 });
-
+// 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
 
 const openai = require("openai");
 const Configuration = openai.Configuration;
@@ -62,7 +62,7 @@ team_member = {
     },
     "Duy Nguyen Khanh": {
         "email": "duy.nguyenkhanh@gameloft.com"
-    }    
+    }
 }
 
 const port = process.env.PORT || 3000
@@ -290,10 +290,11 @@ app.post('/sendMsg', function (req, res) {
                 const completion = await openaiObj.createCompletion(myQuest);
                 let myQuest2 = {
                     "model": "text-davinci-003",
-                    "prompt": "Help me give my teammates reminder that \"you need to fill out the daily task today\"",
+                    // "prompt": "I'm Dragon Mania Legends China, Help me give my teammates reminder that \"you need to fill out the daily task today\"",
+                    "prompt": "On behalf of \"Dragon Mania Legends China Team\". Help me say hi and a polite reminder email to my friends that \"you need to fill out the daily task today\"",
                     "max_tokens": 1000,
                     // "temperature": 0,
-                    "top_p": 0.5,
+                    "top_p": 0.1,
                     "n": 1,
                     "stream": false,
                     "logprobs": null,
@@ -425,7 +426,7 @@ app.post('/chatToVietanh', function (req, res) {
                         console.log(error.message);
                     }
                 }
-                
+
             }
             res.end("numOfReport End");
         })
@@ -445,7 +446,7 @@ app.post('/checkMemberMissingRecord', function (req, res) {
             let missingRec = getMemberMissingRecord()
             let myQuestion = 'Help me(iam DMLCN Team) remind ' + missingRec + " to fill in daily tasks politely and gently"
             requestOpenAIAndSendMM(myQuestion)
-                
+
             res.end("checkMemberMissingRecord End")
         })
     }
@@ -474,7 +475,7 @@ async function requestOpenAIAndSendMM(myQuestion) {
         var request = require('request');
         request.post(
             getDestinationMMUrl(),
-            { json: { "text":  msg } },
+            { json: { "text": msg } },
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     console.log(body);
@@ -482,7 +483,7 @@ async function requestOpenAIAndSendMM(myQuestion) {
                     console.log("got error")
                 }
             }
-        );                    
+        );
     } catch (error) {
         if (error.response) {
             console.log(error.response.status);
@@ -515,7 +516,7 @@ function getMemberMissingRecord() {
         if (!membersData[getCurrentDate()][team_member_email]) {
             console.log(team_member[member]["email"])
             missingRec.push(team_member[member]["email"])
-        } 
+        }
     }
     return missingRec
 }
@@ -524,7 +525,7 @@ function getCurrentDate() {
     const date = new Date();
     let day = date.getDate();
     let month = date.getMonth() + 1;
-    let year = date.getFullYear();    
+    let year = date.getFullYear();
     return `${year}-${month}-${day}`
 }
 
