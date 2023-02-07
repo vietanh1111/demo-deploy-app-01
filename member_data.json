@@ -1,5 +1,14 @@
 {
    "2023-2-8": {
+      "Reporting for @minh.nguyenchinh \n* Continued making new feature\n- Fixed some bugs caused null access, non click screen and opptimize gifts boxs position\n- Made multi levels for NewFeature\n- Implemented ObjectPool to generate multi fire balls\n- Built android version ": {
+         "reports": [
+            "* Continued making new feature",
+            "- Fixed some bugs caused null access, non click screen and opptimize gifts boxs position",
+            "- Made multi levels for NewFeature",
+            "- Implemented ObjectPool to generate multi fire balls",
+            "- Built android version "
+         ]
+      },
       "Reporting for anh.nguyenviet6@gameloft.com\n- implementation a demo": {
          "reports": [
             "- implementation a demo"
