@@ -1,5 +1,5 @@
 {
-   "2023-2-8": {
+   "2023-2-7": {
       "Reporting for @minh.nguyenchinh \n* Continued making new feature\n- Fixed some bugs caused null access, non click screen and opptimize gifts boxs position\n- Made multi levels for NewFeature\n- Implemented ObjectPool to generate multi fire balls\n- Built android version ": {
          "reports": [
             "* Continued making new feature",
@@ -36,14 +36,6 @@
          "reports": [
             "- Support for @minh.nguyenchinh ",
             "- Create Health bar in New Feature"
-         ]
-      }
-   },
-   "2023-2-7": {
-      "Reporting for @giang.trinhthuy :\n+ test sigil detection on android\n+ prepare compliancylib workshop (cont)": {
-         "reports": [
-            "+ test sigil detection on android",
-            "+ prepare compliancylib workshop (cont)"
          ]
       }
    },
