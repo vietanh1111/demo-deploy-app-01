@@ -622,7 +622,9 @@ app.post('/checkMemberMissingRecord', function (req, res) {
 })
 
 app.get('/getLocalDataFile', (req, res) => {
-  res.send('hello world')
+    // let jsonData = {"name":"vietanh"}
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send("helllllo")
 })
 
 async function requestOpenAIAndSendMM(myQuestion) {
