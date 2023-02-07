@@ -1,5 +1,11 @@
 {
    "2023-2-8": {
+      "Reporting for @giang.trinhthuy :\n+ build android with detection code\n+ build and deploy linux server": {
+         "reports": [
+            "+ build android with detection code",
+            "+ build and deploy linux server"
+         ]
+      },
       "Reporting for @quy.nguyenngoc \n - learning Unity": {
          "reports": [
             " - learning Unity"
