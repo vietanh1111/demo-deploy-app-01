@@ -444,6 +444,20 @@ app.post('/getNumOfReports', function (req, res) {
 
             // }
             getNumRecords()
+            
+            const html = fs.readFileSync('index.html', 'utf8');
+            const API_ID = "c5695b69-579a-42b9-9791-5730b9c82cb8"
+            const API_KEY = "e3faa319-e781-414c-a768-7a00b873832a"
+            const data = {
+                html: html,
+                google_fonts: "Roboto"
+            }
+
+            request.post({ url: 'https://hcti.io/v1/image', form: data })
+                .auth(API_ID, API_KEY)
+                .on('data', function (data) {
+                    console.log(JSON.parse(data))
+                })
 
             // const html = fs.readFileSync('index.html', 'utf8');
             // const API_ID = "c5695b69-579a-42b9-9791-5730b9c82cb8"
@@ -486,19 +500,7 @@ function getNumRecords() {
     // console.log(console.log(JSON.stringify(all_records, null, 3)))
 
     console.log(console.log(JSON.stringify(all_records, null, 3)))
-    const html = fs.readFileSync('index.html', 'utf8');
-    const API_ID = "c5695b69-579a-42b9-9791-5730b9c82cb8"
-    const API_KEY = "e3faa319-e781-414c-a768-7a00b873832a"
-    const data = {
-        html: html,
-        google_fonts: "Roboto"
-    }
 
-    request.post({ url: 'https://hcti.io/v1/image', form: data })
-        .auth(API_ID, API_KEY)
-        .on('data', function (data) {
-            console.log(JSON.parse(data))
-        })
 
 
     return all_records
