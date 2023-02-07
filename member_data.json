@@ -1,6 +1,6 @@
 {
    "2023-2-7": {
-      "Reporting for @minh.nguyenchinh \n* Continued making new feature\n- Fixed some bugs caused null access, non click screen and opptimize gifts boxs position\n- Made multi levels for NewFeature\n- Implemented ObjectPool to generate multi fire balls\n- Built android version ": {
+      "minh.nguyenchinh": {
          "reports": [
             "* Continued making new feature",
             "- Fixed some bugs caused null access, non click screen and opptimize gifts boxs position",
@@ -9,30 +9,36 @@
             "- Built android version "
          ]
       },
-      "Reporting for anh.nguyenviet6@gameloft.com\n- implementation a demo": {
+      "anh.nguyenviet6": {
          "reports": [
             "- implementation a demo"
          ]
       },
-      "Reporting for @giang.trinhthuy :\n+ build android with detection code\n+ build and deploy linux server": {
+      "trung.maiduc2": {
+         "reports": [
+            "- Find the put method of federation and test it on beta",
+            "- Research something about Unity"
+         ]
+      },      
+      "giang.trinhthuy": {
          "reports": [
             "+ build android with detection code",
             "+ build and deploy linux server"
          ]
       },
-      "Reporting for @quy.nguyenngoc \n - learning Unity": {
+      "quy.nguyenngoc": {
          "reports": [
             " - learning Unity"
          ]
       },
-      "Reporting for @anh.buithingoc@gameloft.com \n•\tResearch more on confluen https://confluence.gameloft.org/display/GLHN/%5BDML%5D%5BCN%5D+Technical+Documentations\n•\tResearch tracking\n": {
+      "anh.buithingoc": {
          "reports": [
             "•\tResearch more on confluen https://confluence.gameloft.org/display/GLHN/%5BDML%5D%5BCN%5D+Technical+Documentations",
             "•\tResearch tracking",
             ""
          ]
       },
-      "Reporting for @duc.luutrong \n- Support for @minh.nguyenchinh \n- Create Health bar in New Feature": {
+      "duc.luutrong": {
          "reports": [
             "- Support for @minh.nguyenchinh ",
             "- Create Health bar in New Feature"
@@ -149,13 +155,13 @@
             "- Non-project: working on android studio premake with the gameloft libs(cont)"
          ]
       },
-      "@trung.maiduc2": {
+      "trung.maiduc2": {
          "reports": [
             "- Update UC and 4399 SDK",
             "- Research about modified profile"
          ]
       },
-      "@quy.nguyenngoc": {
+      "quy.nguyenngoc": {
          "reports": [
             " - built sample unity app and connected it to unity distribution portal",
             " - trying to implement Huawei IAP with UDP"

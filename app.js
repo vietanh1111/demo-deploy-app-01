@@ -1,9 +1,26 @@
-var express = require('express');
+const express = require('express');
 var app = express();
-var fs = require("fs");
+
+const fs = require("fs");
+const request = require('request')
+const openai = require("openai");
 
 // var ENV_SERVER = "http://127.0.0.1:3000/"
 var ENV_SERVER = "https://demo-deploy-app-01.onrender.com/"
+
+
+app.get('/getIndex', function (request, response) {
+    response.sendFile(__dirname + '/index.html');
+});
+
+// app.listen('8000');
+
+// const myconstants = require('constants');
+// myconstants.myFunction();
+
+// var app_constants = require('./app_constants.js');
+// team_member = app_constants.getTheTeamMembers()
+// console.log(JSON.stringify(team_member, null, 3))
 
 // const cron = require("node-cron");
 
@@ -24,7 +41,7 @@ var ENV_SERVER = "https://demo-deploy-app-01.onrender.com/"
 //     res.end("checkMemberMissingRecord End");
 // });
 
-const openai = require("openai");
+// init openAPI
 const Configuration = openai.Configuration;
 const OpenAIApi = openai.OpenAIApi;
 let key = "sk-TSz275JV5fMrM1jCpV5XT3BlbkFJLblwOpYhW2lBwPud"
@@ -37,74 +54,61 @@ console.log(process.env.OPENAI_API_KEY)
 const openaiObj = new OpenAIApi(configuration);
 
 
+// const html = fs.readFileSync('index.html', 'utf8');
+// const API_ID = "c5695b69-579a-42b9-9791-5730b9c82cb8"
+// const API_KEY = "e3faa319-e781-414c-a768-7a00b873832a"
+// const data = {
+//     html: html,
+//     google_fonts: "Roboto"
+// }
+
+// request.post({ url: 'https://hcti.io/v1/image', form: data })
+//     .auth(API_ID, API_KEY)
+//     .on('data', function (data) {
+//         console.log(JSON.parse(data))
+//     })
+
 team_member = {
     "Anh Nguyen Viet 6": {
         "email": "anh.nguyenviet6@gameloft.com",
-        "name": "anh.nguyenviet6"
+        "name": "anh.nguyenviet6",
+        "alias": "vietanh6"
     },
     "Quy Nguyen Ngoc": {
         "email": "quy.nguyenngoc@gameloft.com",
-        "name": "quy.nguyenngoc"
+        "name": "quy.nguyenngoc",
+        "alias": "quynn"
     },
     "Duc Luu Trong": {
         "email": "duc.luutrong@gameloft.com",
-        "name": "duc.luutrong"
+        "name": "duc.luutrong",
+        "alias": "ducdoo"
     },
     "Trung Mai Duc 2": {
         "email": "trung.maiduc2@gameloft.com",
-        "name": "trung.maiduc2"
+        "name": "trung.maiduc2",
+        "alias": "trungtrau"
     },
     "Minh Nguyen Chinh": {
         "email": "minh.nguyenchinh@gameloft.com",
-        "name": "minh.nguyenchinh"
+        "name": "minh.nguyenchinh",
+        "alias": "chinhminh"
     },
     "Giang Trinh Thuy": {
         "email": "giang.trinhthuy@gameloft.com",
-        "name": "giang.trinhthuy"
+        "name": "giang.trinhthuy",
+        "alias": "alextrinh"
     },
     "Anh Bui Thi Ngoc": {
         "email": "anh.buithingoc@gameloft.com",
-        "name": "anh.buithingoc"
+        "name": "anh.buithingoc",
+        "alias": "ngocanh"
     }
 }
 
 const port = process.env.PORT || 3000
 const data_path = "./member_data.json";
 
-/*
-Steps:
-- Read data.json to initialize member objects from data.json
-e.g.:
-{
-    "20230130" : {
-        "anh.nguyenviet6": {
-            "name":"Vietanh6",
-            "report_contents":"",
-            "report_nums":"0"
-        },
-        "trung.maiduc2": {
-            "name":"MaiDucTrung2",
-            "report_contents":"",
-            "report_nums":0
-        }
-    },
-    "20230131" : {
-        "anh.nguyenviet6": {
-            "name":"Vietanh6",
-            "report_contents":"",
-            "report_nums":"0"
-        },
-        "trung.maiduc2": {
-            "name":"MaiDucTrung2",
-            "report_contents":"",
-            "report_nums":0
-        }
-    }    
-}
-
-- Read data from MM to update each members
-- Save to data.json
-*/
 
 function convertToEmail(list) {
     var email_list = []
@@ -184,7 +188,7 @@ app.post('/report', function (req, res) {
             console.log(JSON.stringify(myData, null, 3));
             console.log(JSON.stringify(readDataJson, null, 3));
             const JSONObjectMerge = require("json-object-merge");
-            const merged = JSONObjectMerge.default(myData, readDataJson);    
+            const merged = JSONObjectMerge.default(myData, readDataJson);
             console.log("merging....2");
             console.log(JSON.stringify(merged, null, 3));
 
@@ -350,7 +354,7 @@ function getRecords() {
             missRec.push(team_member[member]["name"])
         } else {
             console.log(team_member[member]["name"])
-            doneRec.push(team_member[member]["name"])           
+            doneRec.push(team_member[member]["name"])
         }
     }
     let rec_today = {}
@@ -359,6 +363,7 @@ function getRecords() {
     console.log(console.log(JSON.stringify(rec_today, null, 3)))
     return rec_today
 }
+
 app.post('/sendThank', function (req, res) {
     if (req.method == 'POST') {
         req.on('data', async function (data) {
@@ -372,7 +377,7 @@ app.post('/sendThank', function (req, res) {
                 const completion = await openaiObj.createCompletion(myQuest);
                 let myQuest2 = {
                     "model": "text-davinci-003",
-                    "prompt": "On behalf of \"Dragon Mania Legends China Team\". Send a short email to thank my team for reporting"  + " then warning " + rec["miss"]  + " because missing report.",
+                    "prompt": "On behalf of \"Dragon Mania Legends China Team\". Send a short email to thank my team for reporting" + " then warning " + rec["miss"] + " because missing report.",
                     "max_tokens": 1000,
                     // "temperature": 0,
                     "top_p": 0.1,
@@ -419,6 +424,7 @@ app.post('/sendThank', function (req, res) {
         })
     }
 })
+
 app.post('/getNumOfReports', function (req, res) {
     if (req.method == 'POST') {
         req.on('data', async function (data) {
@@ -439,6 +445,20 @@ app.post('/getNumOfReports', function (req, res) {
             // }
             getNumRecords()
 
+            // const html = fs.readFileSync('index.html', 'utf8');
+            // const API_ID = "c5695b69-579a-42b9-9791-5730b9c82cb8"
+            // const API_KEY = "e3faa319-e781-414c-a768-7a00b873832a"
+            // const data = {
+            //     html: html,
+            //     google_fonts: "Roboto"
+            // }
+
+            // request.post({ url: 'https://hcti.io/v1/image', form: data })
+            //     .auth(API_ID, API_KEY)
+            //     .on('data', function (data) {
+            //         console.log(JSON.parse(data))
+            //     })
+
             res.end("numOfReport End");
         })
     }
@@ -454,7 +474,7 @@ function getNumRecords() {
         team_member_email = team_member[member]["name"]
         number_records = 0
         for (var date of Object.keys(all_data)) {
-            console.log(date)
+            // console.log(date)
             if (all_data[date][team_member[member]["name"]]) {
                 number_records += 1
             }
@@ -465,6 +485,20 @@ function getNumRecords() {
 
     console.log(console.log(JSON.stringify(all_records, null, 3)))
 
+    // console.log(console.log(JSON.stringify(all_records, null, 3)))
+    // const html = fs.readFileSync('index.html', 'utf8');
+    // const API_ID = "c5695b69-579a-42b9-9791-5730b9c82cb8"
+    // const API_KEY = "e3faa319-e781-414c-a768-7a00b873832a"
+    // const data = {
+    // html: html,
+    // google_fonts: "Roboto"
+    // }
+
+    // request.post({ url: 'https://hcti.io/v1/image', form: data})
+    // .auth(API_ID, API_KEY)
+    // .on('data', function(data) {
+    //     console.log(JSON.parse(data))
+    // })
 }
 
 // show help
@@ -524,7 +558,7 @@ app.post('/chatToVietanh', function (req, res) {
             // if (jsonData.user_name == "anh.nguyenviet6" && jsonData.text.toLowerCase().indexOf("Quạ im nhé") === -1) {
             // if (jsonData.user_name == "anh.nguyenviet6") {
             if (jsonData.text.startsWith("Question:")) {
-                var question = jsonData.text.replace('Question:','');
+                var question = jsonData.text.replace('Question:', '');
 
 
                 console.log("chat to vietanh")
@@ -544,7 +578,7 @@ app.post('/chatToVietanh', function (req, res) {
                     var request = require('request');
                     request.post(
                         getDestinationMMUrl(),
-                        { json: { "text":  "I'm dead" } },
+                        { json: { "text": "I'm dead" } },
                         function (error, response, body) {
                             if (!error && response.statusCode == 200) {
                                 console.log(body);
@@ -552,7 +586,7 @@ app.post('/chatToVietanh', function (req, res) {
                                 console.log("got error")
                             }
                         }
-                    );                    
+                    );
                 } catch (error) {
                     if (error.response) {
                         console.log(error.response.status);
@@ -587,6 +621,9 @@ app.post('/checkMemberMissingRecord', function (req, res) {
     }
 })
 
+app.get('/getLocalDataFile', (req, res) => {
+  res.send('hello world')
+})
 
 async function requestOpenAIAndSendMM(myQuestion) {
     console.log("chat to vietanh")

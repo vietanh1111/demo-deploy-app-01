@@ -1,31 +1,31 @@
-<div style="border: 2px solid black; padding: 20px;">
+<div style="border: 2px solid rgba(255, 99, 132, 0.2); padding: 20px;">
     <canvas id="myChart"></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- <script src="app_constants.js"></script> -->
-
 <script>
-
-    function getCurrentDate() {
-        const date = new Date();
-        let day = date.getDate();
-        let month = date.getMonth() + 1;
-        let year = date.getFullYear();
-        return `${year}-${month}-${day}`
-    }
 
     function getUserDataFromFile() {
 
         let readDataStr = ""
         let readDataJson = ""
-        try {
-            fetch('./member_data.json')
-                .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.error(error));
-        } catch (err) {
-        }
+
+        // fetch('http://127.0.0.1:3000/getLocalDataFile')
+            fetch('https://demo-deploy-app-01.onrender.com/getLocalDataFile', {
+            mode: 'no-cors'
+            })        
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok')
+                }
+                return response.json()
+            })
+            .then(data => {
+                console.log('JSON data from fetch:', data)
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error)
+            })
 
         return readDataJson
     }
@@ -33,38 +33,26 @@
     function getRecords() {
         let missRec = []
         let doneRec = []
-        // var team_member = JSON.parse(JSON.stringify(team_members))
         let membersData = getUserDataFromFile()
-        // let membersData = readTextFile('file:///F:/Dmlcn/Toool/MyBot/demo-deploy-app-01_new/member_data.json')
-        // for (var member of Object.keys(team_member)) {
-        //     team_member_email = team_member[member]["name"]
-        //     number_records = 0
-        //     if (!membersData[getCurrentDate()][team_member_email]) {
-        //         console.log(team_member[member]["name"])
-        //         missRec.push(team_member[member]["name"])
-        //     } else {
-        //         console.log(team_member[member]["name"])
-        //         doneRec.push(team_member[member]["name"])
-        //     }
-        // }
-        // let rec_today = {}
-        // rec_today["miss"] = missRec
-        // rec_today["done"] = doneRec
-        // console.log(console.log(JSON.stringify(rec_today, null, 3)))
-        // return rec_today
+
     }
 
     getRecords()
 
+    // var myLabel = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']
+    // var myLabelName = '# of Recored'
+    // var myLabelRecords = [12, 19, 3, 5, 2, 3]
+    // var myLabelCorlor = [12, 19, 3, 5, 2, 3]
+    
+    // var myLabel = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']
     // var ctx = document.getElementById('myChart').getContext('2d');
-
     // var myChart = new Chart(ctx, {
     //     type: 'bar',
     //     data: {
-    //         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    //         labels: myLabel,
     //         datasets: [{
-    //             label: '# of Recored',
-    //             data: [12, 19, 3, 5, 2, 3],
+    //             label: myLabelName,
+    //             data: myLabelRecords,
     //             backgroundColor: [
     //                 'rgba(255, 99, 132, 0.2)',
     //                 'rgba(54, 162, 235, 0.2)',
@@ -96,20 +84,3 @@
     // });
 
 </script>
-<!-- 
-<!DOCTYPE html>
-<html>
-<head>
-  <script>
-    function readJSON() {
-      fetch('team_member.json')
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-        });
-    }
-  </script>
-</head>
-<body onload="readJSON()">
-</body>
-</html> -->
