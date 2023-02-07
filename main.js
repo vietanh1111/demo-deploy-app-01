@@ -1,8 +1,8 @@
 var ManagerSystem = function () {
     console.log("hello ManagerSystem")
     
-    var linkGetLocalData = "http://127.0.0.1:3000/getLocalDataFile"
-    // var linkGetLocalData = "https://demo-deploy-app-01.onrender.com/getLocalDataFile"
+    // var linkGetLocalData = "http://127.0.0.1:3000/getLocalDataFile"
+    var linkGetLocalData = "https://demo-deploy-app-01.onrender.com/getLocalDataFile"
     $.ajax({
         url: linkGetLocalData,
         type: "GET",
