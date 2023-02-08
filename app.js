@@ -121,19 +121,67 @@ console.log(process.env.OPENAI_API_KEY)
 const openaiObj = new OpenAIApi(configuration);
 
 
-// const html = fs.readFileSync('index.html', 'utf8');
-// const API_ID = "c5695b69-579a-42b9-9791-5730b9c82cb8"
-// const API_KEY = "e3faa319-e781-414c-a768-7a00b873832a"
-// const data = {
-//     html: html,
-//     google_fonts: "Roboto"
-// }
 
-// request.post({ url: 'https://hcti.io/v1/image', form: data })
-//     .auth(API_ID, API_KEY)
-//     .on('data', function (data) {
-//         console.log(JSON.parse(data))
-//     })
+const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
+
+const width = 400; //px
+const height = 400; //px
+const backgroundColour = 'white'; // Uses https://www.w3schools.com/tags/canvas_fillstyle.asp
+const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, backgroundColour });
+const configuration2 = {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        animation: {
+            duration: 0 // general animation time
+        },
+        hover: {
+            animationDuration: 0 // duration of animations when hovering an item
+        },
+        responsiveAnimationDuration: 0, // animation duration after a resize
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    callback: (value) => '$' + value
+                }
+            }]
+        }
+    }
+};
+(async () => {
+
+    // const image = await chartJSNodeCanvas.renderToBuffer(configuration);
+    const image = await chartJSNodeCanvas.renderToBuffer(configuration2);
+    // const stream = chartJSNodeCanvas.renderToStream(configuration);
+    fs.writeFileSync('chart.png', image);
+    console.log("done chart")
+})();
+
+
 
 team_member = {
     "Anh Nguyen Viet 6": {
