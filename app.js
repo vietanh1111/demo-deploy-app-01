@@ -321,7 +321,33 @@ async function sendImage() {
     const height = 400; //px
     const backgroundColour = 'white'; // Uses https://www.w3schools.com/tags/canvas_fillstyle.asp
     const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, backgroundColour });
-    
+    // Define the chart options
+    const options = {
+        scales: {
+            xAxes: [
+                {
+                    type: "3d",
+                    position: "bottom",
+                    gridLines: {
+                        drawOnChartArea: false
+                    }
+                }
+            ],
+            yAxes: [
+                {
+                    type: "linear",
+                    position: "left",
+                    gridLines: {
+                        drawOnChartArea: false
+                    }
+                }
+            ]
+        },
+        animation: {
+            duration: 2000,
+            easing: "easeOutQuart"
+        }
+    };
     var myLabel = []
     var myLabelName = '# of Recored'
     var myLabelRecords = []
@@ -359,23 +385,7 @@ async function sendImage() {
                 borderWidth: 1
             }]
         },
-        options: {
-            animation: {
-                duration: 0 // general animation time
-            },
-            hover: {
-                animationDuration: 0 // duration of animations when hovering an item
-            },
-            responsiveAnimationDuration: 0, // animation duration after a resize
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        callback: (value) => '$' + value
-                    }
-                }]
-            }
-        }
+        options: options
     };
 
     (async () => {
@@ -424,8 +434,21 @@ async function sendImage() {
                 console.error(err);
             } else {
                 console.log('The URL for the image is: ', url);
+                var request = require('request');
+                request.post(
+                    getDestinationMMUrl(),
+                    { json: { "text": url } },
+                    function (error, response, body) {
+                        if (!error && response.statusCode == 200) {
+                            console.log(body);
+                        } else {
+                            console.log("got error")
+                        }
+                    }
+                );
             }
         });
+
     })();
 
 }
