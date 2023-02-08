@@ -23,11 +23,6 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@kurkle/color@^0.3.0":
-  version "0.3.2"
-  resolved "https://registry.npmjs.org/@kurkle/color/-/color-0.3.2.tgz"
-  integrity sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==
-
 "@mapbox/node-pre-gyp@^1.0.0":
   version "1.0.10"
   resolved "https://registry.npmjs.org/@mapbox/node-pre-gyp/-/node-pre-gyp-1.0.10.tgz"
@@ -299,21 +294,10 @@ chalk@^2.0.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chart.js@^3.5.1, chart.js@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/chart.js/-/chart.js-4.2.0.tgz"
-  integrity sha512-wbtcV+QKeH0F7gQZaCJEIpsNriFheacouJQTVIjITi3eQA8bTlIBoknz0+dgV79aeKLNMAX+nDslIVE/nJ3rzA==
-  dependencies:
-    "@kurkle/color" "^0.3.0"
-
-chart@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/chart/-/chart-0.1.2.tgz"
-  integrity sha512-MSiVzAd3qUEXv54k9KGe1oIoC7WG32W9wtjpovlTGlzo2ue/fRiHf7kJAK1zmD736jH/0fVWNCQLh41btfAEZQ==
-  dependencies:
-    hashish ""
-    hat ""
-    mrcolor "https://github.com/rook2pawn/mrcolor/archive/master.tar.gz"
+chart.js@^3.5.1:
+  version "3.9.1"
+  resolved "https://registry.npmjs.org/chart.js/-/chart.js-3.9.1.tgz"
+  integrity sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==
 
 chartjs-node-canvas@^4.1.6:
   version "4.1.6"
@@ -339,11 +323,6 @@ color-convert@^1.9.0:
   integrity sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==
   dependencies:
     color-name "1.1.3"
-
-color-convert@0.2.x:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/color-convert/-/color-convert-0.2.1.tgz"
-  integrity sha512-FWbwpCgyRV41Vml0iKU9UmL0dVTKORnm7ZC8h8cdfvutk2bU7ZcMLtSleggScK/IpUVXILg9Pw86LhPUQyTaVg==
 
 color-name@1.1.3:
   version "1.1.3"
@@ -848,18 +827,6 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-hashish@:
-  version "0.0.4"
-  resolved "https://registry.npmjs.org/hashish/-/hashish-0.0.4.tgz"
-  integrity sha512-xyD4XgslstNAs72ENaoFvgMwtv8xhiDtC2AtzCG+8yF7W/Knxxm9BX+e2s25mm+HxMKh0rBmXVOEGF3zNImXvA==
-  dependencies:
-    traverse ">=0.2.4"
-
-hat@:
-  version "0.0.3"
-  resolved "https://registry.npmjs.org/hat/-/hat-0.0.3.tgz"
-  integrity sha512-zpImx2GoKXy42fVDSEad2BPKuSQdLcqsCYa48K3zHSzM/ugWuYjLDr8IXxpVuL7uCLHw56eaiLxCRthhOzf5ug==
-
 http-errors@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/http-errors/-/http-errors-2.0.0.tgz"
@@ -1166,13 +1133,6 @@ mkdirp@^1.0.3:
   version "1.0.4"
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
-
-"mrcolor@https://github.com/rook2pawn/mrcolor/archive/master.tar.gz":
-  version "0.0.1"
-  resolved "https://github.com/rook2pawn/mrcolor/archive/master.tar.gz"
-  integrity sha512-feteSepg0FRp0fW3RafigAjU7gXiiaa4OlMW39FEmcvQPbD7Zlpc2PSu4hVBPSBR4XNee8n6EjCTfK0O37DL5A==
-  dependencies:
-    color-convert "0.2.x"
 
 ms@2.0.0:
   version "2.0.0"
@@ -1689,11 +1649,6 @@ tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
-
-traverse@>=0.2.4:
-  version "0.6.7"
-  resolved "https://registry.npmjs.org/traverse/-/traverse-0.6.7.tgz"
-  integrity sha512-/y956gpUo9ZNCb99YjxG7OaslxZWHfCHAUUfshwqOXmxUIvqLjVO581BT+gM59+QV9tFe6/CGG53tsA1Y7RSdg==
 
 tslib@^2.3.1, tslib@^2.4.1, tslib@^2.5.0:
   version "2.5.0"
