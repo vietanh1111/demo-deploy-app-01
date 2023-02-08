@@ -764,7 +764,8 @@ app.post('/checkMemberMissingRecord', function (req, res) {
 app.get('/getLocalDataFile', (req, res) => {
     // let jsonData = {"name":"vietanh"}
     res.set('Access-Control-Allow-Origin', '*');
-    res.send(getNumRecords())
+    // res.send(getNumRecords())
+    res.send("getNumRecords()")
 })
 
 async function requestOpenAIAndSendMM(myQuestion) {
