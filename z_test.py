@@ -40,6 +40,8 @@ elif sys.argv[1] == 'send_thank':
     # myobj = {'text': "Question: Hi, Im Vietanh"}   
 elif sys.argv[1] == 'get_num_records':
     print(sys.argv[1])
+    
+    # url = 'https://demo-deploy-app-01.onrender.com/getNumOfReports'
     url = 'http://127.0.0.1:3000/getNumOfReports'
     myobj = {'text': "Question: Do you know my name?"}   
     # myobj = {'text': "Question: Hi, Im Vietanh"}   
