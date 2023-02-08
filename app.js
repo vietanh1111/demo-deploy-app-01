@@ -512,19 +512,87 @@ app.post('/getNumOfReports', function (req, res) {
             // }
             getNumRecords()
 
-            const html = fs.readFileSync('index.html', 'utf8');
-            const API_ID = "c5695b69-579a-42b9-9791-5730b9c82cb8"
-            const API_KEY = "e3faa319-e781-414c-a768-7a00b873832a"
-            const formData = {
-                html: html,
-                google_fonts: "Roboto"
-            }
+                // const html = fs.readFileSync('index.html', 'utf8');
+                // const API_ID = "c5695b69-579a-42b9-9791-5730b9c82cb8"
+                // const API_KEY = "e3faa319-e781-414c-a768-7a00b873832a"
+                // const formData = {
+                //     html: html,
+                //     google_fonts: "Roboto"
+                // }
 
-            request.post({ url: 'https://hcti.io/v1/image', form: formData })
-                .auth(API_ID, API_KEY)
-                .on('data', function (data) {
-                    console.log(JSON.parse(data))
-                })
+                // request.post({ url: 'https://hcti.io/v1/image', form: formData })
+                //     .auth(API_ID, API_KEY)
+                //     .on('data', function (data) {
+                //         console.log(JSON.parse(data))
+                //     })
+
+
+                (async () => {
+                    const path = require("path");
+                    const browser = await puppeteer.launch();
+                    const page = await browser.newPage();
+                    const filePath = path.join(__dirname, "index.html");
+                    await page.goto(`file://${filePath}`);
+
+                    // Wait for 5 seconds
+                    await new Promise((resolve) => setTimeout(resolve, 5 * 1000));
+
+                    // Take screenshot
+                    await page.screenshot({ path: "screenshot.png" });
+
+                    await browser.close();
+
+                    ACCESS_KEY_1 = "AKIA6JEDQFAH5UBN"
+                    ACCESS_KEY_2 = "Z75K"
+                    ACCESS_KEY_ID = ACCESS_KEY_1 + ACCESS_KEY_2
+
+                    SECRET_KEY_1 = "HMH+hRFDQKCdR4cOleJr9KqqfueaOxdanzn"
+                    SECRET_KEY_2 = "NgwnR"
+                    SECRET_ACCESS_KEY = SECRET_KEY_1 + SECRET_KEY_2
+
+                    // Configure the AWS SDK with your AWS credentials and region
+                    AWS.config.update({
+                        accessKeyId: ACCESS_KEY_ID,
+                        secretAccessKey: SECRET_ACCESS_KEY,
+                        region: 'ap-northeast-1'
+                    });
+
+                    // Create an S3 instance
+                    const s3 = new AWS.S3();
+
+                    // Read the image file
+                    const file = fs.readFileSync('screenshot.png');
+
+                    // Upload the image to S3
+                    s3.upload({
+                        Bucket: 'myvietanhbot3',
+                        Key: 'screenshot.png',
+                        Body: file,
+                        ContentType: 'image/png'
+                    }, (error, data) => {
+                        if (error) {
+                            console.error(error);
+                        } else {
+                            console.log(data);
+                        }
+                    });
+
+
+                    var params = {
+                        Bucket: 'myvietanhbot3',
+                        Key: 'screenshot.png',
+                        Expires: 600 // URL will expire in 60 seconds
+                    };
+
+                    s3.getSignedUrl('getObject', params, function (err, url) {
+                        if (err) {
+                            console.error(err);
+                        } else {
+                            console.log('The URL for the image is: ', url);
+                        }
+                    });
+
+                })();
 
             // const html = fs.readFileSync('index.html', 'utf8');
             // const API_ID = "c5695b69-579a-42b9-9791-5730b9c82cb8"
@@ -563,74 +631,6 @@ function getNumRecords() {
         all_records[team_member[member]["alias"]] = number_records
 
     }
-
-    (async () => {
-        const path = require("path");
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-        const filePath = path.join(__dirname, "index.html");
-        await page.goto(`file://${filePath}`);
-
-        // Wait for 5 seconds
-        await new Promise((resolve) => setTimeout(resolve, 5 * 1000));
-
-        // Take screenshot
-        await page.screenshot({ path: "screenshot.png" });
-
-        await browser.close();
-
-        ACCESS_KEY_1 = "AKIA6JEDQFAH5UBN"
-        ACCESS_KEY_2 = "Z75K"
-        ACCESS_KEY_ID = ACCESS_KEY_1 + ACCESS_KEY_2
-
-        SECRET_KEY_1 = "HMH+hRFDQKCdR4cOleJr9KqqfueaOxdanzn"
-        SECRET_KEY_2 = "NgwnR"
-        SECRET_ACCESS_KEY = SECRET_KEY_1 + SECRET_KEY_2
-
-        // Configure the AWS SDK with your AWS credentials and region
-        AWS.config.update({
-            accessKeyId: ACCESS_KEY_ID,
-            secretAccessKey: SECRET_ACCESS_KEY,
-            region: 'ap-northeast-1'
-        });
-
-        // Create an S3 instance
-        const s3 = new AWS.S3();
-
-        // Read the image file
-        const file = fs.readFileSync('screenshot.png');
-
-        // Upload the image to S3
-        s3.upload({
-            Bucket: 'myvietanhbot3',
-            Key: 'screenshot.png',
-            Body: file,
-            ContentType: 'image/png'
-        }, (error, data) => {
-            if (error) {
-                console.error(error);
-            } else {
-                console.log(data);
-            }
-        });
-
-
-        var params = {
-            Bucket: 'myvietanhbot3',
-            Key: 'screenshot.png',
-            Expires: 600 // URL will expire in 60 seconds
-        };
-
-        s3.getSignedUrl('getObject', params, function (err, url) {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log('The URL for the image is: ', url);
-            }
-        });
-
-    })();
-
     // console.log(console.log(JSON.stringify(all_records, null, 3)))
 
     console.log(console.log(JSON.stringify(all_records, null, 3)))
