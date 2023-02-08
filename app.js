@@ -124,62 +124,62 @@ const openaiObj = new OpenAIApi(configuration);
 
 const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
 
-const width = 400; //px
-const height = 400; //px
-const backgroundColour = 'white'; // Uses https://www.w3schools.com/tags/canvas_fillstyle.asp
-const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, backgroundColour });
-const configuration2 = {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        animation: {
-            duration: 0 // general animation time
-        },
-        hover: {
-            animationDuration: 0 // duration of animations when hovering an item
-        },
-        responsiveAnimationDuration: 0, // animation duration after a resize
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    callback: (value) => '$' + value
-                }
-            }]
-        }
-    }
-};
-(async () => {
+// const width = 400; //px
+// const height = 400; //px
+// const backgroundColour = 'white'; // Uses https://www.w3schools.com/tags/canvas_fillstyle.asp
+// const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, backgroundColour });
+// const configuration2 = {
+//     type: 'bar',
+//     data: {
+//         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//         datasets: [{
+//             label: '# of Votes',
+//             data: [12, 19, 3, 5, 2, 3],
+//             backgroundColor: [
+//                 'rgba(255, 99, 132, 0.2)',
+//                 'rgba(54, 162, 235, 0.2)',
+//                 'rgba(255, 206, 86, 0.2)',
+//                 'rgba(75, 192, 192, 0.2)',
+//                 'rgba(153, 102, 255, 0.2)',
+//                 'rgba(255, 159, 64, 0.2)'
+//             ],
+//             borderColor: [
+//                 'rgba(255,99,132,1)',
+//                 'rgba(54, 162, 235, 1)',
+//                 'rgba(255, 206, 86, 1)',
+//                 'rgba(75, 192, 192, 1)',
+//                 'rgba(153, 102, 255, 1)',
+//                 'rgba(255, 159, 64, 1)'
+//             ],
+//             borderWidth: 1
+//         }]
+//     },
+//     options: {
+//         animation: {
+//             duration: 0 // general animation time
+//         },
+//         hover: {
+//             animationDuration: 0 // duration of animations when hovering an item
+//         },
+//         responsiveAnimationDuration: 0, // animation duration after a resize
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero: true,
+//                     callback: (value) => '$' + value
+//                 }
+//             }]
+//         }
+//     }
+// };
+// (async () => {
 
-    // const image = await chartJSNodeCanvas.renderToBuffer(configuration);
-    const image = await chartJSNodeCanvas.renderToBuffer(configuration2);
-    // const stream = chartJSNodeCanvas.renderToStream(configuration);
-    fs.writeFileSync('chart.png', image);
-    console.log("done chart")
-})();
+//     // const image = await chartJSNodeCanvas.renderToBuffer(configuration);
+//     const image = await chartJSNodeCanvas.renderToBuffer(configuration2);
+//     // const stream = chartJSNodeCanvas.renderToStream(configuration);
+//     fs.writeFileSync('chart.png', image);
+//     console.log("done chart")
+// })();
 
 
 
@@ -294,20 +294,20 @@ function getNumRecords() {
 }
 
 async function sendImage() {
-    console.log("prepare capturing 3")
-    const path = require("path");
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    const filePath = path.join(__dirname, "index.html");
-    await page.goto(`file://${filePath}`);
+    console.log("prepare capturing 4")
+    // const path = require("path");
+    // const browser = await puppeteer.launch();
+    // const page = await browser.newPage();
+    // const filePath = path.join(__dirname, "index.html");
+    // await page.goto(`file://${filePath}`);
 
-    // Wait for 5 seconds
-    await new Promise((resolve) => setTimeout(resolve, 5 * 1000));
+    // // Wait for 5 seconds
+    // await new Promise((resolve) => setTimeout(resolve, 5 * 1000));
 
-    // Take screenshot
-    await page.screenshot({ path: "screenshot.png" });
+    // // Take screenshot
+    // await page.screenshot({ path: "screenshot.png" });
 
-    await browser.close();
+    // await browser.close();
 
     ACCESS_KEY_1 = "AKIA6JEDQFAH5UBN"
     ACCESS_KEY_2 = "Z75K"
@@ -317,47 +317,117 @@ async function sendImage() {
     SECRET_KEY_2 = "NgwnR"
     SECRET_ACCESS_KEY = SECRET_KEY_1 + SECRET_KEY_2
 
-    // Configure the AWS SDK with your AWS credentials and region
-    AWS.config.update({
-        accessKeyId: ACCESS_KEY_ID,
-        secretAccessKey: SECRET_ACCESS_KEY,
-        region: 'ap-northeast-1'
-    });
+    const width = 400; //px
+    const height = 400; //px
+    const backgroundColour = 'white'; // Uses https://www.w3schools.com/tags/canvas_fillstyle.asp
+    const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, backgroundColour });
+    
+    var myLabel = []
+    var myLabelName = '# of Recored'
+    var myLabelRecords = []
+    var myLabelRecordsBackground = [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+    ]
+    var myLabelRecordsBorder = [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+    ]
 
-    // Create an S3 instance
-    const s3 = new AWS.S3();
-
-    // Read the image file
-    const file = fs.readFileSync('screenshot.png');
-
-    // Upload the image to S3
-    s3.upload({
-        Bucket: 'myvietanhbot3',
-        Key: 'screenshot.png',
-        Body: file,
-        ContentType: 'image/png'
-    }, (error, data) => {
-        if (error) {
-            console.error(error);
-        } else {
-            console.log(data);
+    recoredData = getNumRecords()
+    for (var name of Object.keys(recoredData)) {
+        myLabel.push(name)
+        myLabelRecords.push(recoredData[name])
+    }
+    const configuration2 = {
+        type: 'bar',
+        data: {
+            labels: myLabel,
+            datasets: [{
+                label: myLabelName,
+                data: myLabelRecords,
+                backgroundColor: myLabelRecordsBackground,
+                borderColor: myLabelRecordsBorder,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            animation: {
+                duration: 0 // general animation time
+            },
+            hover: {
+                animationDuration: 0 // duration of animations when hovering an item
+            },
+            responsiveAnimationDuration: 0, // animation duration after a resize
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        callback: (value) => '$' + value
+                    }
+                }]
+            }
         }
-    });
-
-
-    var params = {
-        Bucket: 'myvietanhbot3',
-        Key: 'screenshot.png',
-        Expires: 600 // URL will expire in 60 seconds
     };
 
-    s3.getSignedUrl('getObject', params, function (err, url) {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log('The URL for the image is: ', url);
-        }
-    });
+    (async () => {
+
+        // const image = await chartJSNodeCanvas.renderToBuffer(configuration);
+        const image = await chartJSNodeCanvas.renderToBuffer(configuration2);
+        // const stream = chartJSNodeCanvas.renderToStream(configuration);
+        fs.writeFileSync('screenshot.png', image);
+        console.log("done chart")
+        // Configure the AWS SDK with your AWS credentials and region
+        AWS.config.update({
+            accessKeyId: ACCESS_KEY_ID,
+            secretAccessKey: SECRET_ACCESS_KEY,
+            region: 'ap-northeast-1'
+        });
+
+        // Create an S3 instance
+        const s3 = new AWS.S3();
+
+        // Read the image file
+        const file = fs.readFileSync('screenshot.png');
+
+        // Upload the image to S3
+        s3.upload({
+            Bucket: 'myvietanhbot3',
+            Key: 'screenshot.png',
+            Body: file,
+            ContentType: 'image/png'
+        }, (error, data) => {
+            if (error) {
+                console.error(error);
+            } else {
+                console.log(data);
+            }
+        });
+
+
+        var params = {
+            Bucket: 'myvietanhbot3',
+            Key: 'screenshot.png',
+            Expires: 600 // URL will expire in 60 seconds
+        };
+
+        s3.getSignedUrl('getObject', params, function (err, url) {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log('The URL for the image is: ', url);
+            }
+        });
+    })();
+
 }
 function convertToEmail(list) {
     var email_list = []
