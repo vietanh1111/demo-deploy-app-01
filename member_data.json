@@ -1,12 +1,10 @@
 {
-   "2023-2-9": {
-      "Reporting for @giang.trinhthuy :\n+ Build and deploy linux server": {
+   "2023-2-8": {
+      "giang.trinhthuy": {
          "reports": [
             "+ Build and deploy linux server"
          ]
-      }
-   },
-   "2023-2-8": {
+      },      
       "trung.maiduc2": {
          "reports": [
             "- Continue to test put data on beta"
