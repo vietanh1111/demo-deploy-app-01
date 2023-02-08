@@ -294,7 +294,7 @@ function getNumRecords() {
 }
 
 async function sendImage() {
-    console.log("prepare capturing 4")
+    console.log("prepare capturing 5")
     // const path = require("path");
     // const browser = await puppeteer.launch();
     // const page = await browser.newPage();
@@ -762,6 +762,7 @@ app.post('/getNumOfReports', function (req, res) {
             //     }
 
             // }
+
             getNumRecords()
             sendImage()
             // const html = fs.readFileSync('index.html', 'utf8');
