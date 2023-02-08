@@ -176,6 +176,74 @@ team_member = {
 const port = process.env.PORT || 3000
 const data_path = "./member_data.json";
 
+function getUserDataFromFile() {
+
+    let readDataStr = ""
+    let readDataJson = ""
+    try {
+        readDataStr = fs.readFileSync('./member_data.json', 'utf8')
+        readDataJson = JSON.parse(readDataStr)
+    } catch (err) {
+    }
+
+    return readDataJson
+}
+
+function getMemberMissingRecord() {
+    let missingRec = []
+    let membersData = getUserDataFromFile()
+    for (var member of Object.keys(team_member)) {
+        team_member_email = team_member[member]["email"]
+        number_records = 0
+        if (!membersData[getCurrentDate()][team_member_email]) {
+            console.log(team_member[member]["email"])
+            missingRec.push(team_member[member]["email"])
+        }
+    }
+    return missingRec
+}
+
+function getCurrentDate() {
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    return `${year}-${month}-${day}`
+}
+
+function getDestinationMMUrl() {
+    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
+}
+
+
+//
+function getNumRecords() {
+    let all_data = getUserDataFromFile()
+
+    let all_records = {}
+
+    for (var member of Object.keys(team_member)) {
+        team_member_email = team_member[member]["name"]
+        number_records = 0
+        for (var date of Object.keys(all_data)) {
+            // console.log(date)
+            if (all_data[date][team_member[member]["name"]]) {
+                number_records += 1
+            }
+        }
+        all_records[team_member[member]["alias"]] = number_records
+
+    }
+    // console.log(console.log(JSON.stringify(all_records, null, 3)))
+
+    console.log("getNumRecords return:")
+    console.log(console.log(JSON.stringify(all_records, null, 3)))
+
+
+
+    return all_records
+}
 
 function convertToEmail(list) {
     var email_list = []
@@ -613,33 +681,7 @@ app.post('/getNumOfReports', function (req, res) {
     }
 })
 
-//
-function getNumRecords() {
-    let all_data = getUserDataFromFile()
 
-    let all_records = {}
-
-    for (var member of Object.keys(team_member)) {
-        team_member_email = team_member[member]["name"]
-        number_records = 0
-        for (var date of Object.keys(all_data)) {
-            // console.log(date)
-            if (all_data[date][team_member[member]["name"]]) {
-                number_records += 1
-            }
-        }
-        all_records[team_member[member]["alias"]] = number_records
-
-    }
-    // console.log(console.log(JSON.stringify(all_records, null, 3)))
-
-    console.log("getNumRecords return:")
-    console.log(console.log(JSON.stringify(all_records, null, 3)))
-
-
-
-    return all_records
-}
 
 // show help
 app.post('/help', function (req, res) {
@@ -809,45 +851,6 @@ async function requestOpenAIAndSendMM(myQuestion) {
     }
 }
 
-function getUserDataFromFile() {
-
-    let readDataStr = ""
-    let readDataJson = ""
-    try {
-        readDataStr = fs.readFileSync('./member_data.json', 'utf8')
-        readDataJson = JSON.parse(readDataStr)
-    } catch (err) {
-    }
-
-    return readDataJson
-}
-
-function getMemberMissingRecord() {
-    let missingRec = []
-    let membersData = getUserDataFromFile()
-    for (var member of Object.keys(team_member)) {
-        team_member_email = team_member[member]["email"]
-        number_records = 0
-        if (!membersData[getCurrentDate()][team_member_email]) {
-            console.log(team_member[member]["email"])
-            missingRec.push(team_member[member]["email"])
-        }
-    }
-    return missingRec
-}
-
-function getCurrentDate() {
-    const date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    return `${year}-${month}-${day}`
-}
-
-function getDestinationMMUrl() {
-    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
-    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
-}
 
 var server = app.listen(port, function () {
     var host = server.address().address
