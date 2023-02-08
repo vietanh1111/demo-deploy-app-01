@@ -633,6 +633,7 @@ function getNumRecords() {
     }
     // console.log(console.log(JSON.stringify(all_records, null, 3)))
 
+    console.log("getNumRecords return:")
     console.log(console.log(JSON.stringify(all_records, null, 3)))
 
 
