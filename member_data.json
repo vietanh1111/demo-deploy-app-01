@@ -1,5 +1,14 @@
 {
    "2023-2-9": {
+      "Reporting for @minh.nguyenchinh \n* Continued making new feature:\n- Added required dlc in gamestatefactory\n- Made multi fireball fall\n- Implemented health bar \n": {
+         "reports": [
+            "* Continued making new feature:",
+            "- Added required dlc in gamestatefactory",
+            "- Made multi fireball fall",
+            "- Implemented health bar ",
+            ""
+         ]
+      },
       "Reporting for anh.nguyenviet6@gameloft.com:\n-  implementation a demo for Unity and HPK and China Stores (done unity and hpk part)\n": {
          "reports": [
             "-  implementation a demo for Unity and HPK and China Stores (done unity and hpk part)",
