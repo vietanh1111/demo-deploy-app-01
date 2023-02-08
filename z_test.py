@@ -53,5 +53,5 @@ x = requests.post(url, json = myobj)
 # # x2 = requests.post(url2, json = myobj2)
 # x3 = requests.post(url3, json = myobj3)
 
-# # print(x.text)
+print(x.text)
 # # print(x2.text)cls
