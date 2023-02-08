@@ -594,8 +594,9 @@ app.post('/getNumOfReports', function (req, res) {
                 //         console.log(JSON.parse(data))
                 //     })
 
-
+                console.log("prepare capturing")
                 (async () => {
+                    console.log("prepare capturing 1")
                     const path = require("path");
                     const browser = await puppeteer.launch();
                     const page = await browser.newPage();

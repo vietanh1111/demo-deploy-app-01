@@ -1,4 +1,5 @@
 var ManagerSystem = function () {
+	
     console.log("hello ManagerSystem")
     var linkGetLocalData = "https://demo-deploy-app-01.onrender.com/getLocalDataFile"
 
