@@ -1,5 +1,11 @@
 {
    "2023-2-10": {
+      "Reporting for @duc.luutrong :\n- Add text show remaining HP for health bar\n- Add animation for gift in New Feature": {
+         "reports": [
+            "- Add text show remaining HP for health bar",
+            "- Add animation for gift in New Feature"
+         ]
+      },
       "Reporting for anh.nguyenviet6@gameloft.com:\n- implementation a demo for Unity and HPK and China Stores (doing demo on gionee)\n- join meeting dml team\n- non-project: support glsociallib on nugetpacks \n": {
          "reports": [
             "- implementation a demo for Unity and HPK and China Stores (doing demo on gionee)",
