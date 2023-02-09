@@ -15,98 +15,6 @@ const API_KEY = "e3faa319-e781-414c-a768-7a00b873832a"
 const puppeteer = require('puppeteer');
 const AWS = require('aws-sdk');
 
-// (async () => {
-//     const path = require("path");
-//     const browser = await puppeteer.launch();
-//     const page = await browser.newPage();
-//     const filePath = path.join(__dirname, "index.html");
-//     await page.goto(`file://${filePath}`);
-
-//     // Wait for 5 seconds
-//     await new Promise((resolve) => setTimeout(resolve, 5 * 1000));
-
-//     // Take screenshot
-//     await page.screenshot({ path: "screenshot.png" });
-
-//     await browser.close();
-
-//     ACCESS_KEY_1 = "AKIA6JEDQFAH5UBN"
-//     ACCESS_KEY_2 = "Z75K"
-//     ACCESS_KEY_ID = ACCESS_KEY_1 + ACCESS_KEY_2
-
-//     SECRET_KEY_1 = "HMH+hRFDQKCdR4cOleJr9KqqfueaOxdanzn"
-//     SECRET_KEY_2 = "NgwnR"
-//     SECRET_ACCESS_KEY = SECRET_KEY_1 + SECRET_KEY_2
-
-//     // Configure the AWS SDK with your AWS credentials and region
-//     AWS.config.update({
-//         accessKeyId: ACCESS_KEY_ID,
-//         secretAccessKey: SECRET_ACCESS_KEY,
-//         region: 'ap-northeast-1'
-//     });
-
-//     // Create an S3 instance
-//     const s3 = new AWS.S3();
-
-//     // Read the image file
-//     const file = fs.readFileSync('screenshot.png');
-
-//     // Upload the image to S3
-//     s3.upload({
-//         Bucket: 'myvietanhbot3',
-//         Key: 'screenshot.png',
-//         Body: file,
-//         ContentType: 'image/png'
-//     }, (error, data) => {
-//         if (error) {
-//             console.error(error);
-//         } else {
-//             console.log(data);
-//         }
-//     });
-
-
-//     var params = {
-//         Bucket: 'myvietanhbot3',
-//         Key: 'screenshot.png',
-//         Expires: 600 // URL will expire in 60 seconds
-//     };
-
-//     s3.getSignedUrl('getObject', params, function (err, url) {
-//         if (err) {
-//             console.error(err);
-//         } else {
-//             console.log('The URL for the image is: ', url);
-//         }
-//     });
-
-// })();
-// myvietanhbot3.s3.ap-northeast-1
-// const myconstants = require('constants');
-// myconstants.myFunction();
-
-// var app_constants = require('./app_constants.js');
-// team_member = app_constants.getTheTeamMembers()
-// console.log(JSON.stringify(team_member, null, 3))
-
-// const cron = require("node-cron");
-
-// cron.schedule("38 12 * * *", function () {
-//     console.log("Tác vụ đã được thực hiện lúc 12h28 giờ mỗi ngày!");
-//     var request = require('request');
-//     request.post(
-//         ENV_SERVER + "checkMemberMissingRecord",
-//         { json: { "text": "hello" } },
-//         function (error, response, body) {
-//             if (!error && response.statusCode == 200) {
-//                 console.log(body);
-//             } else {
-//                 console.log("got error")
-//             }
-//         }
-//     );
-//     res.end("checkMemberMissingRecord End");
-// });
 
 // init openAPI
 const Configuration = openai.Configuration;
@@ -226,9 +134,18 @@ function getNumRecords() {
     console.log("getNumRecords return:")
     console.log(console.log(JSON.stringify(all_records, null, 3)))
 
+    var sortedData = Object.entries(all_records).sort((a, b) => b[1] - a[1]);
+
+    const result = sortedData.reduce((acc, item) => {
+        acc[item[0]] = item[1];
+        return acc;
+    }, {});
 
 
-    return all_records
+    console.log("result===");
+    console.log(result);
+
+    return result
 }
 
 async function sendImage() {
@@ -275,7 +192,7 @@ async function sendImage() {
         }
     };
     var myLabel = []
-    var myLabelName = '# of Recored'
+    var myLabelName = 'Nums of Reports'
     var myLabelRecords = []
     var myLabelRecordsBackground = [
         'rgba(255, 99, 132, 0.2)',
