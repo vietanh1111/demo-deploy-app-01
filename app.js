@@ -423,7 +423,7 @@ app.post('/report', function (req, res) {
                         console.log("Parsing data 1")
                         console.log(filters[1])
                         console.log(filters[2])
-                        myname = jsonData.text
+                        myname = jsonData.user_name
                         myData[currentDate][myname] = {}
                     } else if (filters = value.match(reReports)) {
                         console.log("Parsing data 2")
