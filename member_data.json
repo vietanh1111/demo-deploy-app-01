@@ -1,10 +1,20 @@
 {
+   "2023-2-10": {
+      "Reporting for @Anh Bui Thi Ngoc@gameloft.com\n • Done check out and build trunk NewFeature \n\n• Research add tracking OG \n": {
+         "reports": [
+            " • Done check out and build trunk NewFeature ",
+            "",
+            "• Research add tracking OG ",
+            ""
+         ]
+      }
+   },
    "2023-2-8": {
       "giang.trinhthuy": {
          "reports": [
             "+ Build and deploy linux server"
          ]
-      },      
+      },
       "trung.maiduc2": {
          "reports": [
             "- Continue to test put data on beta"
