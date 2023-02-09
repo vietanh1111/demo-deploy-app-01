@@ -310,5 +310,119 @@
             "+ try to reproduce the sigil amount bug"
          ]
       }
-   }
+   },
+   "2023-2-1": {
+      "anh.nguyenviet6:": {
+         "reports": [
+            "- Check google play services and firebase service with BEI team",
+            "- Do research Unity for China Store following iOS team.",
+            "- Non-project: working on android studio premake with the gameloft libs(cont)"
+         ]
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Update UC and 4399 SDK",
+            "- Research to change data profile when Sigils is abnormal"
+         ]
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - Build sample Unity app to test UDP with Huawei store"
+         ]
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "- Update and build newest src",
+            "- Learn about task DLC",
+            ""
+         ]
+      },
+      "duc.luutrong": {
+         "reports": [
+            "- Implement script for notify when upload dSym"
+         ]
+      },
+      "minh.nguyenchinh": {
+         "reports": [
+            "",
+            "continued making new feature (done to step 8 with bugs)",
+            "Step:",
+            "- create new gamestate with 1 dragon, 1 habitat and fireBall falling",
+            "- control the dragon with the cursor",
+            "- destroy fireBall when falling to the bottom",
+            "- let the fireball fall at the dragon position",
+            "- let the fireball fall at the dragon's position when the dragon moves",
+            "- let the dragon disappear when fireBall drops the dragon",
+            "- force fireBall disappears when chasing dragon",
+            "- create gifts boxs with random position in this gamestate",
+            "- make the gift box disapear whenever the dragon get them and a new one appears.",
+            "- create UI which counts points for user",
+            ""
+         ]
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "+ connected to mattermost channel upon detecting sigil count error",
+            "+ encountered ssl certificate problem after establishing a connection",
+            "+ research fix for ssl cert problem"
+         ]
+      }
+   },
+   "2023-1-20": {
+      "anh.nguyenviet6:": {
+         "reports": [
+            "- Crashlytics: crash ruinrewards (cont)",
+            "- Minor update in premake android",
+            "- Non-project: check android studio module with the lib owners"
+         ]
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - implement AntiAddictionCallback onExit() function"
+         ]
+      },
+      "duc.luutrong": {
+         "reports": [
+            "- Learning about thread in cpp",
+            "- Research about script which uploads dSym to crashlytic"
+         ]
+      },      
+      "minh.nguyenchinh": {
+         "reports": [
+            "Upload new dlc gameboard",
+            "Fixed bugs DMLCNQA-1598",
+            "Research to make new feature in DS",
+            ""
+         ]
+      }
+   },
+   "2023-1-19": {
+      "anh.nguyenviet6:": {
+         "reports": [
+            "- Check Shinzo with Anvesh",
+            "- Merge OG to ios trunk",
+            "- Crashlytics: crash ruinrewards (cont)",
+            "- Crashlytics: Missing stacktrace on 4399, baidu, xiaomi, tencent, vivo?",
+            "- Crashlytics: crash ruinrewards (cont)"
+         ]
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - fix use_alipay_sandbox hpk config"
+         ]
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Build APK for new SDK of glshop"
+         ]
+      },      
+      "minh.nguyenchinh": {
+         "reports": [
+            "Created a new feature gamestate",
+            "Did resignation things",
+            "Check bugs in Jira",
+            ""
+         ]
+      }
+   }        
 }
