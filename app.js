@@ -121,68 +121,6 @@ console.log(process.env.OPENAI_API_KEY)
 const openaiObj = new OpenAIApi(configuration);
 
 
-
-const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
-
-// const width = 400; //px
-// const height = 400; //px
-// const backgroundColour = 'white'; // Uses https://www.w3schools.com/tags/canvas_fillstyle.asp
-// const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, backgroundColour });
-// const configuration2 = {
-//     type: 'bar',
-//     data: {
-//         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//         datasets: [{
-//             label: '# of Votes',
-//             data: [12, 19, 3, 5, 2, 3],
-//             backgroundColor: [
-//                 'rgba(255, 99, 132, 0.2)',
-//                 'rgba(54, 162, 235, 0.2)',
-//                 'rgba(255, 206, 86, 0.2)',
-//                 'rgba(75, 192, 192, 0.2)',
-//                 'rgba(153, 102, 255, 0.2)',
-//                 'rgba(255, 159, 64, 0.2)'
-//             ],
-//             borderColor: [
-//                 'rgba(255,99,132,1)',
-//                 'rgba(54, 162, 235, 1)',
-//                 'rgba(255, 206, 86, 1)',
-//                 'rgba(75, 192, 192, 1)',
-//                 'rgba(153, 102, 255, 1)',
-//                 'rgba(255, 159, 64, 1)'
-//             ],
-//             borderWidth: 1
-//         }]
-//     },
-//     options: {
-//         animation: {
-//             duration: 0 // general animation time
-//         },
-//         hover: {
-//             animationDuration: 0 // duration of animations when hovering an item
-//         },
-//         responsiveAnimationDuration: 0, // animation duration after a resize
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     beginAtZero: true,
-//                     callback: (value) => '$' + value
-//                 }
-//             }]
-//         }
-//     }
-// };
-// (async () => {
-
-//     // const image = await chartJSNodeCanvas.renderToBuffer(configuration);
-//     const image = await chartJSNodeCanvas.renderToBuffer(configuration2);
-//     // const stream = chartJSNodeCanvas.renderToStream(configuration);
-//     fs.writeFileSync('chart.png', image);
-//     console.log("done chart")
-// })();
-
-
-
 team_member = {
     "Anh Nguyen Viet 6": {
         "email": "anh.nguyenviet6@gameloft.com",
@@ -295,19 +233,6 @@ function getNumRecords() {
 
 async function sendImage() {
     console.log("prepare capturing 5")
-    // const path = require("path");
-    // const browser = await puppeteer.launch();
-    // const page = await browser.newPage();
-    // const filePath = path.join(__dirname, "index.html");
-    // await page.goto(`file://${filePath}`);
-
-    // // Wait for 5 seconds
-    // await new Promise((resolve) => setTimeout(resolve, 5 * 1000));
-
-    // // Take screenshot
-    // await page.screenshot({ path: "screenshot.png" });
-
-    // await browser.close();
 
     ACCESS_KEY_1 = "AKIA6JEDQFAH5UBN"
     ACCESS_KEY_2 = "Z75K"
@@ -319,7 +244,7 @@ async function sendImage() {
 
     const width = 400; //px
     const height = 400; //px
-    const backgroundColour = 'white'; // Uses https://www.w3schools.com/tags/canvas_fillstyle.asp
+    const backgroundColour = 'white';
     const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, backgroundColour });
     // Define the chart options
     const options = {
@@ -390,21 +315,18 @@ async function sendImage() {
 
     (async () => {
 
-        // const image = await chartJSNodeCanvas.renderToBuffer(configuration);
         const image = await chartJSNodeCanvas.renderToBuffer(configuration2);
-        // const stream = chartJSNodeCanvas.renderToStream(configuration);
         fs.writeFileSync('screenshot.png', image);
         console.log("done chart")
-        // Configure the AWS SDK with your AWS credentials and region
         AWS.config.update({
             accessKeyId: ACCESS_KEY_ID,
             secretAccessKey: SECRET_ACCESS_KEY,
             region: 'ap-northeast-1'
         });
 
+
         // Create an S3 instance
         const s3 = new AWS.S3();
-
         // Read the image file
         const file = fs.readFileSync('screenshot.png');
 
@@ -450,8 +372,8 @@ async function sendImage() {
         });
 
     })();
-
 }
+
 function convertToEmail(list) {
     var email_list = []
     list.forEach(getEmail)
@@ -474,149 +396,151 @@ app.post('/report', function (req, res) {
             console.log(data)
             jsonData = JSON.parse(data)
             console.log("jsonData.text")
-            console.log(jsonData.text)
-            var membersData = jsonData.text.split('\n');
-            var myname = ""
+            if (jsonData.text.startsWith("Reporting")) {
+                console.log(jsonData.text)
+                var membersData = jsonData.text.split('\n');
+                var myname = ""
 
-            // No Raven
-            var myData = {}
+                // No Raven
+                var myData = {}
 
-            const date = new Date();
-            let day = date.getDate() + 1;
-            let month = date.getMonth() + 1;
-            let year = date.getFullYear();
-            let currentDate = `${year}-${month}-${day}`;
+                const date = new Date();
+                let day = date.getDate() + 1;
+                let month = date.getMonth() + 1;
+                let year = date.getFullYear();
+                let currentDate = `${year}-${month}-${day}`;
 
-            myData[currentDate] = {}
+                myData[currentDate] = {}
 
-            console.log("Parsing data")
-            const reName = /(^Report)(.*)/;
-            const reReports = /(.*)/
-            membersData.forEach(readData)
-            function readData(value, index, array) {
-                console.log("value222")
-                console.log(value)
-                if (filters = value.match(reName)) {
-                    console.log("Parsing data 1")
-                    console.log(filters[1])
-                    console.log(filters[2])
-                    myname = jsonData.text
-                    myData[currentDate][myname] = {}
-                } else if (filters = value.match(reReports)) {
-                    console.log("Parsing data 2")
-                    console.log(myname)
-                    console.log(myData[currentDate][myname]["reports"])
-                    console.log(filters[0])
+                console.log("Parsing data")
+                const reName = /(Reporting for)(.*)/;
+                const reReports = /(.*)/
+                membersData.forEach(readData)
+                function readData(value, index, array) {
+                    console.log("value222")
+                    console.log(value)
+                    if (filters = value.match(reName)) {
+                        console.log("Parsing data 1")
+                        console.log(filters[1])
+                        console.log(filters[2])
+                        myname = jsonData.text
+                        myData[currentDate][myname] = {}
+                    } else if (filters = value.match(reReports)) {
+                        console.log("Parsing data 2")
+                        console.log(myname)
+                        console.log(myData[currentDate][myname]["reports"])
+                        console.log(filters[0])
 
-                    if (myname != "" && !myData[currentDate][myname]["reports"]) myData[currentDate][myname]["reports"] = [];
-                    myData[currentDate][myname]["reports"].push(filters[0])
+                        if (myname != "" && !myData[currentDate][myname]["reports"]) myData[currentDate][myname]["reports"] = [];
+                        myData[currentDate][myname]["reports"].push(filters[0])
+                    }
                 }
-            }
 
-            console.log("\nShow myData")
-            console.log('myData : %j', myData);
+                console.log("\nShow myData")
+                console.log('myData : %j', myData);
 
-            const fs = require('fs');
-            let readDataStr = ""
-            let readDataJson = {}
-            try {
-                readDataStr = fs.readFileSync(data_path, 'utf8');
-                readDataJson = JSON.parse(readDataStr);
-            } catch (err) {
-            }
-
-
-            console.log("merging....1");
-            console.log(JSON.stringify(myData, null, 3));
-            console.log(JSON.stringify(readDataJson, null, 3));
-            const JSONObjectMerge = require("json-object-merge");
-            const merged = JSONObjectMerge.default(myData, readDataJson);
-            console.log("merging....2");
-            console.log(JSON.stringify(merged, null, 3));
-
-            if (fs.existsSync(data_path)) {
-                // path exists
-                const myJSON = JSON.stringify(merged, null, 3);
-                fs.writeFile(data_path, myJSON, (err) => {
-                    // In case of a error throw err.
-                    if (err) throw err;
-                    console.log("exists:3", data_path);
-                    console.log("vietanh git 3");
-                    var execProcess = require("./exec_process.js");
-                    execProcess.result("sh temp.sh", function (err, response) {
-                        console.log("aaa")
-                        if (!err) {
-                            console.log("1")
-                            console.log(response);
-                        } else {
-                            console.log("2")
-                            console.log(err);
-                        }
-                    });
-                })
-            }
-
-            let msg = ""
-            console.log(myData[currentDate][myname]["reports"] + "?")
-            let myQuest = {
-                "model": "text-davinci-003",
-                // "prompt": "Say thank the report of " + myname + "?",
-                "prompt": "Give me a short explain of the report: " + myData[currentDate][myname]["reports"] + "?",
-                "max_tokens": 1000,
-                // "temperature": 0,
-                "top_p": 0.2,
-                "n": 1,
-                "stream": false,
-                "logprobs": null,
-            }
-            try {
-                const completion = await openaiObj.createCompletion(myQuest);
-                console.log(completion.data.choices[0].text);
-                // msg = completion.data.choices[0].text
-                msg = ""
-            } catch (error) {
-                if (error.response) {
-                    console.log(error.response.status);
-                    console.log(error.response.data);
-                } else {
-                    console.log(error.message);
+                const fs = require('fs');
+                let readDataStr = ""
+                let readDataJson = {}
+                try {
+                    readDataStr = fs.readFileSync(data_path, 'utf8');
+                    readDataJson = JSON.parse(readDataStr);
+                } catch (err) {
                 }
-            }
 
-            // let myQuest2 = {
-            //     "model": "text-davinci-003",
-            //     "prompt": "Say thank the report of " + myname + "?" + "say wish me a good working day",
-            //     "max_tokens": 1000,
-            //     // "temperature": 0,
-            //     "top_p": 0.9,
-            //     "n": 1,
-            //     "stream": false,
-            //     "logprobs": null,
-            // }
-            // try {
-            //     const completion = await openaiObj.createCompletion(myQuest2);
-            //     console.log(completion.data.choices[0].text);
-            //     msg += completion.data.choices[0].text
-            // } catch (error) {
-            //     if (error.response) {
-            //         console.log(error.response.status);
-            //         console.log(error.response.data);
-            //     } else {
-            //         console.log(error.message);
-            //     }
-            // }
-            // var request = require('request');
-            // request.post(
-            //     getDestinationMMUrl(),
-            //     { json: { "text": msg } },
-            //     function (error, response, body) {
-            //         if (!error && response.statusCode == 200) {
-            //             console.log(body);
-            //         } else {
-            //             console.log("got error")
-            //         }
-            //     }
-            // );
+
+                console.log("merging....1");
+                console.log(JSON.stringify(myData, null, 3));
+                console.log(JSON.stringify(readDataJson, null, 3));
+                const JSONObjectMerge = require("json-object-merge");
+                const merged = JSONObjectMerge.default(myData, readDataJson);
+                console.log("merging....2");
+                console.log(JSON.stringify(merged, null, 3));
+
+                if (fs.existsSync(data_path)) {
+                    // path exists
+                    const myJSON = JSON.stringify(merged, null, 3);
+                    fs.writeFile(data_path, myJSON, (err) => {
+                        // In case of a error throw err.
+                        if (err) throw err;
+                        console.log("exists:3", data_path);
+                        console.log("vietanh git 3");
+                        var execProcess = require("./exec_process.js");
+                        execProcess.result("sh temp.sh", function (err, response) {
+                            console.log("aaa")
+                            if (!err) {
+                                console.log("1")
+                                console.log(response);
+                            } else {
+                                console.log("2")
+                                console.log(err);
+                            }
+                        });
+                    })
+                }
+
+                let msg = ""
+                console.log(myData[currentDate][myname]["reports"] + "?")
+                let myQuest = {
+                    "model": "text-davinci-003",
+                    // "prompt": "Say thank the report of " + myname + "?",
+                    "prompt": "Give me a short explain of the report: " + myData[currentDate][myname]["reports"] + "?",
+                    "max_tokens": 1000,
+                    // "temperature": 0,
+                    "top_p": 0.2,
+                    "n": 1,
+                    "stream": false,
+                    "logprobs": null,
+                }
+                try {
+                    const completion = await openaiObj.createCompletion(myQuest);
+                    console.log(completion.data.choices[0].text);
+                    // msg = completion.data.choices[0].text
+                    msg = ""
+                } catch (error) {
+                    if (error.response) {
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                    } else {
+                        console.log(error.message);
+                    }
+                }
+
+                // let myQuest2 = {
+                //     "model": "text-davinci-003",
+                //     "prompt": "Say thank the report of " + myname + "?" + "say wish me a good working day",
+                //     "max_tokens": 1000,
+                //     // "temperature": 0,
+                //     "top_p": 0.9,
+                //     "n": 1,
+                //     "stream": false,
+                //     "logprobs": null,
+                // }
+                // try {
+                //     const completion = await openaiObj.createCompletion(myQuest2);
+                //     console.log(completion.data.choices[0].text);
+                //     msg += completion.data.choices[0].text
+                // } catch (error) {
+                //     if (error.response) {
+                //         console.log(error.response.status);
+                //         console.log(error.response.data);
+                //     } else {
+                //         console.log(error.message);
+                //     }
+                // }
+                // var request = require('request');
+                // request.post(
+                //     getDestinationMMUrl(),
+                //     { json: { "text": msg } },
+                //     function (error, response, body) {
+                //         if (!error && response.statusCode == 200) {
+                //             console.log(body);
+                //         } else {
+                //             console.log("got error")
+                //         }
+                //     }
+                // );
+            }
             res.end("sayHello End");
         })
     }
