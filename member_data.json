@@ -1,5 +1,15 @@
 {
    "2023-2-10": {
+      "Reporting for @Minh Nguyen Chinh \n\nContinued making new feature:\n- Made multi fireball fall after delta time\n- Implemented heath points reduce when coliding\n- Added topbar currency (but not usable)\n": {
+         "reports": [
+            "",
+            "Continued making new feature:",
+            "- Made multi fireball fall after delta time",
+            "- Implemented heath points reduce when coliding",
+            "- Added topbar currency (but not usable)",
+            ""
+         ]
+      },
       "Reporting for @quy.nguyenngoc \n - learning Unity": {
          "reports": [
             " - learning Unity"
