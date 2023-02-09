@@ -245,6 +245,7 @@ async function sendImage() {
     const width = 400; //px
     const height = 400; //px
     const backgroundColour = 'white';
+    const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
     const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, backgroundColour });
     // Define the chart options
     const options = {
