@@ -480,7 +480,9 @@ app.post('/report', function (req, res) {
                 }
 
                 let msg = ""
-                console.log(myData[currentDate][myname]["reports"] + "?")
+                console.log("vietanh test Give me")
+                console.log(myData[currentDate][myname]["reports"])
+                console.log(merged[currentDate][myname]["reports"])
                 let myQuest = {
                     "model": "text-davinci-003",
                     // "prompt": "Say thank the report of " + myname + "?",
