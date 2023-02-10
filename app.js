@@ -478,7 +478,7 @@ async function sendReport(jsonData) {
         // );
     }
 }
-async function sendDailyRemind() {
+async function sendDailyRemind(jsonData) {
     console.log("sendDailyRemind")
     let msg = ""
 
@@ -537,7 +537,7 @@ async function sendDailyRemind() {
     );
 }
 
-async function sendThank() {
+async function sendThank(jsonData) {
     console.log("sendThank")
     let msg = ""
     let rec = getRecords();
@@ -692,10 +692,16 @@ app.post('/doTask', function (req, res) {
             jsonData = JSON.parse(data)
             // jsonData = JSON.parse(jsonData)
 
-            if (jsonData["text"].startsWith("Reporting for")) {
+            if (jsonData["text"].startsWith("Raven Reporting for")) {
                 sendReport(jsonData)
-            } else if (jsonData["text"].startsWith("Show Reports")) {
-                getReportChartjsonData()
+            } else if (jsonData["text"].startsWith("Raven Show Reports")) {
+                getReportChart(jsonData)
+            } else if (jsonData["text"].startsWith("Raven Thank")) {
+                sendThank(jsonData)
+            } else if (jsonData["text"].startsWith("Raven Daily Remind")) {
+                sendDailyRemind(jsonData)
+            } else if (jsonData["text"].startsWith("Raven Chat")) {
+                chatBot(jsonData)
             }
 
             res.end("doTask End");
