@@ -1,6 +1,5 @@
 const express = require('express');
 var app = express();
-
 const fs = require("fs");
 const request = require('request')
 const openai = require("openai");
