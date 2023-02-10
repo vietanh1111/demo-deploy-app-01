@@ -692,7 +692,7 @@ app.post('/doTask', function (req, res) {
             jsonData = JSON.parse(data)
             // jsonData = JSON.parse(jsonData)
 
-            if (jsonData["text"].startsWith("Raven Reporting for")) {
+            if (jsonData["text"].startsWith("Reporting for")) {
                 sendReport(jsonData)
             } else if (jsonData["text"].startsWith("Raven Show Reports")) {
                 getReportChart(jsonData)

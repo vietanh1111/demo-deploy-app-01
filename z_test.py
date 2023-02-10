@@ -1,5 +1,6 @@
 import requests
 import sys
+import json
 
 url = ""
 my_text = ""
@@ -7,50 +8,17 @@ myobj = {}
     # url2= 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
     # myobj2 = {'text': "Khả năng cao con quạ không ai cứu nổi, trong thời gian chờ đợi, anh em report tạm vào thread tương ứng cho mỗi ngày nha\n## Report 2022-02-01"}
 
-if sys.argv[1] == 'report':
+if sys.argv[1] == 'doReport':
     print(sys.argv[1])
-    my_text = 'Reporting for anh.nguyenviet6@gameloft.com:\n- Update UC and 4399 SDK\n- Research about modified profile.'
-    url = 'http://127.0.0.1:3000/report'
-    myobj = {'text': my_text}    
-
-elif sys.argv[1] == 'get_reports':
-    print(sys.argv[1])
-    url = 'http://127.0.0.1:3000/numOfReport'
-    myobj = {'name': "anh.nguyenviet6@gameloft.com"}
-
-elif sys.argv[1] == 'send_msg':
-    print(sys.argv[1])
-    url = 'http://127.0.0.1:3000/sendMsg'
-    myobj = {'name': "anh.nguyenviet6@gameloft.com"}   
-
-elif sys.argv[1] == 'check_records':
-    print(sys.argv[1])
-    url = 'http://127.0.0.1:3000/checkMemberMissingRecord'
-    myobj = {'name': "anh.nguyenviet6@gameloft.com"}   
-
-elif sys.argv[1] == 'chat':
-    print(sys.argv[1])
-    url = 'http://127.0.0.1:3000/chatToVietanh'
-    myobj = {'text': "Question: Do you know my name?"}   
-    # myobj = {'text': "Question: Hi, Im Vietanh"}   
-elif sys.argv[1] == 'send_thank':
-    print(sys.argv[1])
-    url = 'http://127.0.0.1:3000/sendThank'
-    myobj = {'text': "Question: Do you know my name?"}   
-    # myobj = {'text': "Question: Hi, Im Vietanh"}   
-elif sys.argv[1] == 'doReport':
-    print(sys.argv[1])
-    import json
-    # some JSON:
-    x = '{ "text":"Reporting for anh.nguyenviet6@gameloft.com:- Update UC and 4399 SDK- Research about modified profile."}'
-    # url = 'https://demo-deploy-app-01.onrender.com/getNumOfReports'
-    url = 'http://127.0.0.1:3000/doTask'
+    x = '{ "text":"Raven Reporting for anh.nguyenviet6@gameloft.com:- Update UC and 4399 SDK- Research about modified profile."}'
     myobj = x
-    # myobj = {'text': "Question: Hi, Im Vietanh"}   
+elif sys.argv[1] == 'doShowReport':
+    x = '{ "text":"Raven Show Reports"}'
+    myobj = x
 
 
 
-print("hello") 
+url = 'http://127.0.0.1:3000/doTask'
 x = requests.post(url, json = myobj)
 # # x2 = requests.post(url2, json = myobj2)
 # x3 = requests.post(url3, json = myobj3)
