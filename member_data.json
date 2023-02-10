@@ -43,7 +43,13 @@
             "+ change dragon and fire ball size based on position relative to camera"
          ],
          "score": 7
-      },      
+      },  
+      "duc.luutrong": {
+         "reports": [
+            "+ New game state for new game play: Dragon Arcade"
+         ],
+         "score": 7
+      },            
       "trung.maiduc2": {
          "reports": [
             "- Finish script to modify data of profile",

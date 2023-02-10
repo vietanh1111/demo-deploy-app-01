@@ -158,7 +158,7 @@ async function sendImage() {
     SECRET_KEY_2 = "NgwnR"
     SECRET_ACCESS_KEY = SECRET_KEY_1 + SECRET_KEY_2
 
-    const width = 400; //px
+    const width = 600; //px
     const height = 400; //px
     const backgroundColour = 'white';
     const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
