@@ -28,6 +28,12 @@ console.log(process.env.OPENAI_API_KEY)
 const openaiObj = new OpenAIApi(configuration);
 
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 team_member = {
     "Anh Nguyen Viet 6": {
         "email": "anh.nguyenviet6@gameloft.com",
@@ -168,7 +174,7 @@ function getUserScore() {
             highest_record = number_records
         }
         all_records[team_member[member]["alias"]] = {}
-        all_records[team_member[member]["alias"]]["score"] =  (score / number_records).toFixed(2) 
+        all_records[team_member[member]["alias"]]["score"] = (score / number_records).toFixed(2)
         all_records[team_member[member]["alias"]]["num_records"] = number_records
 
     }
@@ -180,7 +186,7 @@ function getUserScore() {
     final_score = {}
     for (var member of Object.keys(all_records)) {
         // console.log(member)
-        final_score[member] = 0.7 * (all_records[member]["score"])  + 0.3 * (10*all_records[member]["num_records"] / highest_record)
+        final_score[member] = 0.7 * (all_records[member]["score"]) + 0.3 * (10 * all_records[member]["num_records"] / highest_record)
     }
 
     console.log(final_score)
@@ -302,65 +308,66 @@ async function sendChartAsImage(chartName, chartType) {
         options: options
     };
 
-    (async () => {
+    const bufferImg = await chartJSNodeCanvas.renderToBuffer(configuration2);
 
-        const image = await chartJSNodeCanvas.renderToBuffer(configuration2);
-        fs.writeFileSync('screenshot.png', image);
-        console.log("done chart")
-        AWS.config.update({
-            accessKeyId: ACCESS_KEY_ID,
-            secretAccessKey: SECRET_ACCESS_KEY,
-            region: 'ap-northeast-1'
-        });
+    AWS.config.update({
+        accessKeyId: ACCESS_KEY_ID,
+        secretAccessKey: SECRET_ACCESS_KEY,
+        region: 'ap-northeast-1'
+    });
 
+    // Create an S3 instance
+    const s3 = new AWS.S3();
+    // const file = fs.readFileSync('screenshot.png');
+    const uploadParams = {
+        Bucket: 'myvietanhbot3',
+        Key: 'screenshot.png',
+        Body: bufferImg,
+        ContentType: 'image/png'
+    }
+    var signUrlParams = {
+        Bucket: 'myvietanhbot3',
+        Key: 'screenshot.png',
+        Expires: 600 // URL will expire in 60 seconds
+    };
 
-        // Create an S3 instance
-        const s3 = new AWS.S3();
-        // Read the image file
-        const file = fs.readFileSync('screenshot.png');
-
-        // Upload the image to S3
-        s3.upload({
-            Bucket: 'myvietanhbot3',
-            Key: 'screenshot.png',
-            Body: file,
-            ContentType: 'image/png'
-        }, (error, data) => {
-            if (error) {
-                console.error(error);
-            } else {
-                console.log(data);
-            }
-        });
-
-
-        var params = {
-            Bucket: 'myvietanhbot3',
-            Key: 'screenshot.png',
-            Expires: 600 // URL will expire in 60 seconds
-        };
-
-        s3.getSignedUrl('getObject', params, function (err, url) {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log('The URL for the image is: ', url);
-                var request = require('request');
-                request.post(
-                    getDestinationMMUrl(),
-                    { json: { "text": url } },
-                    function (error, response, body) {
-                        if (!error && response.statusCode == 200) {
-                            console.log(body);
-                        } else {
-                            console.log("got error")
+    const waitForAllFunctions = async () => {
+        let url_img
+        const signedUrlPromise = new Promise((resolve, reject) => {
+            s3.getSignedUrlPromise('getObject', signUrlParams, function (err, url) {
+                if (err) {
+                    reject(err);
+                } else {
+                    console.log('The URL for the image is: ', url);
+                    var request = require('request');
+                    request.post(
+                        getDestinationMMUrl(),
+                        { json: { "text": url } },
+                        function (error, response, body) {
+                            if (!error && response.statusCode == 200) {
+                                console.log(body);
+                            } else {
+                                console.log("got error")
+                            }
                         }
-                    }
-                );
-            }
+                    );
+                    url_img = url
+                    resolve(url);
+                }
+            });
         });
 
-    })();
+        const results = await Promise.all([
+            s3.upload(uploadParams).promise(),
+            signedUrlPromise
+        ]);
+
+        console.log(results);
+        console.log(url_img);
+        return url_img
+    };
+
+    return await waitForAllFunctions();
 }
 
 function convertToEmail(list) {
@@ -653,14 +660,15 @@ async function sendThank(jsonData) {
 
 const SCORE_CHART_TYPE = "score_chart"
 const REPORT_CHART_TYPE = "report_chart"
-function getReportChart(jsonData) {
-    console.log("getReportChart")
-    sendChartAsImage("Team Records", REPORT_CHART_TYPE)
+
+async function getReportChart(jsonData) {
+    const result = await sendChartAsImage("Team Records", REPORT_CHART_TYPE);
+    return result;
 }
 
-function getScoreChart(jsonData) {
-    console.log("getScoreChart")
-    sendChartAsImage("Team Scores", SCORE_CHART_TYPE)
+async function getScoreChart(jsonData) {
+    const result = await sendChartAsImage("Team Scores", SCORE_CHART_TYPE);
+    return result;
 }
 
 function showHelp(jsonData) {
@@ -767,15 +775,16 @@ app.post('/doTask', function (req, res) {
             console.log("doTask for the data")
             console.log(data)
             jsonData = JSON.parse(data)
-            // jsonData = JSON.parse(jsonData)
+            console.log(jsonData)
             console.log(jsonData["text"])
             console.log(jsonData["user_name"])
+            let result = "result nonwe"
             if (jsonData["text"].startsWith("Reporting for")) {
                 sendReport(jsonData)
             } else if (jsonData["text"].startsWith("Raven Show Reports")) {
-                getReportChart(jsonData)
+                result = await getReportChart(jsonData)
             } else if (jsonData["text"].startsWith("Raven Show Score")) {
-                getScoreChart(jsonData)
+                result = await getScoreChart(jsonData)
             } else if (jsonData["text"].startsWith("Raven Thank")) {
                 sendThank(jsonData)
             } else if (jsonData["text"].startsWith("Raven Daily Remind")) {
@@ -784,8 +793,7 @@ app.post('/doTask', function (req, res) {
                 chatBot(jsonData)
             }
 
-            res.header("Access-Control-Allow-Origin", "*")
-            res.end("doTask End")
+            res.end(result)
         })
     }
 })
