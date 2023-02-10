@@ -582,7 +582,6 @@ async function sendThank(jsonData) {
 
 function getReportChart(data) {
     console.log("getReportChart")
-    getNumRecords()
     sendImage()
 }
 
