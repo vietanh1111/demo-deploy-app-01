@@ -1,5 +1,14 @@
 {
    "2023-2-11": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "- meeting devs",
+            "- check glshops restrictions with Wayne...",
+            "- implementation a demo for Unity and HPK and China Stores (doing demo on downjoy - last test)",
+            "- non-project: discuss with Monica for concluding a best solution for online libs, premake and android studio module",
+            "- non-project: checking the above solution on sandboxv2"
+         ]
+      },
       "anh.buithingoc": {
          "reports": [
             " • Revert trunk to build again src",
