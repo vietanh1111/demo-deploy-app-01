@@ -592,7 +592,7 @@ function showHelp(jsonData) {
 }
 
 async function chatBot(jsonData) {
-    console.log("chatBot")
+    console.log("chatBot1")
     if (jsonData.text.startsWith("Raven Chat:")) {
         var question = jsonData.text.replace('Raven Chat:', '');
 
