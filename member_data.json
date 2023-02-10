@@ -37,6 +37,13 @@
          ],
          "score": 7
       },
+      "giang.trinhthuy": {
+         "reports": [
+            "+ eceive work from @Minh Nguyen Chinh",
+            "+ change dragon and fire ball size based on position relative to camera"
+         ],
+         "score": 7
+      },      
       "trung.maiduc2": {
          "reports": [
             "- Finish script to modify data of profile",
