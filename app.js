@@ -640,7 +640,7 @@ function getReportChart(jsonData) {
 }
 
 function getScoreChart(jsonData) {
-    console.log("getReportChart")
+    console.log("getScoreChart")
     sendChartAsImage("Team Scores", SCORE_CHART_TYPE)
 }
 
@@ -751,7 +751,6 @@ app.post('/doTask', function (req, res) {
             // jsonData = JSON.parse(jsonData)
             console.log(jsonData["text"])
             console.log(jsonData["user_name"])
-
             if (jsonData["text"].startsWith("Reporting for")) {
                 sendReport(jsonData)
             } else if (jsonData["text"].startsWith("Raven Show Reports")) {
