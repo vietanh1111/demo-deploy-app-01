@@ -147,7 +147,46 @@ function getNumRecords() {
     return result
 }
 
-async function sendImage() {
+function getUserScore() {
+    let all_data = getUserDataFromFile()
+
+    let all_records = {}
+
+    for (var member of Object.keys(team_member)) {
+        team_member_email = team_member[member]["name"]
+        score = 0
+        number_records = 0
+        for (var date of Object.keys(all_data)) {
+            // console.log(date)
+            if (all_data[date][team_member[member]["name"]]) {
+                score += all_data[date][team_member[member]["name"]]["score"]
+                number_records += 1
+            }
+        }
+        all_records[team_member[member]["alias"]] = (score / number_records).toFixed(2)
+
+    }
+    // console.log(console.log(JSON.stringify(all_records, null, 3)))
+
+    console.log("getNumRecords return:")
+    console.log(console.log(JSON.stringify(all_records, null, 3)))
+
+    var sortedData = Object.entries(all_records).sort((a, b) => b[1] - a[1]);
+
+    const result = sortedData.reduce((acc, item) => {
+        acc[item[0]] = item[1];
+        return acc;
+    }, {});
+
+
+    console.log("result===");
+    console.log(result);
+
+    return result
+}
+
+
+async function sendChartAsImage(chartName, chartType) {
     console.log("prepare capturing 5")
 
     ACCESS_KEY_1 = "AKIA6JEDQFAH5UBN"
@@ -165,6 +204,12 @@ async function sendImage() {
     const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, backgroundColour });
     // Define the chart options
     const options = {
+        plugins: {
+            title: {
+                display: true,
+                text: chartName
+            }
+        },
         indexAxis: 'y',
         scales: {
             xAxes: [
@@ -213,7 +258,12 @@ async function sendImage() {
         'rgba(22, 11, 64, 1)',
     ]
 
-    recoredData = getNumRecords()
+    if (chartType == SCORE_CHART_TYPE) {
+        recoredData = getUserScore()
+    } else if (chartType == REPORT_CHART_TYPE) {
+        recoredData = getNumRecords()
+    }
+
     for (var name of Object.keys(recoredData)) {
         myLabel.push(name)
         myLabelRecords.push(recoredData[name])
@@ -382,7 +432,7 @@ async function sendReport(jsonData) {
         } catch (err) {
             console.log("have error")
         }
-        
+
 
 
         console.log("merging....1");
@@ -582,9 +632,16 @@ async function sendThank(jsonData) {
     );
 }
 
+const SCORE_CHART_TYPE = "score_chart"
+const REPORT_CHART_TYPE = "report_chart"
 function getReportChart(jsonData) {
     console.log("getReportChart")
-    sendImage()
+    sendChartAsImage("Team Records", REPORT_CHART_TYPE)
+}
+
+function getScoreChart(jsonData) {
+    console.log("getReportChart")
+    sendChartAsImage("Team Scores", SCORE_CHART_TYPE)
 }
 
 function showHelp(jsonData) {
@@ -699,6 +756,8 @@ app.post('/doTask', function (req, res) {
                 sendReport(jsonData)
             } else if (jsonData["text"].startsWith("Raven Show Reports")) {
                 getReportChart(jsonData)
+            } else if (jsonData["text"].startsWith("Raven Show Score")) {
+                getScoreChart(jsonData)
             } else if (jsonData["text"].startsWith("Raven Thank")) {
                 sendThank(jsonData)
             } else if (jsonData["text"].startsWith("Raven Daily Remind")) {
