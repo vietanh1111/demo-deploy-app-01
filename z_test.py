@@ -10,8 +10,10 @@ myobj = {}
 
 if sys.argv[1] == 'doReport':
     print(sys.argv[1])
-    x = '{ "text":"Raven Reporting for anh.nguyenviet6@gameloft.com:- Update UC and 4399 SDK- Research about modified profile."}'
-    myobj = x
+    data = {}
+    data["text"] = "Reporting for anh.nguyenviet6@gameloft.com:\n- Update UC and 333 SDK"
+    data["user_name"] = "anh.nguyenviet6"
+    myobj = data
 elif sys.argv[1] == 'doShowReport':
     x = '{ "text":"Raven Show Reports"}'
     myobj = x

@@ -339,7 +339,7 @@ async function sendReport(jsonData) {
         var myData = {}
 
         const date = new Date();
-        let day = date.getDate() + 1;
+        let day = date.getDate();
         let month = date.getMonth() + 1;
         let year = date.getFullYear();
         let currentDate = `${year}-${month}-${day}`;
@@ -380,21 +380,23 @@ async function sendReport(jsonData) {
             readDataStr = fs.readFileSync(data_path, 'utf8');
             readDataJson = JSON.parse(readDataStr);
         } catch (err) {
+            console.log("have error")
         }
+        
 
 
         console.log("merging....1");
-        console.log(JSON.stringify(myData, null, 3));
         console.log(JSON.stringify(readDataJson, null, 3));
+        console.log(JSON.stringify(myData, null, 3));
         const JSONObjectMerge = require("json-object-merge");
-        const merged = JSONObjectMerge.default(myData, readDataJson);
+        const merged = JSONObjectMerge.default(readDataJson, myData);
         console.log("merging....2");
         console.log(JSON.stringify(merged, null, 3));
 
         if (fs.existsSync(data_path)) {
             // path exists
             const myJSON = JSON.stringify(merged, null, 3);
-            fs.writeFile(data_path, myJSON, (err) => {
+            fs.writeFileSync(data_path, myJSON, (err) => {
                 // In case of a error throw err.
                 if (err) throw err;
                 console.log("exists:3", data_path);
@@ -414,9 +416,9 @@ async function sendReport(jsonData) {
         }
 
         let msg = ""
-        console.log("vietanh test Give me")
-        console.log(myData[currentDate][myname]["reports"])
-        console.log(merged[currentDate][myname]["reports"])
+        // console.log("vietanh test Give me")
+        // console.log(myData[currentDate][myname]["reports"])
+        // console.log(merged[currentDate][myname]["reports"])
         let myQuest = {
             "model": "text-davinci-003",
             // "prompt": "Say thank the report of " + myname + "?",
@@ -591,8 +593,8 @@ function showHelp(data) {
 
 async function chatBot(data) {
     console.log("chatBot")
-    if (jsonData.text.startsWith("Question:")) {
-        var question = jsonData.text.replace('Question:', '');
+    if (jsonData.text.startsWith("Raven Chat:")) {
+        var question = jsonData.text.replace('Raven Chat:', '');
 
 
         console.log("chat to vietanh")
@@ -612,7 +614,7 @@ async function chatBot(data) {
             var request = require('request');
             request.post(
                 getDestinationMMUrl(),
-                { json: { "text": "I'm dead" } },
+                { json: { "text": msg } },
                 function (error, response, body) {
                     if (!error && response.statusCode == 200) {
                         console.log(body);
@@ -690,6 +692,8 @@ app.post('/doTask', function (req, res) {
             console.log(data)
             jsonData = JSON.parse(data)
             // jsonData = JSON.parse(jsonData)
+            console.log(jsonData["text"])
+            console.log(jsonData["user_name"])
 
             if (jsonData["text"].startsWith("Reporting for")) {
                 sendReport(jsonData)
