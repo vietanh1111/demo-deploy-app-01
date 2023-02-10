@@ -784,8 +784,8 @@ app.post('/doTask', function (req, res) {
                 chatBot(jsonData)
             }
 
-            res.header("Access-Control-Allow-Origin: *")
-            res.end("doTask End");
+            res.header("Access-Control-Allow-Origin", "*")
+            res.end("doTask End")
         })
     }
 })
