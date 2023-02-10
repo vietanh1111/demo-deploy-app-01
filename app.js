@@ -582,16 +582,16 @@ async function sendThank(jsonData) {
     );
 }
 
-function getReportChart(data) {
+function getReportChart(jsonData) {
     console.log("getReportChart")
     sendImage()
 }
 
-function showHelp(data) {
+function showHelp(jsonData) {
     console.log("showHelp")
 }
 
-async function chatBot(data) {
+async function chatBot(jsonData) {
     console.log("chatBot")
     if (jsonData.text.startsWith("Raven Chat:")) {
         var question = jsonData.text.replace('Raven Chat:', '');
@@ -636,7 +636,7 @@ async function chatBot(data) {
 }
 
 
-function checkMemberMissingRecord(data) {
+function checkMemberMissingRecord(jsonData) {
     console.log("showHelp")
     let missingRec = getMemberMissingRecord()
     let myQuestion = 'Help me(iam DMLCN Team) remind ' + missingRec + " to fill in daily tasks politely and gently"
