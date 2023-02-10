@@ -1,5 +1,5 @@
 {
-   "2023-2-11": {
+   "2023-2-10: {
       "anh.nguyenviet6": {
          "reports": [
             "- meeting devs",
@@ -37,16 +37,6 @@
          "reports": [
             "- Finish script to modify data of profile",
             "- Prepare for the next build: env, setting, ..."
-         ]
-      }
-   },
-   "2023-2-10": {
-      "anh.nguyenviet6": {
-         "reports": [
-            "- implementation a demo for Unity and HPK and China Stores (doing demo on gionee)",
-            "- join meeting dml team",
-            "- non-project: support glsociallib on nugetpacks ",
-            ""
          ]
       }
    },
