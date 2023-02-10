@@ -38,12 +38,14 @@ elif sys.argv[1] == 'send_thank':
     url = 'http://127.0.0.1:3000/sendThank'
     myobj = {'text': "Question: Do you know my name?"}   
     # myobj = {'text': "Question: Hi, Im Vietanh"}   
-elif sys.argv[1] == 'get_num_records':
+elif sys.argv[1] == 'doReport':
     print(sys.argv[1])
-    
+    import json
+    # some JSON:
+    x = '{ "text":"Reporting for anh.nguyenviet6@gameloft.com:- Update UC and 4399 SDK- Research about modified profile."}'
     # url = 'https://demo-deploy-app-01.onrender.com/getNumOfReports'
-    url = 'http://127.0.0.1:3000/getNumOfReports'
-    myobj = {'text': "Question: Do you know my name?"}   
+    url = 'http://127.0.0.1:3000/doTask'
+    myobj = x
     # myobj = {'text': "Question: Hi, Im Vietanh"}   
 
 

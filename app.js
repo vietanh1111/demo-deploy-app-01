@@ -196,19 +196,21 @@ async function sendImage() {
     var myLabelRecords = []
     var myLabelRecordsBackground = [
         'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
+        'rgba(177, 162, 235, 0.2)',
         'rgba(255, 206, 86, 0.2)',
         'rgba(75, 192, 192, 0.2)',
         'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
+        'rgba(67, 111, 64, 0.2)',
+        'rgba(22, 11, 64, 0.2)',
     ]
     var myLabelRecordsBorder = [
         'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
+        'rgba(177, 162, 235, 1)',
         'rgba(255, 206, 86, 1)',
         'rgba(75, 192, 192, 1)',
         'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
+        'rgba(67, 111, 64, 1)',
+        'rgba(22, 11, 64, 1)',
     ]
 
     recoredData = getNumRecords()
@@ -305,230 +307,6 @@ function convertToEmail(list) {
     return email_list.toString()
 }
 
-app.post('/report', function (req, res) {
-    var jsonData = {};
-    if (req.method == 'POST') {
-        req.on('data', async function (data) {
-            data = data.toString()
-            console.log("data")
-            console.log(data)
-            jsonData = JSON.parse(data)
-            console.log("jsonData.text")
-            if (jsonData.text.startsWith("Reporting")) {
-                console.log(jsonData.text)
-                var membersData = jsonData.text.split('\n');
-                var myname = ""
-
-                // No Raven
-                var myData = {}
-
-                const date = new Date();
-                let day = date.getDate() + 1;
-                let month = date.getMonth() + 1;
-                let year = date.getFullYear();
-                let currentDate = `${year}-${month}-${day}`;
-
-                myData[currentDate] = {}
-
-                console.log("Parsing data")
-                const reName = /(Reporting for)(.*)/;
-                const reReports = /(.*)/
-                membersData.forEach(readData)
-                function readData(value, index, array) {
-                    console.log("value222")
-                    console.log(value)
-                    if (filters = value.match(reName)) {
-                        console.log("Parsing data 1")
-                        console.log(filters[1])
-                        console.log(filters[2])
-                        myname = jsonData.user_name
-                        myData[currentDate][myname] = {}
-                    } else if (filters = value.match(reReports)) {
-                        console.log("Parsing data 2")
-                        console.log(myname)
-                        console.log(myData[currentDate][myname]["reports"])
-                        console.log(filters[0])
-
-                        if (myname != "" && !myData[currentDate][myname]["reports"]) myData[currentDate][myname]["reports"] = [];
-                        myData[currentDate][myname]["reports"].push(filters[0])
-                    }
-                }
-
-                console.log("\nShow myData")
-                console.log('myData : %j', myData);
-
-                const fs = require('fs');
-                let readDataStr = ""
-                let readDataJson = {}
-                try {
-                    readDataStr = fs.readFileSync(data_path, 'utf8');
-                    readDataJson = JSON.parse(readDataStr);
-                } catch (err) {
-                }
-
-
-                console.log("merging....1");
-                console.log(JSON.stringify(myData, null, 3));
-                console.log(JSON.stringify(readDataJson, null, 3));
-                const JSONObjectMerge = require("json-object-merge");
-                const merged = JSONObjectMerge.default(myData, readDataJson);
-                console.log("merging....2");
-                console.log(JSON.stringify(merged, null, 3));
-
-                if (fs.existsSync(data_path)) {
-                    // path exists
-                    const myJSON = JSON.stringify(merged, null, 3);
-                    fs.writeFile(data_path, myJSON, (err) => {
-                        // In case of a error throw err.
-                        if (err) throw err;
-                        console.log("exists:3", data_path);
-                        console.log("vietanh git 3");
-                        var execProcess = require("./exec_process.js");
-                        execProcess.result("sh temp.sh", function (err, response) {
-                            console.log("aaa")
-                            if (!err) {
-                                console.log("1")
-                                console.log(response);
-                            } else {
-                                console.log("2")
-                                console.log(err);
-                            }
-                        });
-                    })
-                }
-
-                let msg = ""
-                console.log("vietanh test Give me")
-                console.log(myData[currentDate][myname]["reports"])
-                console.log(merged[currentDate][myname]["reports"])
-                let myQuest = {
-                    "model": "text-davinci-003",
-                    // "prompt": "Say thank the report of " + myname + "?",
-                    "prompt": "Give me a short explain of the report: " + myData[currentDate][myname]["reports"] + "?",
-                    "max_tokens": 1000,
-                    // "temperature": 0,
-                    "top_p": 0.2,
-                    "n": 1,
-                    "stream": false,
-                    "logprobs": null,
-                }
-                try {
-                    const completion = await openaiObj.createCompletion(myQuest);
-                    console.log(completion.data.choices[0].text);
-                    // msg = completion.data.choices[0].text
-                    msg = ""
-                } catch (error) {
-                    if (error.response) {
-                        console.log(error.response.status);
-                        console.log(error.response.data);
-                    } else {
-                        console.log(error.message);
-                    }
-                }
-
-                // let myQuest2 = {
-                //     "model": "text-davinci-003",
-                //     "prompt": "Say thank the report of " + myname + "?" + "say wish me a good working day",
-                //     "max_tokens": 1000,
-                //     // "temperature": 0,
-                //     "top_p": 0.9,
-                //     "n": 1,
-                //     "stream": false,
-                //     "logprobs": null,
-                // }
-                // try {
-                //     const completion = await openaiObj.createCompletion(myQuest2);
-                //     console.log(completion.data.choices[0].text);
-                //     msg += completion.data.choices[0].text
-                // } catch (error) {
-                //     if (error.response) {
-                //         console.log(error.response.status);
-                //         console.log(error.response.data);
-                //     } else {
-                //         console.log(error.message);
-                //     }
-                // }
-                // var request = require('request');
-                // request.post(
-                //     getDestinationMMUrl(),
-                //     { json: { "text": msg } },
-                //     function (error, response, body) {
-                //         if (!error && response.statusCode == 200) {
-                //             console.log(body);
-                //         } else {
-                //             console.log("got error")
-                //         }
-                //     }
-                // );
-            }
-            res.end("sayHello End");
-        })
-    }
-})
-
-app.post('/sendMsg', function (req, res) {
-    if (req.method == 'POST') {
-        req.on('data', async function (data) {
-            let msg = ""
-
-            let myQuest = {
-                "model": "text-davinci-003",
-                "prompt": "hello bot",
-            }
-            try {
-                const completion = await openaiObj.createCompletion(myQuest);
-                let myQuest2 = {
-                    "model": "text-davinci-003",
-                    // "prompt": "I'm Dragon Mania Legends China, Help me give my teammates reminder that \"you need to fill out the daily task today\"",
-                    "prompt": "On behalf of \"Dragon Mania Legends China Team\". Help me say hi and a polite reminder email to my friends that \"you need to fill out the daily task today\"",
-                    "max_tokens": 1000,
-                    // "temperature": 0,
-                    "top_p": 0.1,
-                    "n": 1,
-                    "stream": false,
-                    "logprobs": null,
-                    // "stop": "\n",
-                }
-                try {
-                    const completion = await openaiObj.createCompletion(myQuest2);
-                    console.log(completion.data.choices[0].text);
-                    msg = completion.data.choices[0].text
-                    msg = "# " + msg.trim()
-                } catch (error) {
-                    if (error.response) {
-                        console.log(error.response.status);
-                        console.log(error.response.data);
-                    } else {
-                        console.log(error.message);
-                    }
-                }
-            } catch (error) {
-                if (error.response) {
-                    console.log(error.response.status);
-                    console.log(error.response.data);
-                } else {
-                    console.log(error.message);
-                }
-            }
-
-
-            var request = require('request');
-            request.post(
-                getDestinationMMUrl(),
-                { json: { "text": msg } },
-                function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                        console.log(body);
-                    } else {
-                        console.log("got error")
-                    }
-                }
-            );
-            res.end("sayHello End");
-        })
-    }
-})
-
 function getRecords() {
     let missRec = []
     let doneRec = []
@@ -551,54 +329,291 @@ function getRecords() {
     return rec_today
 }
 
-app.post('/sendThank', function (req, res) {
-    if (req.method == 'POST') {
-        req.on('data', async function (data) {
-            let msg = ""
-            let rec = getRecords();
-            let myQuest = {
-                "model": "text-davinci-003",
-                "prompt": "hello bot",
+async function sendReport(jsonData) {
+    if (jsonData.text.startsWith("Reporting")) {
+        console.log(jsonData.text)
+        var membersData = jsonData.text.split('\n');
+        var myname = ""
+
+        // No Raven
+        var myData = {}
+
+        const date = new Date();
+        let day = date.getDate() + 1;
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        let currentDate = `${year}-${month}-${day}`;
+
+        myData[currentDate] = {}
+
+        console.log("Parsing data")
+        const reName = /(Reporting for)(.*)/;
+        const reReports = /(.*)/
+        membersData.forEach(readData)
+        function readData(value, index, array) {
+            console.log("value222")
+            console.log(value)
+            if (filters = value.match(reName)) {
+                console.log("Parsing data 1")
+                console.log(filters[1])
+                console.log(filters[2])
+                myname = jsonData.user_name
+                myData[currentDate][myname] = {}
+            } else if (filters = value.match(reReports)) {
+                console.log("Parsing data 2")
+                console.log(myname)
+                console.log(myData[currentDate][myname]["reports"])
+                console.log(filters[0])
+
+                if (myname != "" && !myData[currentDate][myname]["reports"]) myData[currentDate][myname]["reports"] = [];
+                myData[currentDate][myname]["reports"].push(filters[0])
             }
-            try {
-                const completion = await openaiObj.createCompletion(myQuest);
-                let myQuest2 = {
-                    "model": "text-davinci-003",
-                    "prompt": "On behalf of \"Dragon Mania Legends China Team\". Send a short email to thank my team for reporting" + " then warning " + rec["miss"] + " because missing report.",
-                    "max_tokens": 1000,
-                    // "temperature": 0,
-                    "top_p": 0.1,
-                    "n": 1,
-                    "stream": false,
-                    "logprobs": null,
-                    // "stop": "\n",
-                }
-                try {
-                    const completion = await openaiObj.createCompletion(myQuest2);
-                    console.log(completion.data.choices[0].text);
-                    msg = completion.data.choices[0].text
-                    msg = "# " + msg.trim()
-                } catch (error) {
-                    if (error.response) {
-                        console.log(error.response.status);
-                        console.log(error.response.data);
+        }
+
+        console.log("\nShow myData")
+        console.log('myData : %j', myData);
+
+        const fs = require('fs');
+        let readDataStr = ""
+        let readDataJson = {}
+        try {
+            readDataStr = fs.readFileSync(data_path, 'utf8');
+            readDataJson = JSON.parse(readDataStr);
+        } catch (err) {
+        }
+
+
+        console.log("merging....1");
+        console.log(JSON.stringify(myData, null, 3));
+        console.log(JSON.stringify(readDataJson, null, 3));
+        const JSONObjectMerge = require("json-object-merge");
+        const merged = JSONObjectMerge.default(myData, readDataJson);
+        console.log("merging....2");
+        console.log(JSON.stringify(merged, null, 3));
+
+        if (fs.existsSync(data_path)) {
+            // path exists
+            const myJSON = JSON.stringify(merged, null, 3);
+            fs.writeFile(data_path, myJSON, (err) => {
+                // In case of a error throw err.
+                if (err) throw err;
+                console.log("exists:3", data_path);
+                console.log("vietanh git 3");
+                var execProcess = require("./exec_process.js");
+                execProcess.result("sh temp.sh", function (err, response) {
+                    console.log("aaa")
+                    if (!err) {
+                        console.log("1")
+                        console.log(response);
                     } else {
-                        console.log(error.message);
+                        console.log("2")
+                        console.log(err);
                     }
-                }
-            } catch (error) {
-                if (error.response) {
-                    console.log(error.response.status);
-                    console.log(error.response.data);
-                } else {
-                    console.log(error.message);
-                }
+                });
+            })
+        }
+
+        let msg = ""
+        console.log("vietanh test Give me")
+        console.log(myData[currentDate][myname]["reports"])
+        console.log(merged[currentDate][myname]["reports"])
+        let myQuest = {
+            "model": "text-davinci-003",
+            // "prompt": "Say thank the report of " + myname + "?",
+            "prompt": "Give me a short explain of the report: " + myData[currentDate][myname]["reports"] + "?",
+            "max_tokens": 1000,
+            // "temperature": 0,
+            "top_p": 0.2,
+            "n": 1,
+            "stream": false,
+            "logprobs": null,
+        }
+        try {
+            const completion = await openaiObj.createCompletion(myQuest);
+            console.log(completion.data.choices[0].text);
+            // msg = completion.data.choices[0].text
+            msg = ""
+        } catch (error) {
+            if (error.response) {
+                console.log(error.response.status);
+                console.log(error.response.data);
+            } else {
+                console.log(error.message);
             }
+        }
+
+        // let myQuest2 = {
+        //     "model": "text-davinci-003",
+        //     "prompt": "Say thank the report of " + myname + "?" + "say wish me a good working day",
+        //     "max_tokens": 1000,
+        //     // "temperature": 0,
+        //     "top_p": 0.9,
+        //     "n": 1,
+        //     "stream": false,
+        //     "logprobs": null,
+        // }
+        // try {
+        //     const completion = await openaiObj.createCompletion(myQuest2);
+        //     console.log(completion.data.choices[0].text);
+        //     msg += completion.data.choices[0].text
+        // } catch (error) {
+        //     if (error.response) {
+        //         console.log(error.response.status);
+        //         console.log(error.response.data);
+        //     } else {
+        //         console.log(error.message);
+        //     }
+        // }
+        // var request = require('request');
+        // request.post(
+        //     getDestinationMMUrl(),
+        //     { json: { "text": msg } },
+        //     function (error, response, body) {
+        //         if (!error && response.statusCode == 200) {
+        //             console.log(body);
+        //         } else {
+        //             console.log("got error")
+        //         }
+        //     }
+        // );
+    }
+}
+async function sendDailyRemind() {
+    console.log("sendDailyRemind")
+    let msg = ""
+
+    let myQuest = {
+        "model": "text-davinci-003",
+        "prompt": "hello bot",
+    }
+    try {
+        const completion = await openaiObj.createCompletion(myQuest);
+        let myQuest2 = {
+            "model": "text-davinci-003",
+            // "prompt": "I'm Dragon Mania Legends China, Help me give my teammates reminder that \"you need to fill out the daily task today\"",
+            "prompt": "On behalf of \"Dragon Mania Legends China Team\". Help me say hi and a polite reminder email to my friends that \"you need to fill out the daily task today\"",
+            "max_tokens": 1000,
+            // "temperature": 0,
+            "top_p": 0.1,
+            "n": 1,
+            "stream": false,
+            "logprobs": null,
+            // "stop": "\n",
+        }
+        try {
+            const completion = await openaiObj.createCompletion(myQuest2);
+            console.log(completion.data.choices[0].text);
+            msg = completion.data.choices[0].text
+            msg = "# " + msg.trim()
+        } catch (error) {
+            if (error.response) {
+                console.log(error.response.status);
+                console.log(error.response.data);
+            } else {
+                console.log(error.message);
+            }
+        }
+    } catch (error) {
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data);
+        } else {
+            console.log(error.message);
+        }
+    }
+
+
+    var request = require('request');
+    request.post(
+        getDestinationMMUrl(),
+        { json: { "text": msg } },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+            } else {
+                console.log("got error")
+            }
+        }
+    );
+}
+
+async function sendThank() {
+    console.log("sendThank")
+    let msg = ""
+    let rec = getRecords();
+    let myQuest = {
+        "model": "text-davinci-003",
+        "prompt": "On behalf of \"Dragon Mania Legends China Team\". Send a short email to thank my team for reporting" + " then warning " + rec["miss"] + " because missing report.",
+        "max_tokens": 1000,
+        // "temperature": 0,
+        "top_p": 0.1,
+        "n": 1,
+        "stream": false,
+        "logprobs": null,
+        // "stop": "\n",
+    }
+    try {
+        const completion = await openaiObj.createCompletion(myQuest);
+        console.log(completion.data.choices[0].text);
+        msg = completion.data.choices[0].text
+        msg = "# " + msg.trim()
+    } catch (error) {
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data);
+        } else {
+            console.log(error.message);
+        }
+    }
+
+    var request = require('request');
+    request.post(
+        getDestinationMMUrl(),
+        { json: { "text": msg } },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+            } else {
+                console.log("got error")
+            }
+        }
+    );
+}
+
+function getReportChart(data) {
+    console.log("getReportChart")
+    getNumRecords()
+    sendImage()
+}
+
+function showHelp(data) {
+    console.log("showHelp")
+}
+
+async function chatBot(data) {
+    console.log("chatBot")
+    if (jsonData.text.startsWith("Question:")) {
+        var question = jsonData.text.replace('Question:', '');
+
+
+        console.log("chat to vietanh")
+        let myQuest2 = {
+            "model": "text-davinci-003",
+            "prompt": question,
+            "max_tokens": 4000,
+            "top_p": 0.1,
+        }
+        try {
+            let msg = ""
+            const completion = await openaiObj.createCompletion(myQuest2);
+            console.log(completion.data.choices[0].text);
+            msg = completion.data.choices[0].text
+            msg = msg.trim()
 
             var request = require('request');
             request.post(
                 getDestinationMMUrl(),
-                { json: { "text": msg } },
+                { json: { "text": "I'm dead" } },
                 function (error, response, body) {
                     if (!error && response.statusCode == 200) {
                         console.log(body);
@@ -607,155 +622,25 @@ app.post('/sendThank', function (req, res) {
                     }
                 }
             );
-            res.end("sayHello End");
-        })
-    }
-})
-
-app.post('/getNumOfReports', function (req, res) {
-    if (req.method == 'POST') {
-        req.on('data', async function (data) {
-            let dataStr = data.toString()
-            let membersData = getUserDataFromFile()
-            console.log(dataStr)
-
-            getNumRecords()
-            sendImage()
-
-
-            res.end("numOfReport End");
-        })
-    }
-})
-
-
-
-// show help
-app.post('/help', function (req, res) {
-    if (req.method == 'POST') {
-        req.on('data', async function (data) {
-            data = data.toString()
-            console.log(data)
-            jsonData = JSON.parse(data)
-            console.log(jsonData.text)
-
-            // if (jsonData.text.startsWith("Raven Help")) {
-            //     var msg = jsonData.text.replace('Raven Help','');
-
-            //     let msg = "\nTo chat with the raven --> Raven oi:  "
-            //     + "\nTo query all records --> Please Give Me Records  "
-
-            //     try {
-            //         var request = require('request');
-            //         request.post(
-            //             getDestinationMMUrl(),
-            //             { json: { "text":  msg } },
-            //             function (error, response, body) {
-            //                 if (!error && response.statusCode == 200) {
-            //                     console.log(body);
-            //                 } else {
-            //                     console.log("got error")
-            //                 }
-            //             }
-            //         );                    
-            //     } catch (error) {
-            //         if (error.response) {
-            //             console.log(error.response.status);
-            //             console.log(error.response.data);
-            //         } else {
-            //             console.log(error.message);
-            //         }
-            //     }
-            // }
-            res.end("numOfReport End");
-        })
-    }
-})
-
-// Initializing the prompt and context variables
-
-app.post('/chatToVietanh', function (req, res) {
-    if (req.method == 'POST') {
-        req.on('data', async function (data) {
-            data = data.toString()
-            console.log("data")
-            console.log(data)
-            jsonData = JSON.parse(data)
-            console.log("jsonData.text")
-            console.log(jsonData.text)
-
-            // if (jsonData.user_name == "anh.nguyenviet6" && jsonData.text.toLowerCase().indexOf("Quạ im nhé") === -1) {
-            // if (jsonData.user_name == "anh.nguyenviet6") {
-            if (jsonData.text.startsWith("Question:")) {
-                var question = jsonData.text.replace('Question:', '');
-
-
-                console.log("chat to vietanh")
-                let myQuest2 = {
-                    "model": "text-davinci-003",
-                    "prompt": question,
-                    "max_tokens": 4000,
-                    "top_p": 0.1,
-                }
-                try {
-                    let msg = ""
-                    const completion = await openaiObj.createCompletion(myQuest2);
-                    console.log(completion.data.choices[0].text);
-                    msg = completion.data.choices[0].text
-                    msg = msg.trim()
-
-                    var request = require('request');
-                    request.post(
-                        getDestinationMMUrl(),
-                        { json: { "text": "I'm dead" } },
-                        function (error, response, body) {
-                            if (!error && response.statusCode == 200) {
-                                console.log(body);
-                            } else {
-                                console.log("got error")
-                            }
-                        }
-                    );
-                } catch (error) {
-                    if (error.response) {
-                        console.log(error.response.status);
-                        console.log(error.response.data);
-                    } else {
-                        console.log(error.message);
-                    }
-                }
-
+        } catch (error) {
+            if (error.response) {
+                console.log(error.response.status);
+                console.log(error.response.data);
+            } else {
+                console.log(error.message);
             }
-            res.end("numOfReport End");
-        })
+        }
+
     }
-})
+}
 
-app.post('/checkMemberMissingRecord', function (req, res) {
-    if (req.method == 'POST') {
-        req.on('data', async function (data) {
-            data = data.toString()
-            console.log("data")
-            console.log(data)
-            jsonData = JSON.parse(data)
-            console.log("jsonData.text")
-            console.log(jsonData.text)
 
-            let missingRec = getMemberMissingRecord()
-            let myQuestion = 'Help me(iam DMLCN Team) remind ' + missingRec + " to fill in daily tasks politely and gently"
-            requestOpenAIAndSendMM(myQuestion)
-
-            res.end("checkMemberMissingRecord End")
-        })
-    }
-})
-
-app.get('/getLocalDataFile', (req, res) => {
-    // let jsonData = {"name":"vietanh"}
-    res.set('Access-Control-Allow-Origin', '*');
-    // res.send(getNumRecords())
-    res.send("getNumRecords()")
-})
+function checkMemberMissingRecord(data) {
+    console.log("showHelp")
+    let missingRec = getMemberMissingRecord()
+    let myQuestion = 'Help me(iam DMLCN Team) remind ' + missingRec + " to fill in daily tasks politely and gently"
+    requestOpenAIAndSendMM(myQuestion)
+}
 
 async function requestOpenAIAndSendMM(myQuestion) {
     console.log("chat to vietanh")
@@ -798,6 +683,24 @@ async function requestOpenAIAndSendMM(myQuestion) {
     }
 }
 
+
+app.post('/doTask', function (req, res) {
+    if (req.method == 'POST') {
+        req.on('data', async function (data) {
+            data = data.toString()
+            console.log("doTask for the data")
+            console.log(data)
+            jsonData = JSON.parse(data)
+            // jsonData = JSON.parse(jsonData)
+
+            if (jsonData["text"].startsWith("Reporting for")) {
+                sendReport(jsonData)
+            }
+
+            res.end("doTask End");
+        })
+    }
+})
 
 var server = app.listen(port, function () {
     var host = server.address().address
