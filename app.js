@@ -683,7 +683,6 @@ async function requestOpenAIAndSendMM(myQuestion) {
     }
 }
 
-
 app.post('/doTask', function (req, res) {
     if (req.method == 'POST') {
         req.on('data', async function (data) {
@@ -695,6 +694,8 @@ app.post('/doTask', function (req, res) {
 
             if (jsonData["text"].startsWith("Reporting for")) {
                 sendReport(jsonData)
+            } else if (jsonData["text"].startsWith("Show Reports")) {
+                getReportChartjsonData()
             }
 
             res.end("doTask End");
