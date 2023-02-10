@@ -7,88 +7,18 @@
 <!-- <script src="main.js"></script> -->
 
 <script>
-    // var managerSys = new ManagerSystem();
-    // var linkGetLocalData = "https://demo-deploy-app-01.onrender.com/getLocalDataFile"
-
-    // $.get(linkGetLocalData, function (data) {
-    //     console.log("hello data")
-    //     console.log(data)
-    //     var myLabel = []
-    //     var myLabelName = '# of Recored'
-    //     var myLabelRecords = []
-    //     var myLabelRecordsBackground = [
-    //         'rgba(255, 99, 132, 0.2)',
-    //         'rgba(54, 162, 235, 0.2)',
-    //         'rgba(255, 206, 86, 0.2)',
-    //         'rgba(75, 192, 192, 0.2)',
-    //         'rgba(153, 102, 255, 0.2)',
-    //         'rgba(255, 159, 64, 0.2)'
-    //     ]
-    //     var myLabelRecordsBorder = [
-    //         'rgba(255, 99, 132, 1)',
-    //         'rgba(54, 162, 235, 1)',
-    //         'rgba(255, 206, 86, 1)',
-    //         'rgba(75, 192, 192, 1)',
-    //         'rgba(153, 102, 255, 1)',
-    //         'rgba(255, 159, 64, 1)'
-    //     ]
-
-
-    //     for (var name of Object.keys(data)) {
-    //         myLabel.push(name)
-    //         myLabelRecords.push(data[name])
-    //     }
-
-
-
-    //     var ctx = document.getElementById('myChart').getContext('2d');
-    //     var myChart = new Chart(ctx, {
-    //         type: 'bar',
-    //         data: {
-    //             labels: myLabel,
-    //             datasets: [{
-    //                 label: myLabelName,
-    //                 data: myLabelRecords,
-    //                 backgroundColor: myLabelRecordsBackground,
-    //                 borderColor: myLabelRecordsBorder,
-    //                 borderWidth: 1
-    //             }]
-    //         },
-    //         // options: {
-    //         //     scales: {
-    //         //         yAxes: [{
-    //         //             ticks: {
-    //         //                 beginAtZero: true
-    //         //             }
-    //         //         }]
-    //         //     }
-    //         // }
-    //     });
-
-        // $(document).ready(function () {
-        //     var html = document.documentElement.outerHTML;
-        //     var options = {
-        //         html: html
-        //     };
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "https://hcti.io/v1/image",
-        //         data: JSON.stringify(options),
-        //         contentType: "application/json",
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'Authorization': 'Basic ' + btoa("c5695b69-579a-42b9-9791-5730b9c82cb8" + ":" + "e3faa319-e781-414c-a768-7a00b873832a")
-        //         },
-        //         success: function (data) {
-        //             var imageUrl = data.url;
-        //             var imageTag = "<img src='" + imageUrl + "' alt='HTML to image example'>";
-        //             $("body").append(imageTag);
-        //             console.log("data.url")
-        //             console.log(data.url)
-        //         }
-        //     });
-        // });
-    // });
-
+    $.ajax({
+        type: "POST",
+        url: "https://demo-deploy-app-01.onrender.com",
+        data: JSON.stringify({ "text": "Raven Show Reports", "user_name":"anh.nguyenviet6" }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+        },
+        failure: function (errMsg) {
+            console.error(errMsg);
+        }
+    });
 
 </script>
