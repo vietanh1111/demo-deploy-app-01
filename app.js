@@ -165,6 +165,7 @@ async function sendImage() {
     const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, backgroundColour });
     // Define the chart options
     const options = {
+        indexAxis: 'y',
         scales: {
             xAxes: [
                 {

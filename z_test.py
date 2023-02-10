@@ -15,8 +15,15 @@ if sys.argv[1] == 'doReport':
     data["user_name"] = "anh.nguyenviet6"
     myobj = data
 elif sys.argv[1] == 'doShowReport':
-    x = '{ "text":"Raven Show Reports"}'
-    myobj = x
+    data = {}
+    data["text"] = "Raven Show Reports"
+    data["user_name"] = "anh.nguyenviet6"
+    myobj = data
+elif sys.argv[1] == 'doShowScores':
+    data = {}
+    data["text"] = "Raven Show Reports"
+    data["user_name"] = "anh.nguyenviet6"
+    myobj = data
 
 
 
