@@ -1,5 +1,11 @@
 {
    "2023-2-11": {
+      "giang.trinhthuy": {
+         "reports": [
+            "+ receive work from @minh.nguyenchinh ",
+            "+ change dragon and fire ball size based on position relative to camera"
+         ]
+      },
       "anh.nguyenviet6": {
          "reports": [
             "- meeting devs",
