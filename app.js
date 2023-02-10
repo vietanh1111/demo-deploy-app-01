@@ -152,10 +152,11 @@ function getUserScore() {
 
     let all_records = {}
 
+    let highest_record = 0
     for (var member of Object.keys(team_member)) {
         team_member_email = team_member[member]["name"]
-        score = 0
         number_records = 0
+        score = 0
         for (var date of Object.keys(all_data)) {
             // console.log(date)
             if (all_data[date][team_member[member]["name"]]) {
@@ -163,15 +164,30 @@ function getUserScore() {
                 number_records += 1
             }
         }
-        all_records[team_member[member]["alias"]] = (score / number_records).toFixed(2)
+        if (highest_record < number_records) {
+            highest_record = number_records
+        }
+        all_records[team_member[member]["alias"]] = {}
+        all_records[team_member[member]["alias"]]["score"] =  (score / number_records).toFixed(2) 
+        all_records[team_member[member]["alias"]]["num_records"] = number_records
 
     }
-    // console.log(console.log(JSON.stringify(all_records, null, 3)))
-
-    console.log("getNumRecords return:")
+    console.log("aall records")
+    console.log(highest_record)
     console.log(console.log(JSON.stringify(all_records, null, 3)))
 
-    var sortedData = Object.entries(all_records).sort((a, b) => b[1] - a[1]);
+
+    final_score = {}
+    for (var member of Object.keys(all_records)) {
+        // console.log(member)
+        final_score[member] = 0.7 * (all_records[member]["score"])  + 0.3 * (10*all_records[member]["num_records"] / highest_record)
+    }
+
+    console.log(final_score)
+    console.log("getNumRecords return:")
+    console.log(console.log(JSON.stringify(final_score, null, 3)))
+
+    var sortedData = Object.entries(final_score).sort((a, b) => b[1] - a[1]);
 
     const result = sortedData.reduce((acc, item) => {
         acc[item[0]] = item[1];
@@ -183,6 +199,7 @@ function getUserScore() {
     console.log(result);
 
     return result
+    // return number_records
 }
 
 
@@ -260,8 +277,10 @@ async function sendChartAsImage(chartName, chartType) {
 
     if (chartType == SCORE_CHART_TYPE) {
         recoredData = getUserScore()
+        myLabelName = 'Scores'
     } else if (chartType == REPORT_CHART_TYPE) {
         recoredData = getNumRecords()
+        myLabelName = 'Reports'
     }
 
     for (var name of Object.keys(recoredData)) {

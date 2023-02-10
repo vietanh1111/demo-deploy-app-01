@@ -8,7 +8,7 @@
             "- non-project: discuss with Monica for concluding a best solution for online libs, premake and android studio module",
             "- non-project: checking the above solution on sandboxv2"
          ],
-         "score": 8
+         "score": 7.5
       },
       "minh.nguyenchinh": {
          "reports": [
@@ -20,14 +20,14 @@
             "",
             ""
          ],
-         "score": 8
+         "score": 7.5
       },
       "quy.nguyenngoc": {
          "reports": [
             " - checking & building New Feature and upd63 trunk",
             " - research online class topic"
          ],
-         "score": 7.5
+         "score": 7
       },
       "anh.buithingoc": {
          "reports": [
@@ -48,14 +48,14 @@
          "reports": [
             "+ New game state for new game play: Dragon Arcade"
          ],
-         "score": 7
+         "score": 7.5
       },            
       "trung.maiduc2": {
          "reports": [
             "- Finish script to modify data of profile",
             "- Prepare for the next build: env, setting, ..."
          ],
-         "score": 8
+         "score": 7.5
       }
    },
    "2023-2-9": {
