@@ -22,9 +22,9 @@ elif sys.argv[1] == 'doShowScore':
     data["text"] = "Raven Show Score"
     data["user_name"] = "anh.nguyenviet6"
     myobj = data
-elif sys.argv[1] == 'doShowReport':
+elif sys.argv[1] == 'doRemind':
     data = {}
-    data["text"] = "Raven Show Reports"
+    data["text"] = "Raven Daily Remind"
     data["user_name"] = "anh.nguyenviet6"
     myobj = data
 

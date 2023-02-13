@@ -1,4 +1,50 @@
 {
+   "2023-2-13": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "- implementation a demo for Unity and HPK and China Stores - test downjoy (DONE)",
+            "- non-project: check new premake in sandboxv2"
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - checking & building New Feature and upd63 trunk",
+            " - learn modern c++ course"
+         ],
+         "score": 6.5
+      },
+      "anh.buithingoc": {
+         "reports": [
+            " Switch trunk to prepare update new data for new dlc",
+            " Adding tracking OG into src"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "+ add joystick control to new feature",
+            "+ add dodge and attack buttons to new feature"
+         ],
+         "score": 8
+      },
+      "duc.luutrong": {
+         "reports": [
+            "+ Implement new feature dragon arcade: Moving background",
+            "+ Research effect editor"
+         ],
+         "score": 8
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Finish Sigil detector and modified data (cont)",
+            "- Checking root for build (hpk config, setting, etc), ...",
+            "- Waiting for 7.3.0ab build",
+            "- learning modern c++ course"
+         ],
+         "score": 7.5
+      }
+   },
    "2023-2-10": {
       "anh.nguyenviet6": {
          "reports": [
@@ -43,13 +89,13 @@
             "+ change dragon and fire ball size based on position relative to camera"
          ],
          "score": 7
-      },  
+      },
       "duc.luutrong": {
          "reports": [
             "+ New game state for new game play: Dragon Arcade"
          ],
          "score": 7.5
-      },            
+      },
       "trung.maiduc2": {
          "reports": [
             "- Finish script to modify data of profile",

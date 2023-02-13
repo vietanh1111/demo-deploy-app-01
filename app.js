@@ -572,7 +572,7 @@ async function sendDailyRemind(jsonData) {
             "prompt": "On behalf of \"Dragon Mania Legends China Team\". Help me say hi and a polite reminder email to my friends that \"you need to fill out the daily task today\"",
             "max_tokens": 1000,
             // "temperature": 0,
-            "top_p": 0.1,
+            "top_p": 0.5,
             "n": 1,
             "stream": false,
             "logprobs": null,
