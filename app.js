@@ -794,7 +794,7 @@ async function sendBuildToQA(jsonData) {
     console.log(myQuestion)
     let myQuest2 = {
         "model": "text-davinci-003",
-        "prompt": myQuestion ,
+        "prompt": myQuestion,
         "max_tokens": 2000,
         // "temperature": 0,
         "top_p": 0.1,
@@ -843,21 +843,24 @@ app.post('/doTask', function (req, res) {
             console.log(jsonData["text"])
             console.log(jsonData["user_name"])
             let result = "result nonwe"
-            if (jsonData["text"].startsWith("Reporting for")) {
-                sendReport(jsonData)
-            } else if (jsonData["text"].startsWith("Raven Show Reports")) {
-                result = await getReportChart(jsonData)
-            } else if (jsonData["text"].startsWith("Raven Show Score")) {
-                result = await getScoreChart(jsonData)
-            } else if (jsonData["text"].startsWith("Raven Thank")) {
-                sendThank(jsonData)
-            } else if (jsonData["text"].startsWith("Raven Daily Remind")) {
-                sendDailyRemind(jsonData)
-            } else if (jsonData["text"].startsWith("Raven Chat")) {
-                chatBot(jsonData)
-            } else if (jsonData["text"].startsWith("Giúp tôi gửi thông tin build này tới các bạn QAs")) {
-                sendBuildToQA(jsonData)
+            if (jsonData["text"]) {
+                if (jsonData["text"].startsWith("Reporting for")) {
+                    sendReport(jsonData)
+                } else if (jsonData["text"].startsWith("Raven Show Reports")) {
+                    result = await getReportChart(jsonData)
+                } else if (jsonData["text"].startsWith("Raven Show Score")) {
+                    result = await getScoreChart(jsonData)
+                } else if (jsonData["text"].startsWith("Raven Thank")) {
+                    sendThank(jsonData)
+                } else if (jsonData["text"].startsWith("Raven Daily Remind")) {
+                    sendDailyRemind(jsonData)
+                } else if (jsonData["text"].startsWith("Raven Chat")) {
+                    chatBot(jsonData)
+                } else if (jsonData["text"].startsWith("Giúp tôi gửi thông tin build này tới các bạn QAs")) {
+                    sendBuildToQA(jsonData)
+                }
             }
+
 
             res.end(result)
         })
