@@ -111,8 +111,8 @@ function getCurrentDate() {
 }
 
 function getDestinationMMUrl() {
-    return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
-    // return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
+    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
 }
 
 
@@ -768,6 +768,70 @@ async function requestOpenAIAndSendMM(myQuestion) {
     }
 }
 
+async function sendBuildToQA(jsonData) {
+    console.log("sendBuildToQA")
+
+    var dataInLines = jsonData.text.split('\n');
+    var preDataBuild = "Tôi là DMLDevs, Giúp tôi gửi thông tin build này tới các bạn QAs một cách lịch sự:"
+    var dataBuild = ""
+    console.log("Parsing data")
+    const reName = /Giúp tôi gửi thông tin build này tới các bạn QAs:/;
+    const reReports = /.*/
+    dataInLines.forEach(readData)
+    function readData(value, index, array) {
+        console.log("value222")
+        console.log(value)
+        if (filters = value.match(reName)) {
+            console.log("Parsing data 1")
+            console.log(value)
+        } else if (filters = value.match(reReports)) {
+            console.log("Parsing data 2")
+            console.log(value)
+            dataBuild = dataBuild + "\n" + filters[0]
+        }
+    }
+    let myQuestion = preDataBuild + dataBuild
+    console.log(myQuestion)
+    let myQuest2 = {
+        "model": "text-davinci-003",
+        "prompt": myQuestion ,
+        "max_tokens": 2000,
+        // "temperature": 0,
+        "top_p": 0.1,
+        "n": 1,
+        "stream": false,
+        "logprobs": null,
+        // "stop": "\n",
+    }
+    try {
+        let msg = ""
+        const completion = await openaiObj.createCompletion(myQuest2);
+        console.log(completion.data.choices[0].text);
+        msg = completion.data.choices[0].text
+        msg = msg.trim()
+        var request = require('request');
+        request.post(
+            getDestinationMMUrl(),
+            { json: { "text": msg } },
+            function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body);
+                } else {
+                    console.log("got error")
+                }
+            }
+        );
+    } catch (error) {
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data);
+        } else {
+            console.log(error.message);
+        }
+    }
+}
+
+
 app.post('/doTask', function (req, res) {
     if (req.method == 'POST') {
         req.on('data', async function (data) {
@@ -791,6 +855,8 @@ app.post('/doTask', function (req, res) {
                 sendDailyRemind(jsonData)
             } else if (jsonData["text"].startsWith("Raven Chat")) {
                 chatBot(jsonData)
+            } else if (jsonData["text"].startsWith("Giúp tôi gửi thông tin build này tới các bạn QAs:")) {
+                sendBuildToQA(jsonData)
             }
 
             res.end(result)
