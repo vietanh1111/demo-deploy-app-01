@@ -771,26 +771,26 @@ async function requestOpenAIAndSendMM(myQuestion) {
 async function sendBuildToQA(jsonData) {
     console.log("sendBuildToQA")
 
-    var dataInLines = jsonData.text.split('\n');
-    var preDataBuild = "Tôi là DMLDevs, Giúp tôi gửi thông tin build này tới các bạn QAs một cách lịch sự:"
-    var dataBuild = ""
-    console.log("Parsing data")
-    const reName = /Giúp tôi gửi thông tin build này tới các bạn QAs:/;
-    const reReports = /.*/
-    dataInLines.forEach(readData)
-    function readData(value, index, array) {
-        console.log("value222")
-        console.log(value)
-        if (filters = value.match(reName)) {
-            console.log("Parsing data 1")
-            console.log(value)
-        } else if (filters = value.match(reReports)) {
-            console.log("Parsing data 2")
-            console.log(value)
-            dataBuild = dataBuild + "\n" + filters[0]
-        }
-    }
-    let myQuestion = preDataBuild + dataBuild
+    // var dataInLines = jsonData.text.split('\n');
+    var preDataBuild = "Tôi là DMLDevs"
+    // var dataBuild = ""
+    // console.log("Parsing data")
+    // const reName = /Giúp tôi gửi thông tin build này tới các bạn QAs.*/;
+    // const reReports = /.*/
+    // dataInLines.forEach(readData)
+    // function readData(value, index, array) {
+    //     console.log("value222")
+    //     console.log(value)
+    //     if (filters = value.match(reName)) {
+    //         console.log("Parsing data 1")
+    //         console.log(value)
+    //     } else if (filters = value.match(reReports)) {
+    //         console.log("Parsing data 2")
+    //         console.log(value)
+    //         dataBuild = dataBuild + "\n" + filters[0]
+    //     }
+    // }
+    let myQuestion = preDataBuild + "\n" + jsonData.text
     console.log(myQuestion)
     let myQuest2 = {
         "model": "text-davinci-003",
@@ -855,7 +855,7 @@ app.post('/doTask', function (req, res) {
                 sendDailyRemind(jsonData)
             } else if (jsonData["text"].startsWith("Raven Chat")) {
                 chatBot(jsonData)
-            } else if (jsonData["text"].startsWith("Giúp tôi gửi thông tin build này tới các bạn QAs:")) {
+            } else if (jsonData["text"].startsWith("Giúp tôi gửi thông tin build này tới các bạn QAs")) {
                 sendBuildToQA(jsonData)
             }
 
