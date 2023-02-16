@@ -811,7 +811,7 @@ async function sendBuildToQA(jsonData) {
         msg = msg.trim()
         var request = require('request');
         request.post(
-            getDestinationMMUrl(),
+            "https://chat.gameloft.org/hooks/mzzto39n73g35dmn7rd5e4i3qo",
             { json: { "text": msg } },
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
