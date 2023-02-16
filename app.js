@@ -621,7 +621,7 @@ async function sendThank(jsonData) {
     let rec = getRecords();
     let myQuest = {
         "model": "text-davinci-003",
-        "prompt": "On behalf of \"Dragon Mania Legends China Team\". Send a short email to thank my team for reporting" + " then warning " + rec["miss"] + " because missing report.",
+        "prompt": "On behalf of \"Dragon Mania Legends China Team\". Send a short email to thank my team for reporting" + " then warning " + rec["miss"] + " because missing daily report.",
         "max_tokens": 1000,
         // "temperature": 0,
         "top_p": 0.1,

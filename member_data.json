@@ -1,4 +1,123 @@
 {
+   "2023-2-16": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "send 730ab",
+            "non-project: update premake, deps and unittests for libs (savegamelib)"
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support test build 730ab",
+            "learn modern c++ course",
+            "research federation & pandora for online class"
+         ],
+         "score": 6.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Implement moving dragon in Dragon Arcade"
+         ],
+         "score": 7.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "learning c++",
+            "test to reproduce sigil bug"            
+         ],
+         "score": 7
+      }
+   },   
+   "2023-2-15": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "lead dev meet",
+            "non-project: update premake for gameloft libs"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support build 730ab",
+            "learn modern c++ course",
+            "research federation & pandora for online class"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Testing 443283 Online Gift Reward  on ODD tool",
+            "Check new commit for DLC from SAI on trunk root"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "deploy server 730ab",
+            "create currency list for arcade (cont)"
+         ],
+         "score": 7.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            ""
+         ],
+         "score": 7
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "support build 730ab",
+            "join ws c++ and learn c++ course"
+         ],
+         "score": 7
+      }
+   },   
+   "2023-2-14": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "Weekly: fix sigil users profile",
+            "Merge CRM: Gameobject, gameconfig, game items",
+            "Check update sdk",
+            "Non-project: update premake for gameloft libs (done - Anubis, CELib, CEFWrapper)"
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "checking & building New Feature trunk"
+         ],
+         "score": 6
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Added tracking OG into src and send request add event on ODD",
+            "Test new event on ODD tool"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "Create currency list for arcade",
+            "Fix collision between dragon and border"
+         ],
+         "score": 7.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Implement background looping"
+         ],
+         "score": 7.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "Testing and try to reproduce sigil bug",
+            "Build new update (if today SAI finish)",
+            "Resolve IAP CC (done)"            
+         ],
+         "score": 7.5
+      }
+   },
    "2023-2-13": {
       "anh.nguyenviet6": {
          "reports": [
