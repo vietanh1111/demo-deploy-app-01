@@ -867,6 +867,54 @@ app.post('/doTask', function (req, res) {
     }
 })
 
+app.post('/doHelp', function (req, res) {
+    if (req.method == 'POST') {
+        req.on('data', async function (data) {
+            data = data.toString()
+            console.log("doHelp for the data")
+            console.log(data)
+            jsonData = JSON.parse(data)
+            console.log(jsonData)
+            console.log(jsonData["text"])
+            console.log(jsonData["user_name"])
+            let result = "result nonwe"
+            if (jsonData["text"]) {
+                if (jsonData["text"].startsWith("Raven Help")) {
+                    GetHelp(jsonData)
+                }
+            }
+            res.end(result)
+        })
+    }
+})
+
+function GetHelp(jsonData) {
+    var msg = "#### Raven Options.\n\n| Option  | Command   | Note |\n|:-----------|:-----------:|:-----------------------------------------------|\n| To Show Report     | Raven Show Reports | ✅ |\n| To Show Score | Raven Show Score | ✅  |\n| To Daily Remind | Raven Daily Remind | ✅ |\n| To Send Thank For Reports | Raven Thank |  ✅ |\n| To Reporting | Reporting for <data> |  ✅ |\n| To Send Build to QA | Giúp tôi gửi thông tin build này tới các bạn QAs + <data> |  ✅ |\n| To Chat with Raven | Raven Chat |  ✅ |"
+    // msg = msg + "\n" + "`To Show Report` -> `Raven Show Reports`"
+    // msg = msg + "\n" + "`To Show Score` -> `Raven Show Score`"
+    // msg = msg + "\n" + "`To Daily Remind` -> `Raven Daily Remind`"
+    // msg = msg + "\n" + "`To Send Thank For Reports` -> `Raven Thank`"
+    // msg = msg + "\n" + "`To Reporting` -> `Reporting for <data>`"
+    // msg = msg + "\n" + "`To Send Build to QA` -> `Giúp tôi gửi thông tin build này tới các bạn QAs + <data>`"
+    // msg = msg + "\n" + "`To Chat with Raven` -> `Raven Chat` "
+
+    console.log("GetHelp")
+    console.log(msg)
+    var request = require('request');
+    request.post(
+        getDestinationMMUrl(),
+        { json: { "text": msg } },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+            } else {
+                console.log("got error")
+            }
+        }
+    );
+}
+
+
 var server = app.listen(port, function () {
     var host = server.address().address
     var port = server.address().port

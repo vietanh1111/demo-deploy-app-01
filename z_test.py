@@ -37,8 +37,13 @@ elif sys.argv[1] == 'sendBuildToQA':
     data["text"] = 'Giúp tôi gửi thông tin build này tới các bạn QAs, một cách lịch sự\nVersion build: 7.3.0ab \nLink Base Sharefolder: \\gameloft.org\han\Production\DMLCN\1. Android China\40. UPD63\2. Release\7.3.0ab\7.3.0ab base build to test Tracking CRM \nLink Repack Sharefolder: \\gameloft.org\han\Production\DMLCN\1. Android China\40. UPD63\2. Release\7.3.0ab\channel_apks_beta\ \nLink Base: https://glplay.gameloft.com/57/build/562526\nLink Channel: https://glplay.gameloft.com/57/build/562528'
     data["user_name"] = "anh.nguyenviet6"
     myobj = data
+elif sys.argv[1] == 'doHelp':
+    data = {}
+    data["text"] = 'Raven Help'
+    data["user_name"] = "anh.nguyenviet6"
+    myobj = data
 
-url = 'http://127.0.0.1:3000/doTask'
+url = 'http://127.0.0.1:3000/doHelp'
 x = requests.post(url, json = myobj)
 
 
