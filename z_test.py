@@ -47,10 +47,11 @@ elif sys.argv[1] == 'doHelp':
 
 elif sys.argv[1] == 'doCreateVersion':
     data = {}
-    data["text"] = 'Raven-jira: create\ngame_version:7.3.0eb\nepic_link:DMLCNQA-1651'
+    # data["text"] = 'Raven-jira: create\ngame_version:7.3.0eb\nepic_link:DMLCNQA-1651'
+    data["text"] = 'Raven-Jira: create tasks for the data\n```\ngame_version:7.3.0cb\nepic_link:DMLCNQA-165\n```'
     data["user_name"] = "anh.nguyenviet6"
     myobj = data
-    url = 'http://127.0.0.1:3000/doJira'
+    url = 'http://127.0.0.1:3000/doTask'
 
 
 x = requests.post(url, json = myobj)
