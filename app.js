@@ -898,15 +898,17 @@ function CreateAndAddTasks(jsonData) {
         const reEpicLinks = /(epic_link:)(.*)/
         dataInLines.forEach(readData)
         function readData(value, index, array) {
+            console.log(value)
             if (filters = value.match(reVersion)) {
-                console.log(value)
+                console.log("Parsing data 1")
                 console.log(filters[1])
                 console.log(filters[2])
                 myname = jsonData.user_name
                 requestData["gameVersion"] = filters[2]
             } else if (filters = value.match(reEpicLinks)) {
                 console.log("Parsing data 2")
-                console.log(value)
+                console.log(filters[1])
+                console.log(filters[2])
                 requestData["epicLink"] = filters[2]
             }
         }
