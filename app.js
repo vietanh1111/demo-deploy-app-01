@@ -858,30 +858,13 @@ app.post('/doTask', function (req, res) {
                     chatBot(jsonData)
                 } else if (jsonData["text"].startsWith("Giúp tôi gửi thông tin build này tới các bạn QAs")) {
                     sendBuildToQA(jsonData)
-                }
-            }
-
-            res.end(result)
-        })
-    }
-})
-
-app.post('/doHelp', function (req, res) {
-    if (req.method == 'POST') {
-        req.on('data', async function (data) {
-            data = data.toString()
-            console.log("doHelp for the data")
-            console.log(data)
-            jsonData = JSON.parse(data)
-            console.log(jsonData)
-            console.log(jsonData["text"])
-            console.log(jsonData["user_name"])
-            let result = "result nonwe"
-            if (jsonData["text"]) {
-                if (jsonData["text"].startsWith("Raven Help")) {
+                } else if (jsonData["text"].startsWith("Raven Help")) {
                     GetHelp(jsonData)
+                } else if (jsonData["text"].toLowerCase().startsWith("raven-jira: create")) {
+                    CreateAndAddTasks(jsonData)
                 }
             }
+
             res.end(result)
         })
     }
@@ -968,27 +951,6 @@ function CreateAndAddTasks(jsonData) {
         );
     }
 }
-
-app.post('/doJira', function (req, res) {
-    if (req.method == 'POST') {
-        req.on('data', async function (data) {
-            data = data.toString()
-            console.log("doHelp for the data")
-            console.log(data)
-            jsonData = JSON.parse(data)
-            console.log(jsonData)
-            console.log(jsonData["text"])
-            console.log(jsonData["user_name"])
-            let result = "result nonwe"
-            if (jsonData["text"]) {
-                if (jsonData["text"].toLowerCase().startsWith("raven-jira: create")) {
-                    CreateAndAddTasks(jsonData)
-                }
-            }
-            res.end(result)
-        })
-    }
-})
 
 function GetHelp(jsonData) {
     var msg = "#### Raven Options.\n\n| Option  | Command   | Note |"
