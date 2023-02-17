@@ -913,7 +913,7 @@ function CreateAndAddTasks(jsonData) {
             }
         }
         console.log(JSON.stringify(requestData, null, 3))
-        var url = "https://jira.gameloft.org/rest/cb-automation/latest/hooks/90829df43af72bc27de506fee71f74d956cc3a47"
+        var url = "https://jira.gameloft.org/rest/cb-automation/latest/hooks/11ab6d4646e1a816c474ff572518a7b3fd2c7084"
 
         var request = require('request');
         request.post(
