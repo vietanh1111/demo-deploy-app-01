@@ -861,7 +861,6 @@ app.post('/doTask', function (req, res) {
                 }
             }
 
-
             res.end(result)
         })
     }
@@ -888,8 +887,120 @@ app.post('/doHelp', function (req, res) {
     }
 })
 
+
+MSG_CREATE_DONE = "Create Done!"
+MSG_CREATE_FAILED = "Create Failed"
+
+function CreateAndAddTasks(jsonData) {
+    console.log("CreateAndAddTasks")
+    if (jsonData["user_name"] !== "dat.letien2" && jsonData["user_name"] !== "anh.nguyenviet6") {
+        failed_msg = "You couldn't do the action. Please ask your Manager"
+        request.post(
+            getDestinationMMUrl(),
+            { json: { "text": failed_msg } },
+            function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body);
+                } else {
+                    console.log("got error")
+                }
+            }
+        );
+    } else {
+        console.log("parse data")
+        var dataInLines = jsonData.text.split('\n');
+
+        var requestData = {}
+        const reVersion = /(game_version:)(.*)/;
+        const reEpicLinks = /(epic_link:)(.*)/
+        dataInLines.forEach(readData)
+        function readData(value, index, array) {
+            if (filters = value.match(reVersion)) {
+                console.log(value)
+                console.log(filters[1])
+                console.log(filters[2])
+                myname = jsonData.user_name
+                requestData["gameVersion"] = filters[2]
+            } else if (filters = value.match(reEpicLinks)) {
+                console.log("Parsing data 2")
+                console.log(value)
+                requestData["epicLink"] = filters[2]
+            }
+        }
+        console.log(JSON.stringify(requestData, null, 3))
+        var url = "https://jira.gameloft.org/rest/cb-automation/latest/hooks/90829df43af72bc27de506fee71f74d956cc3a47"
+
+        var request = require('request');
+        request.post(
+            url,
+            { json: requestData },
+            function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log("CreateAndAddTasks Success");
+
+                    request.post(
+                        getDestinationMMUrl(),
+                        { json: { "text": MSG_CREATE_DONE } },
+                        function (error, response, body) {
+                            if (!error && response.statusCode == 200) {
+                                console.log(body);
+                            } else {
+                                console.log("got error")
+                            }
+                        }
+                    );
+                } else {
+                    console.log("CreateAndAddTasks Err");
+                    var failed_msg = MSG_CREATE_FAILED
+                    request.post(
+                        getDestinationMMUrl(),
+                        { json: { "text": failed_msg } },
+                        function (error, response, body) {
+                            if (!error && response.statusCode == 200) {
+                                console.log(body);
+                            } else {
+                                console.log("got error")
+                            }
+                        }
+                    );
+                }
+            }
+        );
+    }
+}
+
+app.post('/doJira', function (req, res) {
+    if (req.method == 'POST') {
+        req.on('data', async function (data) {
+            data = data.toString()
+            console.log("doHelp for the data")
+            console.log(data)
+            jsonData = JSON.parse(data)
+            console.log(jsonData)
+            console.log(jsonData["text"])
+            console.log(jsonData["user_name"])
+            let result = "result nonwe"
+            if (jsonData["text"]) {
+                if (jsonData["text"].toLowerCase().startsWith("raven-jira: create")) {
+                    CreateAndAddTasks(jsonData)
+                }
+            }
+            res.end(result)
+        })
+    }
+})
+
 function GetHelp(jsonData) {
-    var msg = "#### Raven Options.\n\n| Option  | Command   | Note |\n|:-----------|:-----------:|:-----------------------------------------------|\n| To Show Report     | Raven Show Reports | ✅ |\n| To Show Score | Raven Show Score | ✅  |\n| To Daily Remind | Raven Daily Remind | ✅ |\n| To Send Thank For Reports | Raven Thank |  ✅ |\n| To Reporting | Reporting for <data> |  ✅ |\n| To Send Build to QA | Giúp tôi gửi thông tin build này tới các bạn QAs + <data> |  ✅ |\n| To Chat with Raven | Raven Chat |  ✅ |"
+    var msg = "#### Raven Options.\n\n| Option  | Command   | Note |"
+        + "\n|:-----------|:-----------:|:-----------------------------------------------|"
+        + "\n| To Show Report | Raven Show Reports | ✅ |"
+        + "\n| To Show Score | Raven Show Score | ✅  |"
+        + "\n| To Daily Remind | Raven Daily Remind | ✅ |"
+        + "\n| To Send Thank For Reports | Raven Thank |  ✅ |"
+        + "\n| To Reporting | Reporting for <data> |  ✅ |"
+        + "\n| To Send Build to QA | Giúp tôi gửi thông tin build này tới các bạn QAs + <data> |  ✅ |"
+        + "\n| To Chat with Raven | Raven Chat |  ✅ |"
+        + "\n| To Create Jira GameVersion and Relating Tasks | Raven-Jira: Create + \ngame_version:<version>\nepic_link:<epic> |  only availble for managers |"
     // msg = msg + "\n" + "`To Show Report` -> `Raven Show Reports`"
     // msg = msg + "\n" + "`To Show Score` -> `Raven Show Score`"
     // msg = msg + "\n" + "`To Daily Remind` -> `Raven Daily Remind`"

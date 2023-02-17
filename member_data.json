@@ -1,4 +1,42 @@
-{
+{   "2023-2-17": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "support release build 730bb",
+            "clean bug base"
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support  build 730bb",
+            "clean up manhattan bundles",
+            "learn modern c++ course",
+			"research janus for online class"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Attempt to fix some issues in Flying Dragon"
+         ],
+         "score": 7.5
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Check and up new dlc android",
+            "Testing 443283 Online Gift Reward on ODD tool "
+         ],
+         "score": 6.5
+      },	  
+      "trung.maiduc2": {
+         "reports": [
+            "learning c++ in excel doc",
+			"read about new update of game",
+            "doing the build task"            
+         ],
+         "score": 7
+      }
+   },   
    "2023-2-16": {
       "anh.nguyenviet6": {
          "reports": [
