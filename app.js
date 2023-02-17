@@ -936,7 +936,8 @@ function CreateAndAddTasks(jsonData) {
                     );
                 } else {
                     console.log("CreateAndAddTasks Err");
-                    console.log(error.message);
+                    console.log(error);
+                    console.log(response);
                     var failed_msg = MSG_CREATE_FAILED
                     request.post(
                         getDestinationMMUrl(),
