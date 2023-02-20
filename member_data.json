@@ -1,4 +1,50 @@
-{   "2023-2-17": {
+{
+   "2023-2-20": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "update jira automation and applying to bot",
+            "non-project: check dep-get on sbv2"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support build 730cb",
+            "learn modern c++ course",
+            "research janus for online class"
+         ],
+         "score": 6.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Bounding play area for Flying dragon"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Update newest src and update EventsEnum, EventsJson for android china on trunk new feature",
+            "Update and check dlc on trunk root for new version"
+         ],
+         "score": 6.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "Checking CC",
+            "Checking build for 720cb"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "Make gift boxes fall instead of being static",
+            "Change dragon and fireball hit boxese",
+            "Generate tickets when catching gift"
+         ],
+         "score": 7.5
+      }
+   },   
+   "2023-2-17": {
       "anh.nguyenviet6": {
          "reports": [
             "support release build 730bb",
@@ -11,7 +57,7 @@
             "support  build 730bb",
             "clean up manhattan bundles",
             "learn modern c++ course",
-			"research janus for online class"
+            "research janus for online class"
          ],
          "score": 7
       },
@@ -27,16 +73,16 @@
             "Testing 443283 Online Gift Reward on ODD tool "
          ],
          "score": 6.5
-      },	  
+      },
       "trung.maiduc2": {
          "reports": [
             "learning c++ in excel doc",
-			"read about new update of game",
-            "doing the build task"            
+            "read about new update of game",
+            "doing the build task"
          ],
          "score": 7
       }
-   },   
+   },
    "2023-2-16": {
       "anh.nguyenviet6": {
          "reports": [
@@ -62,11 +108,11 @@
       "trung.maiduc2": {
          "reports": [
             "learning c++",
-            "test to reproduce sigil bug"            
+            "test to reproduce sigil bug"
          ],
          "score": 7
       }
-   },   
+   },
    "2023-2-15": {
       "anh.nguyenviet6": {
          "reports": [
@@ -110,7 +156,7 @@
          ],
          "score": 7
       }
-   },   
+   },
    "2023-2-14": {
       "anh.nguyenviet6": {
          "reports": [
@@ -151,7 +197,7 @@
          "reports": [
             "Testing and try to reproduce sigil bug",
             "Build new update (if today SAI finish)",
-            "Resolve IAP CC (done)"            
+            "Resolve IAP CC (done)"
          ],
          "score": 7.5
       }

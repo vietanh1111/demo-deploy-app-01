@@ -36,37 +36,37 @@ app.use(function (req, res, next) {
 
 team_member = {
     "Anh Nguyen Viet 6": {
-        "email": "anh.nguyenviet6@gameloft.com",
+        "email": "anh.nguyenviet6",
         "name": "anh.nguyenviet6",
         "alias": "vietanh6"
     },
     "Quy Nguyen Ngoc": {
-        "email": "quy.nguyenngoc@gameloft.com",
+        "email": "quy.nguyenngoc",
         "name": "quy.nguyenngoc",
         "alias": "quynn"
     },
     "Duc Luu Trong": {
-        "email": "duc.luutrong@gameloft.com",
+        "email": "duc.luutrong",
         "name": "duc.luutrong",
         "alias": "ducdoo"
     },
     "Trung Mai Duc 2": {
-        "email": "trung.maiduc2@gameloft.com",
+        "email": "trung.maiduc2",
         "name": "trung.maiduc2",
         "alias": "trungtrau"
     },
     "Minh Nguyen Chinh": {
-        "email": "minh.nguyenchinh@gameloft.com",
+        "email": "minh.nguyenchinh",
         "name": "minh.nguyenchinh",
         "alias": "chinhminh"
     },
     "Giang Trinh Thuy": {
-        "email": "giang.trinhthuy@gameloft.com",
+        "email": "giang.trinhthuy",
         "name": "giang.trinhthuy",
         "alias": "alextrinh"
     },
     "Anh Bui Thi Ngoc": {
-        "email": "anh.buithingoc@gameloft.com",
+        "email": "anh.buithingoc",
         "name": "anh.buithingoc",
         "alias": "ngocanh"
     }
@@ -111,8 +111,8 @@ function getCurrentDate() {
 }
 
 function getDestinationMMUrl() {
-    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
-    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
+    return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    // return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
 }
 
 
@@ -772,7 +772,7 @@ async function sendBuildToQA(jsonData) {
     console.log("sendBuildToQA")
 
     // var dataInLines = jsonData.text.split('\n');
-    var preDataBuild = "Tôi là DMLDevs"
+    var preDataBuild = "Tôi là Dev-Chan"
     // var dataBuild = ""
     // console.log("Parsing data")
     // const reName = /Giúp tôi gửi thông tin build này tới các bạn QAs.*/;
@@ -790,6 +790,7 @@ async function sendBuildToQA(jsonData) {
     //         dataBuild = dataBuild + "\n" + filters[0]
     //     }
     // }
+    var question = jsonData.text.replace('Raven SendToQA:', '');
     let myQuestion = preDataBuild + "\n" + jsonData.text
     console.log(myQuestion)
     let myQuest2 = {
@@ -856,7 +857,7 @@ app.post('/doTask', function (req, res) {
                     sendDailyRemind(jsonData)
                 } else if (jsonData["text"].startsWith("Raven Chat")) {
                     chatBot(jsonData)
-                } else if (jsonData["text"].startsWith("Giúp tôi gửi thông tin build này tới các bạn QAs")) {
+                } else if (jsonData["text"].startsWith("Raven SendToQA:")) {
                     sendBuildToQA(jsonData)
                 } else if (jsonData["text"].startsWith("Raven Help")) {
                     GetHelp(jsonData)
@@ -903,13 +904,12 @@ function CreateAndAddTasks(jsonData) {
                 console.log("Parsing data 1")
                 console.log(filters[1])
                 console.log(filters[2])
-                myname = jsonData.user_name
-                requestData["gameVersion"] = filters[2]
+                // requestData["gameVersion"] = filters[2]
             } else if (filters = value.match(reEpicLinks)) {
                 console.log("Parsing data 2")
                 console.log(filters[1])
                 console.log(filters[2])
-                requestData["epicLink"] = filters[2]
+                // requestData["epicLink"] = filters[2]
             }
         }
         console.log(JSON.stringify(requestData, null, 3))
@@ -964,7 +964,7 @@ function GetHelp(jsonData) {
         + "\n| To Daily Remind | Raven Daily Remind | ✅ |"
         + "\n| To Send Thank For Reports | Raven Thank |  ✅ |"
         + "\n| To Reporting | Reporting for <data> |  ✅ |"
-        + "\n| To Send Build to QA | Giúp tôi gửi thông tin build này tới các bạn QAs + <data> |  ✅ |"
+        + "\n| To Send Msg to QA | Raven SendToQA: |  ✅ |"
         + "\n| To Chat with Raven | Raven Chat |  ✅ |"
         + "\n| To Create Jira GameVersion and Relating Tasks | Raven-Jira: Create + \ngame_version:<version>\nepic_link:<epic> |  only availble for managers |"
     // msg = msg + "\n" + "`To Show Report` -> `Raven Show Reports`"
