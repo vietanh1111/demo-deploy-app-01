@@ -18,13 +18,14 @@ const AWS = require('aws-sdk');
 // init openAPI
 const Configuration = openai.Configuration;
 const OpenAIApi = openai.OpenAIApi;
+
 let key = "sk-TSz275JV5fMrM1jCpV5XT3BlbkFJLblwOpYhW2lBwPud"
 let key2 = "6BT0"
 const configuration = new Configuration({
     organization: "org-kZkL4Z0rkGFT2U9PH5n4aBJy",
     apiKey: key + key2,
 });
-console.log(process.env.OPENAI_API_KEY)
+// console.log(process.env.OPENAI_API_KEY)
 const openaiObj = new OpenAIApi(configuration);
 
 
@@ -462,8 +463,8 @@ async function sendReport(jsonData) {
 
 
         console.log("merging....1");
-        console.log(JSON.stringify(readDataJson, null, 3));
-        console.log(JSON.stringify(myData, null, 3));
+        // console.log(JSON.stringify(readDataJson, null, 3));
+        // console.log(JSON.stringify(myData, null, 3));
         const JSONObjectMerge = require("json-object-merge");
         const merged = JSONObjectMerge.default(readDataJson, myData);
         console.log("merging....2");
@@ -630,6 +631,7 @@ async function sendThank(jsonData) {
         "logprobs": null,
         // "stop": "\n",
     }
+    console.log("request texrt")
     try {
         const completion = await openaiObj.createCompletion(myQuest);
         console.log(completion.data.choices[0].text);

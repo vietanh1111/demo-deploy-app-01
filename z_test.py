@@ -6,7 +6,7 @@ url = ""
 my_text = ""
 myobj = {}
 
-url = 'http://127.0.0.1:3000/doHelp'
+url = 'http://127.0.0.1:3000/doTask'
 
 if sys.argv[1] == 'doReport':
     print(sys.argv[1])
@@ -44,6 +44,8 @@ elif sys.argv[1] == 'doHelp':
     data["text"] = 'Raven Help'
     data["user_name"] = "anh.nguyenviet6"
     myobj = data
+    url = 'http://127.0.0.1:3000/doHelp'
+
 
 elif sys.argv[1] == 'doCreateVersion':
     data = {}

@@ -1,4 +1,50 @@
 {
+   "2023-2-21": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "Weekly: fix sigils users",
+            "Check cheating issue"
+         ],
+         "score": 7.0
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support build 730cb",
+            "learn modern c++ course",
+            "research janus for online class"
+         ],
+         "score": 6.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Fixed some issue in flying dragon",
+            "FOptimize code for reading",
+            "Implement shooting for the dragon"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Update and rebuild trunk new feature to  test",
+            "Update and check dlc on trunk root for new version"
+         ],
+         "score": 7
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "Checking CC (DMLSD-3959)",
+            "Build 730cb (in progress)",
+            "Prepare for c++ test"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "Generate tickets when catching gift"
+         ],
+         "score": 7
+      }
+   },   
    "2023-2-20": {
       "anh.nguyenviet6": {
          "reports": [
