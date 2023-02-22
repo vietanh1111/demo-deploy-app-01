@@ -44,7 +44,7 @@ elif sys.argv[1] == 'doHelp':
     data["text"] = 'Raven Help'
     data["user_name"] = "anh.nguyenviet6"
     myobj = data
-    url = 'http://127.0.0.1:3000/doHelp'
+    # url = 'http://127.0.0.1:3000/doHelp'
 
 
 elif sys.argv[1] == 'doCreateVersion':

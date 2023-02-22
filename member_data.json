@@ -1,4 +1,44 @@
 {
+   "2023-2-22": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "investigate cheat gem issue",
+            "fix build with target 31+ on glshops",
+            "check extra_dlc_includes"
+         ],
+         "score": 7.0
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support test build 730cb",
+            "prepare to fail c++ contest",
+            "research topics for online class"
+         ],
+         "score": 6
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Implement shooting for the dragon",
+            "Review C++ for win first prize"
+         ],
+         "score": 6.5
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Check 4 bugs that assigned on jira",
+            "Update and check dlc on trunk root for new version"
+         ],
+         "score": 6.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "Prepare for c++ test",
+            "Check the bugs on jira",
+            "Continue investigating CC (DMLSD-3959)"
+         ],
+         "score": 6.5
+      }
+   },      
    "2023-2-21": {
       "anh.nguyenviet6": {
          "reports": [
