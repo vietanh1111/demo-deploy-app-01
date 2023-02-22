@@ -16,5 +16,5 @@ d=$a$b$c
 
 echo "aaaaaa"
 git add .
-git commit -m "asadsa"
+git commit -m "[auto-commit] update data"
 git push -f https://vietanh1111:${d}@github.com/vietanh1111/demo-deploy-app-01.git HEAD:main
