@@ -468,7 +468,7 @@ async function sendReport(jsonData) {
         const JSONObjectMerge = require("json-object-merge");
         const merged = JSONObjectMerge.default(readDataJson, myData);
         console.log("merging....2");
-        console.log(JSON.stringify(merged, null, 3));
+        // console.log(JSON.stringify(merged, null, 3));
 
         if (fs.existsSync(data_path)) {
             // path exists
@@ -490,6 +490,8 @@ async function sendReport(jsonData) {
                     }
                 });
             })
+        } else {
+            console.log("Report: not found data_path=" + data_path)
         }
 
         let msg = ""
