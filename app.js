@@ -111,8 +111,8 @@ function getCurrentDate() {
 }
 
 function getDestinationMMUrl() {
-    return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
-    // return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
+    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
 }
 
 
@@ -453,7 +453,7 @@ async function chatBot(jsonData) {
     printLog(arguments.callee.name, "chatBot")
     if (jsonData.text.startsWith("Raven Chat:")) {
         let question = jsonData.text.replace('Raven Chat:', '');
-        requestGetOpenAIMsg(question)
+        requestGetOpenAIMsgForChatBot(question)
     }
 }
 
@@ -591,6 +591,7 @@ function sendMessageToMM(msg, request_url) {
 }
 
 async function requestGetOpenAIMsg(question, mmUrl) {
+    printLog(arguments.callee.name, "hello ")
     let request_data = {
         "model": "text-davinci-003",
         "prompt": question,
@@ -598,8 +599,9 @@ async function requestGetOpenAIMsg(question, mmUrl) {
         "top_p": 0.4,
         "n": 1,
         "stream": false,
-        "logprobs": null,
+        "user": "vietanh6"
     }
+
     try {
         let msg = ""
         const completion = await openaiObj.createCompletion(request_data);
@@ -607,6 +609,40 @@ async function requestGetOpenAIMsg(question, mmUrl) {
         printLog(arguments.callee.name, "msg=" + msg)
         msg = msg.trim()
         sendMessageToMM(msg, mmUrl)
+    } catch (error) {
+        printLog(arguments.callee.name, "get error")
+        printLog(arguments.callee.name, error)
+    }
+}
+
+let msg = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly."
+// let end_msg = "\nAI:"
+async function requestGetOpenAIMsgForChatBot(question, mmUrl) {
+    printLog(arguments.callee.name, "hello ")
+
+    question = "\nHuman:" + question + "\nAI:"
+    msg = msg + question
+    console.log("msg=" + msg)
+    let request_data = {
+        model: "text-davinci-003",
+        prompt: msg,
+        temperature: 0.1,
+        max_tokens: 2000,
+        top_p: 1,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.6,
+        stop: [" Human:", " AI:"],
+    }
+
+    try {
+
+        const completion = await openaiObj.createCompletion(request_data);
+        res = completion.data.choices[0].text
+        res = res.trim()
+        msg = msg + res
+        // printLog(arguments.callee.name, "msg=" + msg)
+
+        sendMessageToMM(res, mmUrl)
     } catch (error) {
         printLog(arguments.callee.name, "get error")
         printLog(arguments.callee.name, error)
