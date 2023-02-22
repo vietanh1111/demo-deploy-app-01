@@ -9,9 +9,9 @@ git config user.email "anh.nguyenviet6@gameloft.com"
 # git init
 # git remote add origin https://github.com/vietanh1111/demo-deploy-app-01.git
 
-a="ghp_"
-b="Wik1hg27sXecx2sJJcS8XO1R9XwtFh3LdD"
-c="7e"
+a="ghp_vzTuJkvYcDcpa9ujt4Y"
+b="FwqOaRnhMEO3u"
+c="JV4J"
 d=$a$b$c
 
 echo "aaaaaa"

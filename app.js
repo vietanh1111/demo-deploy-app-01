@@ -404,7 +404,9 @@ async function sendReport(jsonData) {
             printLog(arguments.callee.name, "existsSync")
             let myJSON = JSON.stringify(merged, null, 3);
             fs.writeFileSync(data_path, myJSON, (err) => {
+                printLog(arguments.callee.name, "1")
                 if (err) throw err;
+                printLog(arguments.callee.name, "2")
                 var execProcess = require("./exec_process.js");
                 execProcess.result("sh temp.sh", function (err, response) {
                     if (!err) {
