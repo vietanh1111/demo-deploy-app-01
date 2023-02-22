@@ -385,6 +385,8 @@ async function sendReport(jsonData) {
             }
         }
 
+        printLog(arguments.callee.name, JSON.stringify(myData, null, 3))
+
         const fs = require('fs');
         let readDataStr = ""
         let readDataJson = {}
@@ -399,6 +401,7 @@ async function sendReport(jsonData) {
         const merged = JSONObjectMerge.default(readDataJson, myData);
 
         if (fs.existsSync(data_path)) {
+            printLog(arguments.callee.name, "existsSync")
             let myJSON = JSON.stringify(merged, null, 3);
             fs.writeFileSync(data_path, myJSON, (err) => {
                 if (err) throw err;
