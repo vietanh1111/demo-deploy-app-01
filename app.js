@@ -21,14 +21,13 @@ const AWS = require('aws-sdk');
 const Configuration = openai.Configuration;
 const OpenAIApi = openai.OpenAIApi;
 
-let key = "sk-TSz275JV5fMrM1jCpV5XT3BlbkFJLblwOpYhW2lBwPud"
-let key2 = "6BT0"
+let key = "sk-2b6uSrunRaQwfp1e5cFjT3BlbkFJKefhFZy5274MopF"
+let key2 = "Q3Ns4"
 const configuration = new Configuration({
     organization: "org-kZkL4Z0rkGFT2U9PH5n4aBJy",
     apiKey: key + key2,
 });
 const openaiObj = new OpenAIApi(configuration);
-
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -112,8 +111,8 @@ function getCurrentDate() {
 }
 
 function getDestinationMMUrl() {
-    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
-    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
+    return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    // return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
 }
 
 
@@ -194,7 +193,7 @@ function getUserScore() {
 
 
 async function sendChartAsImage(chartName, chartType) {
-    printLog(arguments.callee.name, "prepare capturing 5")
+    printLog(arguments.callee.name, "sendChartAsImage")
 
     ACCESS_KEY_1 = "AKIA6JEDQFAH5UBN"
     ACCESS_KEY_2 = "Z75K"
@@ -323,7 +322,7 @@ async function sendChartAsImage(chartName, chartType) {
                     reject(err);
                 } else {
                     printLog(arguments.callee.name, 'The URL for the image is: ', url);
-                    sendMessageToMM(url)
+                    sendMessageToMM("#This is your chart\n" + url)
                     url_img = url
                     resolve(url);
                 }
@@ -463,7 +462,7 @@ async function sendBuildToQA(jsonData) {
     var preDataBuild = "Tôi là Dev-Chan"
     var myQuestion = preDataBuild + "\n" + jsonData.text.replace('Raven SendToQA:', '');
     printLog(arguments.callee.name, myQuestion)
-    requestGetOpenAIMsg(myQuestion)
+    requestGetOpenAIMsg(myQuestion, "https://chat.gameloft.org/hooks/mzzto39n73g35dmn7rd5e4i3qo")
 }
 
 
@@ -572,9 +571,14 @@ function GetHelp(jsonData) {
 }
 
 
-function sendMessageToMM(msg) {
+function sendMessageToMM(msg, request_url) {
+    let url = getDestinationMMUrl()
+    if (request_url) {
+        url = request_url
+    }
+
     request.post(
-        getDestinationMMUrl(),
+        url,
         { json: { "text": msg } },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
@@ -586,12 +590,12 @@ function sendMessageToMM(msg) {
     )
 }
 
-async function requestGetOpenAIMsg(question) {
+async function requestGetOpenAIMsg(question, mmUrl) {
     let request_data = {
         "model": "text-davinci-003",
         "prompt": question,
         "max_tokens": 2000,
-        "top_p": 0.1,
+        "top_p": 0.4,
         "n": 1,
         "stream": false,
         "logprobs": null,
@@ -600,10 +604,12 @@ async function requestGetOpenAIMsg(question) {
         let msg = ""
         const completion = await openaiObj.createCompletion(request_data);
         msg = completion.data.choices[0].text
+        printLog(arguments.callee.name, "msg=" + msg)
         msg = msg.trim()
-        sendMessageToMM(msg)
+        sendMessageToMM(msg, mmUrl)
     } catch (error) {
         printLog(arguments.callee.name, "get error")
+        printLog(arguments.callee.name, error)
     }
 }
 
