@@ -1,1 +1,875 @@
-myJSON
+{
+   "2023-2-22": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "investigate cheat gem issue",
+            "fix build with target 31+ on glshops",
+            "check extra_dlc_includes"
+         ],
+         "score": 7.0
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support test build 730cb",
+            "prepare to fail c++ contest",
+            "research topics for online class"
+         ],
+         "score": 6
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Implement shooting for the dragon",
+            "Review C++ for win first prize"
+         ],
+         "score": 6.5
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Check 4 bugs that assigned on jira",
+            "Update and check dlc on trunk root for new version"
+         ],
+         "score": 6.5
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "investigate megabitat piece texture issue",
+            "generate tickets when catching gift (cont)"
+         ],
+         "score": 7
+      },      
+      "trung.maiduc2": {
+         "reports": [
+            "Prepare for c++ test",
+            "Check the bugs on jira",
+            "Continue investigating CC (DMLSD-3959)"
+         ],
+         "score": 6.5
+      }
+   },      
+   "2023-2-21": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "Weekly: fix sigils users",
+            "Check cheating issue"
+         ],
+         "score": 7.0
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support build 730cb",
+            "learn modern c++ course",
+            "research janus for online class"
+         ],
+         "score": 6.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Fixed some issue in flying dragon",
+            "FOptimize code for reading",
+            "Implement shooting for the dragon"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Update and rebuild trunk new feature to  test",
+            "Update and check dlc on trunk root for new version"
+         ],
+         "score": 7
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "Checking CC (DMLSD-3959)",
+            "Build 730cb (in progress)",
+            "Prepare for c++ test"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "Generate tickets when catching gift"
+         ],
+         "score": 7
+      }
+   },   
+   "2023-2-20": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "update jira automation and applying to bot",
+            "non-project: check dep-get on sbv2"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support build 730cb",
+            "learn modern c++ course",
+            "research janus for online class"
+         ],
+         "score": 6.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Bounding play area for Flying dragon"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Update newest src and update EventsEnum, EventsJson for android china on trunk new feature",
+            "Update and check dlc on trunk root for new version"
+         ],
+         "score": 6.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "Checking CC",
+            "Checking build for 720cb"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "Make gift boxes fall instead of being static",
+            "Change dragon and fireball hit boxese",
+            "Generate tickets when catching gift"
+         ],
+         "score": 7.5
+      }
+   },   
+   "2023-2-17": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "support release build 730bb",
+            "clean bug base"
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support  build 730bb",
+            "clean up manhattan bundles",
+            "learn modern c++ course",
+            "research janus for online class"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Attempt to fix some issues in Flying Dragon"
+         ],
+         "score": 7.5
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Check and up new dlc android",
+            "Testing 443283 Online Gift Reward on ODD tool "
+         ],
+         "score": 6.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "learning c++ in excel doc",
+            "read about new update of game",
+            "doing the build task"
+         ],
+         "score": 7
+      }
+   },
+   "2023-2-16": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "send 730ab",
+            "non-project: update premake, deps and unittests for libs (savegamelib)"
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support test build 730ab",
+            "learn modern c++ course",
+            "research federation & pandora for online class"
+         ],
+         "score": 6.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Implement moving dragon in Dragon Arcade"
+         ],
+         "score": 7.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "learning c++",
+            "test to reproduce sigil bug"
+         ],
+         "score": 7
+      }
+   },
+   "2023-2-15": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "lead dev meet",
+            "non-project: update premake for gameloft libs"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support build 730ab",
+            "learn modern c++ course",
+            "research federation & pandora for online class"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Testing 443283 Online Gift Reward  on ODD tool",
+            "Check new commit for DLC from SAI on trunk root"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "deploy server 730ab",
+            "create currency list for arcade (cont)"
+         ],
+         "score": 7.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            ""
+         ],
+         "score": 7
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "support build 730ab",
+            "join ws c++ and learn c++ course"
+         ],
+         "score": 7
+      }
+   },
+   "2023-2-14": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "Weekly: fix sigil users profile",
+            "Merge CRM: Gameobject, gameconfig, game items",
+            "Check update sdk",
+            "Non-project: update premake for gameloft libs (done - Anubis, CELib, CEFWrapper)"
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "checking & building New Feature trunk"
+         ],
+         "score": 6
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Added tracking OG into src and send request add event on ODD",
+            "Test new event on ODD tool"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "Create currency list for arcade",
+            "Fix collision between dragon and border"
+         ],
+         "score": 7.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Implement background looping"
+         ],
+         "score": 7.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "Testing and try to reproduce sigil bug",
+            "Build new update (if today SAI finish)",
+            "Resolve IAP CC (done)"
+         ],
+         "score": 7.5
+      }
+   },
+   "2023-2-13": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "- implementation a demo for Unity and HPK and China Stores - test downjoy (DONE)",
+            "- non-project: check new premake in sandboxv2"
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - checking & building New Feature and upd63 trunk",
+            " - learn modern c++ course"
+         ],
+         "score": 6.5
+      },
+      "anh.buithingoc": {
+         "reports": [
+            " Switch trunk to prepare update new data for new dlc",
+            " Adding tracking OG into src"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "+ add joystick control to new feature",
+            "+ add dodge and attack buttons to new feature"
+         ],
+         "score": 8
+      },
+      "duc.luutrong": {
+         "reports": [
+            "+ Implement new feature dragon arcade: Moving background",
+            "+ Research effect editor"
+         ],
+         "score": 8
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Finish Sigil detector and modified data (cont)",
+            "- Checking root for build (hpk config, setting, etc), ...",
+            "- Waiting for 7.3.0ab build",
+            "- learning modern c++ course"
+         ],
+         "score": 7.5
+      }
+   },
+   "2023-2-10": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "- meeting devs",
+            "- check glshops restrictions with Wayne...",
+            "- implementation a demo for Unity and HPK and China Stores (doing demo on downjoy - last test)",
+            "- non-project: discuss with Monica for concluding a best solution for online libs, premake and android studio module",
+            "- non-project: checking the above solution on sandboxv2"
+         ],
+         "score": 7.5
+      },
+      "minh.nguyenchinh": {
+         "reports": [
+            "Meeting devs",
+            "Continued making new feature:",
+            "- Made a dragon flying through and drop fire balls",
+            "- Removed and fixed bugs TopBars Currency",
+            "- handing over work to @giang.trinhthuy ",
+            "",
+            ""
+         ],
+         "score": 7.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - checking & building New Feature and upd63 trunk",
+            " - research online class topic"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            " • Revert trunk to build again src",
+            "",
+            "• Continue research add tracking OG"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "+ eceive work from @Minh Nguyen Chinh",
+            "+ change dragon and fire ball size based on position relative to camera"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "+ New game state for new game play: Dragon Arcade"
+         ],
+         "score": 7.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Finish script to modify data of profile",
+            "- Prepare for the next build: env, setting, ..."
+         ],
+         "score": 7.5
+      }
+   },
+   "2023-2-9": {
+      "minh.nguyenchinh": {
+         "reports": [
+            "",
+            "Continued making new feature:",
+            "- Made multi fireball fall after delta time",
+            "- Implemented heath points reduce when coliding",
+            "- Added topbar currency (but not usable)",
+            ""
+         ],
+         "score": 8
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - learning Unity"
+         ],
+         "score": 6
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Continue put data on leaderboard beta",
+            "- learn Unity"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "- Add text show remaining HP for health bar",
+            "- Add animation for gift in New Feature"
+         ],
+         "score": 7.5
+      },
+      "anh.nguyenviet6": {
+         "reports": [
+            "- implementation a demo for Unity and HPK and China Stores (doing demo on gionee)",
+            "- join meeting dml team",
+            "- non-project: support glsociallib on nugetpacks ",
+            ""
+         ],
+         "score": 7.5
+      },
+      "anh.buithingoc": {
+         "reports": [
+            " • Done check out and build trunk NewFeature ",
+            "",
+            "• Research add tracking OG ",
+            ""
+         ],
+         "score": 7
+      }
+   },
+   "2023-2-8": {
+      "giang.trinhthuy": {
+         "reports": [
+            "+ Build and deploy linux server"
+         ],
+         "score": 7
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Continue to test put data on beta"
+         ],
+         "score": 7
+      },
+      "minh.nguyenchinh": {
+         "reports": [
+            "* Continued making new feature:",
+            "- Added required dlc in gamestatefactory",
+            "- Made multi fireball fall",
+            "- Implemented health bar ",
+            ""
+         ],
+         "score": 7.5
+      },
+      "anh.nguyenviet6": {
+         "reports": [
+            "-  implementation a demo for Unity and HPK and China Stores (done unity and hpk part)",
+            ""
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - learning Unity"
+         ],
+         "score": 6
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "•\tCheck out trunk NewFeature to add tracking OG",
+            ""
+         ],
+         "score": 6.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "- Create health bar for New Feature (done) "
+         ],
+         "score": 7
+      }
+   },
+   "2023-2-7": {
+      "minh.nguyenchinh": {
+         "reports": [
+            "* Continued making new feature",
+            "- Fixed some bugs caused null access, non click screen and opptimize gifts boxs position",
+            "- Made multi levels for NewFeature",
+            "- Implemented ObjectPool to generate multi fire balls",
+            "- Built android version "
+         ],
+         "score": 7.5
+      },
+      "anh.nguyenviet6": {
+         "reports": [
+            "- implementation a demo"
+         ],
+         "score": 6.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Find the put method of federation and test it on beta",
+            "- Research something about Unity"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "+ build android with detection code",
+            "+ build and deploy linux server"
+         ],
+         "score": 8
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - learning Unity"
+         ],
+         "score": 6
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "•\tResearch more on confluen https://confluence.gameloft.org/display/GLHN/%5BDML%5D%5BCN%5D+Technical+Documentations",
+            "•\tResearch tracking",
+            ""
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "- Support for @minh.nguyenchinh ",
+            "- Create Health bar in New Feature"
+         ],
+         "score": 7.5
+      }
+   },
+   "2023-2-6": {
+      "giang.trinhthuy": {
+         "reports": [
+            "+ test sigil detection on android",
+            "+ prepare compliancylib workshop (cont)"
+         ],
+         "score": 8
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Research about modifing profile (cont)",
+            "- Research something about Unity "
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - trying to implement Huawei IAP with UDP",
+            "learning Unity for objective project"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "•    Learned iris assets",
+            "•    Research more on confluen https://confluence.gameloft.org/display/GLHN/%5BDML%5D%5BCN%5D+Technical+Documentations",
+            ""
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "- Upfate Meizu SDK",
+            "- Learning Unreal Engine"
+         ],
+         "score": 7.5
+      },
+      "anh.nguyenviet6": {
+         "reports": [
+            "- learn iap_validation Unity project",
+            "- implementation a demo on xiaomi",
+            "- Non-project: working on android studio premake with the gameloft libs(done with the [MR](https://git.gameloft.org/tools/premake/-/merge_requests/351))",
+            ""
+         ],
+         "score": 7.5
+      }
+   },
+   "2023-2-3": {
+      "giang.trinhthuy": {
+         "reports": [
+            "+ could not reproduce sigil bug  :pepedie: ",
+            "+ prepare for compliancylib workshop",
+            "+ research glf debugger"
+         ],
+         "score": 8
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "",
+            "- Update 4399 (with local lib)",
+            "- Research about modifing profile with script",
+            "- Research something about Unity"
+         ],
+         "score": 8
+      },
+      "minh.nguyenchinh": {
+         "reports": [
+            "",
+            "continued making new feature and fix bugs(done to step 9)",
+            "Step:",
+            "- create new gamestate with 1 dragon, 1 habitat and fireBall falling",
+            "- control the dragon with the cursor",
+            "- destroy fireBall when falling to the bottom",
+            "- let the fireball fall at the dragon position",
+            "- let the fireball fall at the dragon's position when the dragon moves",
+            "- let the dragon disappear when fireBall drops the dragon",
+            "- force fireBall disappears when chasing dragon",
+            "- create gifts boxs with random position in this gamestate",
+            "- make the gift box disapears whenever the dragon get them and a new one appears.",
+            "- create UI which counts points for user",
+            ""
+         ],
+         "score": 8
+      },
+      "duc.luutrong": {
+         "reports": [
+            "- Fixed script notify when upload dSyms ",
+            "- Learning Unreal Engine"
+         ],
+         "score": 7.5
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "•\tLearned how to use Manhattan",
+            "•\tLearn iris assets",
+            ""
+         ],
+         "score": 7.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - experiment with building android server using WSL2",
+            " - trying to implement Huawei IAP with UDP"
+         ],
+         "score": 8
+      },
+      "anh.nguyenviet6": {
+         "reports": [
+            "- learn iap_validation Unity project",
+            "- Non-project: working on android studio premake with the gameloft libs(cont)",
+            ""
+         ],
+         "score": 7.5
+      }
+   },
+   "2023-2-2": {
+      "anh.nguyenviet6:": {
+         "reports": [
+            "- Check google play services and firebase service with BEI team",
+            "- Do research Unity for China Store following iOS team.",
+            "- Non-project: working on android studio premake with the gameloft libs(cont)"
+         ],
+         "score": 8
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Update UC and 4399 SDK",
+            "- Research about modified profile"
+         ],
+         "score": 7.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - built sample unity app and connected it to unity distribution portal",
+            " - trying to implement Huawei IAP with UDP"
+         ],
+         "score": 7.5
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "- Done Update and build newest src",
+            "- Applied for permission to Manhattan",
+            "- Learn how to use manhattan",
+            ""
+         ],
+         "score": 7.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "- Implement script notify when upload dSyms",
+            "- Learning Unity"
+         ],
+         "score": 7.5
+      },
+      "minh.nguyenchinh": {
+         "reports": [
+            "",
+            "continued making new feature (done to step 8 with bugs)",
+            "Step:",
+            "- create new gamestate with 1 dragon, 1 habitat and fireBall falling",
+            "- control the dragon with the cursor",
+            "- destroy fireBall when falling to the bottom",
+            "- let the fireball fall at the dragon position",
+            "- let the fireball fall at the dragon's position when the dragon moves",
+            "- let the dragon disappear when fireBall drops the dragon",
+            "- force fireBall disappears when chasing dragon",
+            "- create gifts boxs with random position in this gamestate",
+            "- make the gift box disapear whenever the dragon get them and a new one appears.",
+            "- create UI which counts points for user",
+            ""
+         ],
+         "score": 8
+      },
+      "anh.nguyenviet6": {
+         "reports": [
+            "- check iap_validation Unity",
+            "- Non-project: working on android studio premake with the gameloft libs(cont)",
+            ""
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "+ successfully posted sigils with abnormal amount in inventory to mattermost upon detection",
+            "+ try to reproduce the sigil amount bug"
+         ],
+         "score": 8
+      }
+   },
+   "2023-2-1": {
+      "anh.nguyenviet6:": {
+         "reports": [
+            "- Check google play services and firebase service with BEI team",
+            "- Do research Unity for China Store following iOS team.",
+            "- Non-project: working on android studio premake with the gameloft libs(cont)"
+         ],
+         "score": 7.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Update UC and 4399 SDK",
+            "- Research to change data profile when Sigils is abnormal"
+         ],
+         "score": 7.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - Build sample Unity app to test UDP with Huawei store"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "- Update and build newest src",
+            "- Learn about task DLC",
+            ""
+         ],
+         "score": 8
+      },
+      "duc.luutrong": {
+         "reports": [
+            "- Implement script for notify when upload dSym"
+         ],
+         "score": 7.5
+      },
+      "minh.nguyenchinh": {
+         "reports": [
+            "",
+            "continued making new feature (done to step 8 with bugs)",
+            "Step:",
+            "- create new gamestate with 1 dragon, 1 habitat and fireBall falling",
+            "- control the dragon with the cursor",
+            "- destroy fireBall when falling to the bottom",
+            "- let the fireball fall at the dragon position",
+            "- let the fireball fall at the dragon's position when the dragon moves",
+            "- let the dragon disappear when fireBall drops the dragon",
+            "- force fireBall disappears when chasing dragon",
+            "- create gifts boxs with random position in this gamestate",
+            "- make the gift box disapear whenever the dragon get them and a new one appears.",
+            "- create UI which counts points for user",
+            ""
+         ],
+         "score": 8
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "+ connected to mattermost channel upon detecting sigil count error",
+            "+ encountered ssl certificate problem after establishing a connection",
+            "+ research fix for ssl cert problem"
+         ],
+         "score": 8
+      }
+   },
+   "2023-1-20": {
+      "anh.nguyenviet6:": {
+         "reports": [
+            "- Crashlytics: crash ruinrewards (cont)",
+            "- Minor update in premake android",
+            "- Non-project: check android studio module with the lib owners"
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - implement AntiAddictionCallback onExit() function"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "- Learning about thread in cpp",
+            "- Research about script which uploads dSym to crashlytic"
+         ],
+         "score": 7.5
+      },
+      "minh.nguyenchinh": {
+         "reports": [
+            "Upload new dlc gameboard",
+            "Fixed bugs DMLCNQA-1598",
+            "Research to make new feature in DS",
+            ""
+         ],
+         "score": 8
+      }
+   },
+   "2023-1-19": {
+      "anh.nguyenviet6:": {
+         "reports": [
+            "- Check Shinzo with Anvesh",
+            "- Merge OG to ios trunk",
+            "- Crashlytics: crash ruinrewards (cont)",
+            "- Crashlytics: Missing stacktrace on 4399, baidu, xiaomi, tencent, vivo?",
+            "- Crashlytics: crash ruinrewards (cont)"
+         ],
+         "score": 8
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            " - fix use_alipay_sandbox hpk config"
+         ],
+         "score": 7
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "- Build APK for new SDK of glshop"
+         ],
+         "score": 7
+      },
+      "minh.nguyenchinh": {
+         "reports": [
+            "Created a new feature gamestate",
+            "Did resignation things",
+            "Check bugs in Jira",
+            ""
+         ],
+         "score": 7.5
+      }
+   }
+}
