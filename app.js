@@ -56,11 +56,6 @@ team_member = {
         "name": "trung.maiduc2",
         "alias": "trungtrau"
     },
-    "Minh Nguyen Chinh": {
-        "email": "minh.nguyenchinh",
-        "name": "minh.nguyenchinh",
-        "alias": "chinhminh"
-    },
     "Giang Trinh Thuy": {
         "email": "giang.trinhthuy",
         "name": "giang.trinhthuy",
@@ -402,21 +397,19 @@ async function sendReport(jsonData) {
         if (fs.existsSync(data_path)) {
             printLog(arguments.callee.name, "existsSync")
             let myJSON = JSON.stringify(merged, null, 3);
-            fs.writeFileSync(data_path, myJSON, (err) => {
-                printLog(arguments.callee.name, "1")
-                if (err) throw err;
-                printLog(arguments.callee.name, "2")
-                var execProcess = require("./exec_process.js");
-                execProcess.result("sh temp.sh", function (err, response) {
-                    if (!err) {
-                        printLog(arguments.callee.name, "push OK")
-                        printLog(arguments.callee.name, response);
-                    } else {
-                        printLog(arguments.callee.name, "push failed")
-                        printLog(arguments.callee.name, err);
-                    }
-                });
-            })
+            fs.writeFileSync(data_path, myJSON)
+            printLog(arguments.callee.name, "1")
+            printLog(arguments.callee.name, "2")
+            var execProcess = require("./exec_process.js");
+            execProcess.result("sh temp.sh", function (err, response) {
+                if (!err) {
+                    printLog(arguments.callee.name, "push OK")
+                    printLog(arguments.callee.name, response);
+                } else {
+                    printLog(arguments.callee.name, "push failed")
+                    printLog(arguments.callee.name, err);
+                }
+            });
         } else {
             printLog(arguments.callee.name, "Report: not found data_path=" + data_path)
         }
