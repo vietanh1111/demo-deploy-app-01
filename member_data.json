@@ -1,4 +1,48 @@
 {
+   "2023-2-23": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "Investiage Gem Cheat",
+            "Learn about Snowflake"
+         ],
+         "score": 7.0
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Revision C++ for contest"
+         ],
+         "score": 6
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "suppport test build",
+            "research topics for online class",
+            "still learn c++ because I'm bad "
+         ],
+         "score": 6.5
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Recheck DMLCNQA-1671 and DMLCNQA-1672 on v730db",
+            "Update and check dlc on trunk root for new version"
+         ],
+         "score": 6.5
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "generate tickets when catching gift (cont) because i cannot understand the gacha flow :pepedie:",
+            "investigate DMLCNQA-1754 (cont) because i cannot build root :pe"
+         ],
+         "score": 7
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "check bugs on jira (DMLCN 1674-1676-1677-1681-1683-16 86-1687; DMLSD-3959)",
+            "build 730db"
+         ],
+         "score": 6.5
+      }
+   },
    "2023-2-22": {
       "anh.nguyenviet6": {
          "reports": [
@@ -36,7 +80,7 @@
             "generate tickets when catching gift (cont)"
          ],
          "score": 7
-      },      
+      },
       "trung.maiduc2": {
          "reports": [
             "Prepare for c++ test",
@@ -45,7 +89,7 @@
          ],
          "score": 6.5
       }
-   },      
+   },
    "2023-2-21": {
       "anh.nguyenviet6": {
          "reports": [
@@ -91,7 +135,7 @@
          ],
          "score": 7
       }
-   },   
+   },
    "2023-2-20": {
       "anh.nguyenviet6": {
          "reports": [
@@ -136,7 +180,7 @@
          ],
          "score": 7.5
       }
-   },   
+   },
    "2023-2-17": {
       "anh.nguyenviet6": {
          "reports": [
