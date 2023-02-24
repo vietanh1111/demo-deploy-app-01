@@ -1,4 +1,49 @@
 {
+   "2023-2-24": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "Meeting devs",
+            "Meet O3 for objective",
+            "Cheat gem issue"
+         ],
+         "score": 6.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Implement shooting for dragon",
+            "Learning Unreal engine"
+         ],
+         "score": 7
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support test build 730db",
+            "research topics for online class"
+         ],
+         "score": 6
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Update, check dlc and build trunk root.",
+            "Check DMLCNQA-1671 and DMLCNQA-1672 on iOS "
+         ],
+         "score": 6.5
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "generate tickets when catching gift (cont)"
+         ],
+         "score": 7
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "Check bugs on jira (DMLCN 1674-1676-1677-1681-1683-16 86-1687; DMLSD-3959)",
+            "Learning snowflake",
+            "Joining AI ws"
+         ],
+         "score": 6.5
+      }
+   },   
    "2023-2-23": {
       "anh.nguyenviet6": {
          "reports": [
