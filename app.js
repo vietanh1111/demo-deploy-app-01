@@ -106,8 +106,8 @@ function getCurrentDate() {
 }
 
 function getDestinationMMUrl() {
-    return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
-    // return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
+    // return 'https://chat.gameloft.org/hooks/zgzs61kbmtbiuradjy6ut6oi8a'
+    return 'https://chat.gameloft.org/hooks/3xuqbiou1iyo9rc5otwkg7zywa'
 }
 
 
@@ -317,7 +317,7 @@ async function sendChartAsImage(chartName, chartType) {
                     reject(err);
                 } else {
                     printLog(arguments.callee.name, 'The URL for the image is: ', url);
-                    sendMessageToMM("#This is your chart\n" + url)
+                    sendMessageToMM("# This is your chart\n" + url)
                     url_img = url
                     resolve(url);
                 }
@@ -366,7 +366,7 @@ async function sendReport(jsonData) {
         let currentDate = getCurrentDate()
         myData[currentDate] = {}
 
-        const reName = /(Reporting for)(.*)/;
+        const reName = /(Reporting for)(.*)/gi;
         const reReports = /(.*)/
         membersData.forEach(readData)
         function readData(value, index, array) {
@@ -408,21 +408,24 @@ async function sendReport(jsonData) {
                 } else {
                     printLog(arguments.callee.name, "push failed")
                     printLog(arguments.callee.name, err);
+                    return "sendReport failed"
                 }
             });
         } else {
             printLog(arguments.callee.name, "Report: not found data_path=" + data_path)
         }
-
+        return "sendReport done"
+    } else {
+        return "sendReport failed"
     }
 }
-async function sendDailyRemind(jsonData) {
+async function sendDailyRemind() {
     printLog(arguments.callee.name, "sendDailyRemind")
     let msg = "On behalf of \"Dragon Mania Legends China Team\". Help me say hi and a polite reminder email to my friends that \"you need to fill out the daily task today\""
     requestGetOpenAIMsg(msg)
 }
 
-async function sendThank(jsonData) {
+async function sendThank() {
     printLog(arguments.callee.name, "sendThank")
     let rec = getRecords();
     let msg = "On behalf of \"Dragon Mania Legends China Team\". Send a short email to thank my team for reporting" + " then warning " + rec["miss"] + " because missing daily report."
@@ -432,68 +435,136 @@ async function sendThank(jsonData) {
 const SCORE_CHART_TYPE = "score_chart"
 const REPORT_CHART_TYPE = "report_chart"
 
-async function getReportChart(jsonData) {
+async function getReportChart() {
     const result = await sendChartAsImage("Team Records", REPORT_CHART_TYPE);
     return result;
 }
 
-async function getScoreChart(jsonData) {
+async function getScoreChart() {
     const result = await sendChartAsImage("Team Scores", SCORE_CHART_TYPE);
     return result;
 }
 
 async function chatBot(jsonData) {
     printLog(arguments.callee.name, "chatBot")
-    if (jsonData.text.startsWith("Raven Chat:")) {
-        let question = jsonData.text.replace('Raven Chat:', '');
-        requestGetOpenAIMsgForChatBot(question)
-    }
+    return requestGetOpenAIMsgForChatBot(jsonData)
 }
 
 async function sendBuildToQA(jsonData) {
     printLog(arguments.callee.name, "sendBuildToQA")
-    var preDataBuild = "Tôi là Dev-Chan"
-    var myQuestion = preDataBuild + "\n" + jsonData.text.replace('Raven SendToQA:', '');
+    var preDataBuild = "Tôi là Dev-Chan. "
+    var myQuestion = preDataBuild + jsonData;
     printLog(arguments.callee.name, myQuestion)
-    requestGetOpenAIMsg(myQuestion, "https://chat.gameloft.org/hooks/mzzto39n73g35dmn7rd5e4i3qo")
+    return requestGetOpenAIMsg(myQuestion, "https://chat.gameloft.org/hooks/mzzto39n73g35dmn7rd5e4i3qo")
 }
 
 
-app.post('/doTask', function (req, res) {
-    if (req.method == 'POST') {
-        req.on('data', async function (data) {
-            data = data.toString()
-            printLog(arguments.callee.name, "doTask for the data")
-            printLog(arguments.callee.name, data)
-            jsonData = JSON.parse(data)
-            let result = "result nonwe"
-            if (jsonData["text"]) {
-                if (jsonData["text"].startsWith("Reporting for")) {
-                    sendReport(jsonData)
-                } else if (jsonData["text"].startsWith("Raven Show Reports")) {
-                    result = await getReportChart(jsonData)
-                } else if (jsonData["text"].startsWith("Raven Show Score")) {
-                    result = await getScoreChart(jsonData)
-                } else if (jsonData["text"].startsWith("Raven Thank")) {
-                    sendThank(jsonData)
-                } else if (jsonData["text"].startsWith("Raven Daily Remind")) {
-                    sendDailyRemind(jsonData)
-                } else if (jsonData["text"].startsWith("Raven Chat")) {
-                    chatBot(jsonData)
-                } else if (jsonData["text"].startsWith("Raven SendToQA:")) {
-                    sendBuildToQA(jsonData)
-                } else if (jsonData["text"].startsWith("Raven Help")) {
-                    GetHelp(jsonData)
-                } else if (jsonData["text"].toLowerCase().startsWith("raven-jira: create")) {
-                    CreateAndAddTasks(jsonData)
-                }
-            }
 
-            res.end(result)
-        })
+OPENAI_COMPLETIONS_MAX_TOKEN = 4000
+OPENAI_COMPLETIONS_ALLOW_WORDS = 2500 // ~75% MAX TOKEN
+let conversation = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
+async function requestGetOpenAIMsgForChatBot(input_question) {
+    printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBot ")
+
+    let question = "\nHuman:" + input_question + "\nAI:"
+    conversation = conversation + question
+
+    printLog(arguments.callee.name, "begin conversation=" + conversation)
+    printLog(arguments.callee.name, "words in conversation=" + conversation.split(" ").length)
+    if (conversation.split(" ").length < OPENAI_COMPLETIONS_ALLOW_WORDS) {
+        let request_data = {
+            model: "text-davinci-003",
+            prompt: conversation,
+            temperature: 0.2,
+            max_tokens: OPENAI_COMPLETIONS_MAX_TOKEN,
+            top_p: 1,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.6,
+            stop: [" Human:", " AI:"],
+        }
+
+        try {
+            let completion = await openaiObj.createCompletion(request_data);
+            let res = completion.data.choices[0].text
+            res = res.trim()
+            conversation = conversation + res
+
+            printLog(arguments.callee.name, "end conversation=" + conversation)
+
+            // let messageMM = "**Tớ: **" + input_question + "\n**IQ-200: **" + res
+            let messageMM = "\**IQ-200: **" + res
+            res = await sendMessageToMM(messageMM)
+            printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBot get done")
+            return res
+
+        } catch (error) {
+            printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBot get error")
+            printLog(arguments.callee.name, error)
+            // let messageMM = "**Tớ: **" + input_question + "\n**IQ-200: **" + "Sorry, request Failed"
+            let messageMM = "**IQ-200: **" + "Sorry, request Failed"
+            res = await sendMessageToMM(messageMM)
+            return res
+        }
+    } else {
+        conversation = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
+        let messageMM = "**IQ-200: **" + "Rất tiếc, tôi không thể nhớ được tất cả những gì bạn nói, tôi đang xóa ký ức và chúng ta sẽ bắt đầu lại nha :hugging_face: :hugging_face: :hugging_face: "
+        await sendMessageToMM(messageMM)
+        return "ok and clear conversation"
     }
-})
 
+}
+
+async function sendMessageToMM(msg, url) {
+    printLog(arguments.callee.name, "sendMessageToMM")
+    let req_method = "POST"
+    let req_url = getDestinationMMUrl()
+    if (url) {
+        req_url = url
+    }
+    let req_data = JSON.stringify({
+        text: msg,
+        user_name: "anh.nguyenviet6"
+    })
+    let result = await getRequestResponse(req_method, req_url, req_data)
+    return result
+}
+
+async function makeRequest(req_method, req_url, req_data) {
+    printLog(arguments.callee.name, "makeRequest START")
+    const options = {
+        url: req_url,
+        method: req_method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: req_data
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options, (error, response, body) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(body);
+            }
+        });
+    });
+}
+
+async function getRequestResponse(req_method, req_url, req_data) {
+    console.log("getRequestResponse START")
+    try {
+        const response = await makeRequest(req_method, req_url, req_data);
+        printLog(arguments.callee.name, "parseResponse");
+        printLog(arguments.callee.name, response);
+        // Do something with the response
+        return response
+    } catch (error) {
+        printLog(arguments.callee.name, "parseResponse error");
+        printLog(arguments.callee.name, error);
+        return "getRequestResponse error"
+    }
+}
 
 MSG_CREATE_DONE = "Create Done!!"
 MSG_CREATE_FAILED = "Create Failed~~"
@@ -540,7 +611,7 @@ function CreateAndAddTasks(jsonData) {
     }
 }
 
-function GetHelp(jsonData) {
+async function GetHelp(jsonData) {
     var msg = "#### Raven Options.\n\n| Option  | Command   | Note |"
         + "\n|:-----------|:-----------:|:-----------------------------------------------|"
         + "\n| To Show Report | Raven Show Reports | ✅ |"
@@ -560,36 +631,17 @@ function GetHelp(jsonData) {
     // msg = msg + "\n" + "`To Chat with Raven` -> `Raven Chat` "
 
     printLog(arguments.callee.name, msg)
-    sendMessageToMM(msg)
+    return sendMessageToMM(msg)
 }
 
-
-function sendMessageToMM(msg, request_url) {
-    let url = getDestinationMMUrl()
-    if (request_url) {
-        url = request_url
-    }
-
-    request.post(
-        url,
-        { json: { "text": msg } },
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                printLog(arguments.callee.name, body)
-            } else {
-                printLog(arguments.callee.name, "got error")
-            }
-        }
-    )
-}
 
 async function requestGetOpenAIMsg(question, mmUrl) {
     printLog(arguments.callee.name, "hello ")
     let request_data = {
         "model": "text-davinci-003",
         "prompt": question,
-        "max_tokens": 2000,
-        "top_p": 0.4,
+        "max_tokens": OPENAI_COMPLETIONS_MAX_TOKEN,
+        "top_p": 0.6,
         "n": 1,
         "stream": false,
         "user": "vietanh6"
@@ -601,46 +653,54 @@ async function requestGetOpenAIMsg(question, mmUrl) {
         msg = completion.data.choices[0].text
         printLog(arguments.callee.name, "msg=" + msg)
         msg = msg.trim()
-        sendMessageToMM(msg, mmUrl)
+        return await sendMessageToMM(msg, mmUrl)
     } catch (error) {
         printLog(arguments.callee.name, "get error")
         printLog(arguments.callee.name, error)
+        return arguments.callee.name + " get error"
     }
 }
 
-let msg = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly."
-// let end_msg = "\nAI:"
-async function requestGetOpenAIMsgForChatBot(question, mmUrl) {
-    printLog(arguments.callee.name, "hello ")
 
-    question = "\nHuman:" + question + "\nAI:"
-    msg = msg + question
-    console.log("msg=" + msg)
-    let request_data = {
-        model: "text-davinci-003",
-        prompt: msg,
-        temperature: 0.1,
-        max_tokens: 2000,
-        top_p: 1,
-        frequency_penalty: 0.0,
-        presence_penalty: 0.6,
-        stop: [" Human:", " AI:"],
+app.post('/doTask', function (req, res) {
+    if (req.method == 'POST') {
+        req.on('data', async function (data) {
+            data = data.toString()
+            printLog(arguments.callee.name, "doTask for the data")
+            printLog(arguments.callee.name, data)
+            jsonData = JSON.parse(data)
+            let result = "result nonwe"
+            if (jsonData["text"]) {
+                if (jsonData["text"].toLowerCase().startsWith("reporting for")) {
+                    result = await sendReport(jsonData)
+                } else if (jsonData["text"].toLowerCase().startsWith("raven show reports")) {
+                    result = await getReportChart()
+                } else if (jsonData["text"].toLowerCase().startsWith("raven show score")) {
+                    result = await getScoreChart()
+                } else if (jsonData["text"].toLowerCase().startsWith("raven thank")) {
+                    result = await sendThank()
+                } else if (jsonData["text"].toLowerCase().startsWith("raven daily remind")) {
+                    result = await sendDailyRemind()
+                } else if (jsonData["text"].toLowerCase().startsWith("raven chat:")) {
+                    let regex = /raven chat:/gi;
+                    result = await chatBot(jsonData["text"].replace(regex, ""))
+                } else if (jsonData["text"].toLowerCase().startsWith("raven sendtoqa:")) {
+                    let regex = /raven sendtoqa:/gi;
+                    result = await sendBuildToQA(jsonData["text"].replace(regex, ""))
+                } else if (jsonData["text"].toLowerCase().startsWith("raven help")) {
+                    let regex = /raven help/gi;
+                    result = await GetHelp(jsonData["text"].replace(regex, ""))
+                } else if (jsonData["text"].toLowerCase().startsWith("raven-jira: create")) {
+                    let regex = /raven-jira: create/gi;
+                    result = await CreateAndAddTasks(jsonData["text"].replace(regex, ""))
+                }
+            }
+
+            res.end(result)
+        })
     }
+})
 
-    try {
-
-        const completion = await openaiObj.createCompletion(request_data);
-        res = completion.data.choices[0].text
-        res = res.trim()
-        msg = msg + res
-        // printLog(arguments.callee.name, "msg=" + msg)
-
-        sendMessageToMM(res, mmUrl)
-    } catch (error) {
-        printLog(arguments.callee.name, "get error")
-        printLog(arguments.callee.name, error)
-    }
-}
 
 var server = app.listen(port, function () {
     var host = server.address().address
