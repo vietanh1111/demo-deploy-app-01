@@ -454,7 +454,7 @@ async function chatBot(jsonData) {
 
 async function sendBuildToQA(jsonData) {
     printLog(arguments.callee.name, "sendBuildToQA")
-    var preDataBuild = "Tôi là Dev-Chan. "
+    var preDataBuild = "Tôi là Dev-Chan."
     var myQuestion = preDataBuild + jsonData;
     printLog(arguments.callee.name, myQuestion)
     return requestGetOpenAIMsg(myQuestion, "https://chat.gameloft.org/hooks/mzzto39n73g35dmn7rd5e4i3qo")
@@ -707,11 +707,8 @@ async function requestGetOpenAIMsg(question, mmUrl) {
     let request_data = {
         "model": "text-davinci-003",
         "prompt": question,
-        "max_tokens": OPENAI_COMPLETIONS_MAX_TOKEN,
+        "max_tokens": 2000,
         "top_p": 0.6,
-        "n": 1,
-        "stream": false,
-        "user": "vietanh6"
     }
 
     try {
