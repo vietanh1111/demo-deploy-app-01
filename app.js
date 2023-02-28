@@ -777,7 +777,7 @@ app.post('/doChatOpenAI_slash', function (req, res) {
             let params = queryString.parse(data);
             let question = params.text;
             let userName = params.user_name;
-            let response = await requestGetOpenAIMsgForChatBotQA(question)
+            let response = await requestGetOpenAIMsgForChatBotQA(question,userName, true)
             console.log("DONE")
             res.end(response)
         })
