@@ -3,6 +3,8 @@ var app = express();
 const fs = require("fs");
 const request = require('request')
 const openai = require("openai");
+const queryString = require('querystring');
+
 const utilities = require("./utilities/utilities.js")
 const printLog = utilities.printLog
 
@@ -462,19 +464,20 @@ async function sendBuildToQA(jsonData) {
 
 OPENAI_COMPLETIONS_MAX_TOKEN = 4000
 OPENAI_COMPLETIONS_ALLOW_WORDS = 2500 // ~75% MAX TOKEN
-let conversation = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
-async function requestGetOpenAIMsgForChatBot(input_question) {
+let conversationRaven = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
+let conversationQa = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
+async function requestGetOpenAIMsgForChatBotRaven(input_question, user_name, addQuestion) {
     printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBot ")
 
     let question = "\nHuman:" + input_question + "\nAI:"
-    conversation = conversation + question
+    conversationRaven = conversationRaven + question
 
-    printLog(arguments.callee.name, "begin conversation=" + conversation)
-    printLog(arguments.callee.name, "words in conversation=" + conversation.split(" ").length)
-    if (conversation.split(" ").length < OPENAI_COMPLETIONS_ALLOW_WORDS) {
+    printLog(arguments.callee.name, "begin conversation=" + conversationRaven)
+    printLog(arguments.callee.name, "words in conversation=" + conversationRaven.split(" ").length)
+    if (conversationRaven.split(" ").length < OPENAI_COMPLETIONS_ALLOW_WORDS) {
         let request_data = {
             model: "text-davinci-003",
-            prompt: conversation,
+            prompt: conversationRaven,
             temperature: 0.2,
             max_tokens: OPENAI_COMPLETIONS_MAX_TOKEN,
             top_p: 1,
@@ -483,16 +486,22 @@ async function requestGetOpenAIMsgForChatBot(input_question) {
             stop: [" Human:", " AI:"],
         }
 
+        let userQuestion = ""
+        if (addQuestion) {
+            let name = user_name
+            userQuestion = "**" + name + ": **" + input_question 
+        }
+
         try {
             let completion = await openaiObj.createCompletion(request_data);
             let res = completion.data.choices[0].text
             res = res.trim()
-            conversation = conversation + res
+            conversationRaven = conversationRaven + res
 
-            printLog(arguments.callee.name, "end conversation=" + conversation)
+            printLog(arguments.callee.name, "end conversationRaven=" + conversationRaven)
 
             // let messageMM = "**Tớ: **" + input_question + "\n**IQ-200: **" + res
-            let messageMM = "\**IQ-200: **" + res
+            let messageMM = userQuestion + "\**IQ-200: **" + res
             res = await sendMessageToMM(messageMM)
             printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBot get done")
             return res
@@ -506,7 +515,64 @@ async function requestGetOpenAIMsgForChatBot(input_question) {
             return res
         }
     } else {
-        conversation = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
+        conversationRaven = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
+        let messageMM = "**IQ-200: **" + "Rất tiếc, tôi không thể nhớ được tất cả những gì bạn nói, tôi đang xóa ký ức và chúng ta sẽ bắt đầu lại nha :hugging_face: :hugging_face: :hugging_face: "
+        await sendMessageToMM(messageMM)
+        return "ok and clear conversation"
+    }
+
+}
+
+async function requestGetOpenAIMsgForChatBotQA(input_question, user_name, addQuestion) {
+    printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBotQA ")
+
+    let question = "\nHuman:" + input_question + "\nAI:"
+    conversationQa = conversationQa + question
+
+    printLog(arguments.callee.name, "begin conversation=" + conversationQa)
+    printLog(arguments.callee.name, "words in conversation=" + conversationQa.split(" ").length)
+    if (conversationQa.split(" ").length < OPENAI_COMPLETIONS_ALLOW_WORDS) {
+        let request_data = {
+            model: "text-davinci-003",
+            prompt: conversationQa,
+            temperature: 0.2,
+            max_tokens: OPENAI_COMPLETIONS_MAX_TOKEN,
+            top_p: 1,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.6,
+            stop: [" Human:", " AI:"],
+        }
+
+        let userQuestion = ""
+        if (addQuestion) {
+            let name = user_name
+            userQuestion = "**" + name + ": **" + input_question 
+        }
+
+        try {
+            let completion = await openaiObj.createCompletion(request_data);
+            let res = completion.data.choices[0].text
+            res = res.trim()
+            conversationQa = conversationQa + res
+
+            printLog(arguments.callee.name, "end conversationQa=" + conversationQa)
+
+            // let messageMM = "**Tớ: **" + input_question + "\n**IQ-200: **" + res
+            let messageMM = userQuestion + "\**IQ-200: **" + res
+            res = await sendMessageToMM(messageMM)
+            printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBotQA get done")
+            return res
+
+        } catch (error) {
+            printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBotQA get error")
+            printLog(arguments.callee.name, error)
+            // let messageMM = "**Tớ: **" + input_question + "\n**IQ-200: **" + "Sorry, request Failed"
+            let messageMM = "**IQ-200: **" + "Sorry, request Failed"
+            res = await sendMessageToMM(messageMM)
+            return res
+        }
+    } else {
+        conversationQa = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
         let messageMM = "**IQ-200: **" + "Rất tiếc, tôi không thể nhớ được tất cả những gì bạn nói, tôi đang xóa ký ức và chúng ta sẽ bắt đầu lại nha :hugging_face: :hugging_face: :hugging_face: "
         await sendMessageToMM(messageMM)
         return "ok and clear conversation"
@@ -697,6 +763,23 @@ app.post('/doTask', function (req, res) {
             }
 
             res.end(result)
+        })
+    }
+})
+
+app.post('/doChatOpenAI_slash', function (req, res) {
+    if (req.method == 'POST') {
+        req.on('data', async function (data) {
+            data = data.toString()
+            console.log("doChatOpenAI for the data")
+            console.log(data)
+
+            let params = queryString.parse(data);
+            let question = params.text;
+            let userName = params.user_name;
+            let response = await requestGetOpenAIMsgForChatBotQA(question)
+            console.log("DONE")
+            res.end(response)
         })
     }
 })
