@@ -449,7 +449,7 @@ async function getScoreChart() {
 
 async function chatBot(jsonData) {
     printLog(arguments.callee.name, "chatBot")
-    return requestGetOpenAIMsgForChatBot(jsonData)
+    return requestGetOpenAIMsgForChatBotRaven(jsonData)
 }
 
 async function sendBuildToQA(jsonData) {
@@ -467,7 +467,7 @@ OPENAI_COMPLETIONS_ALLOW_WORDS = 2500 // ~75% MAX TOKEN
 let conversationRaven = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
 let conversationQa = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
 async function requestGetOpenAIMsgForChatBotRaven(input_question, user_name, addQuestion) {
-    printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBot ")
+    printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBotRaven ")
 
     let question = "\nHuman:" + input_question + "\nAI:"
     conversationRaven = conversationRaven + question
@@ -503,11 +503,11 @@ async function requestGetOpenAIMsgForChatBotRaven(input_question, user_name, add
             // let messageMM = "**Tớ: **" + input_question + "\n**IQ-200: **" + res
             let messageMM = userQuestion + "\**IQ-200: **" + res
             res = await sendMessageToMM(messageMM)
-            printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBot get done")
+            printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBotRaven get done")
             return res
 
         } catch (error) {
-            printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBot get error")
+            printLog(arguments.callee.name, "requestGetOpenAIMsgForChatBotRaven get error")
             printLog(arguments.callee.name, error)
             // let messageMM = "**Tớ: **" + input_question + "\n**IQ-200: **" + "Sorry, request Failed"
             let messageMM = "**IQ-200: **" + "Sorry, request Failed"
@@ -777,7 +777,7 @@ app.post('/doChatOpenAI_slash', function (req, res) {
             let params = queryString.parse(data);
             let question = params.text;
             let userName = params.user_name;
-            let response = await requestGetOpenAIMsgForChatBotQA(question,userName, true)
+            let response = await requestGetOpenAIMsgForChatBotQA(question, userName, true)
             console.log("DONE")
             res.end(response)
         })
