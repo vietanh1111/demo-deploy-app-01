@@ -703,6 +703,7 @@ async function GetHelp(jsonData) {
 
 async function requestGetOpenAIMsg(question, mmUrl) {
     printLog(arguments.callee.name, "hello ")
+    printLog(arguments.callee.name, question)
     let request_data = {
         "model": "text-davinci-003",
         "prompt": question,
