@@ -462,8 +462,8 @@ async function sendBuildToQA(jsonData) {
 
 
 
-OPENAI_COMPLETIONS_MAX_TOKEN = 4000
-OPENAI_COMPLETIONS_ALLOW_WORDS = 2500 // ~75% MAX TOKEN
+OPENAI_COMPLETIONS_MAX_TOKEN = 2000
+OPENAI_COMPLETIONS_ALLOW_WORDS = 1200 // ~75% MAX TOKEN
 let conversationRaven = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
 let conversationQa = "The following is a conversation with an AI assistant. The assistant have 200-IQ, is helpful, creative, clever, and very friendly."
 async function requestGetOpenAIMsgForChatBotRaven(input_question, user_name, addQuestion) {
@@ -480,9 +480,9 @@ async function requestGetOpenAIMsgForChatBotRaven(input_question, user_name, add
             prompt: conversationRaven,
             temperature: 0.2,
             max_tokens: OPENAI_COMPLETIONS_MAX_TOKEN,
-            top_p: 1,
-            frequency_penalty: 0.0,
-            presence_penalty: 0.6,
+            // top_p: 1,
+            // frequency_penalty: 0.0,
+            // presence_penalty: 0.6,
             stop: [" Human:", " AI:"],
         }
 
@@ -537,9 +537,9 @@ async function requestGetOpenAIMsgForChatBotQA(input_question, user_name, addQue
             prompt: conversationQa,
             temperature: 0.2,
             max_tokens: OPENAI_COMPLETIONS_MAX_TOKEN,
-            top_p: 1,
-            frequency_penalty: 0.0,
-            presence_penalty: 0.6,
+            // top_p: 1,
+            // frequency_penalty: 0.0,
+            // presence_penalty: 0.6,
             stop: [" Human:", " AI:"],
         }
 
