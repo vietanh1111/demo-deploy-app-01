@@ -757,6 +757,9 @@ app.post('/doTask', function (req, res) {
                 } else if (jsonData["text"].toLowerCase().startsWith("raven-jira: create")) {
                     let regex = /raven-jira: create/gi;
                     result = await CreateAndAddTasks(jsonData["text"].replace(regex, ""))
+                } else if (jsonData["text"].toLowerCase().startsWith("raven-localroom:")) {
+                    let regex = /raven-localroom:/gi;
+                    result = await requestGetOpenAIMsgForChatBotQA(jsonData["text"].replace(regex, ""))
                 }
             }
 
