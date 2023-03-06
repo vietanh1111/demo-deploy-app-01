@@ -1,4 +1,225 @@
 {
+   "2023-3-6": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "mockup for new feature",
+            "plan for march2023"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Resolve dragon collider with meteorite:",
+            "Detect collision between dragon and meteorite",
+            "Active shield when dragon collider with meteorite",
+            "IDetect collision between dragon and meteorite"
+         ],
+         "score": 6.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "build 730gb (if possibile)",
+            "Doing [Hacking] Ban Scripts (https://jira.gameloft.org/browse/DMLCNQA-1771)"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support build 730gb",
+            "research topics for online class"
+         ],
+         "score": 6
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "send ticket generation result from server to client",
+            "log result in client",
+            "fix giftbox spawn location algorithm"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Checked DMLCNQA-1800 on 730fb. ",
+            "Waitting, prepare update and upload dlc for 730gb.",
+            "Learn c"
+         ],
+         "score": 6
+      }
+   },
+   "2023-3-3": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "update dlc for 720e",
+            "fix crash when removing dlc from local data",
+            "how to reduce gem and sent massive give through tuna"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Fixed DLC bug",
+            "Resolve collision between projectile and meteorite"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "update dlc for 720e",
+            "support build 730gb"
+         ],
+         "score": 6
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "build 730gb (if possibile)",
+            "doing DMLCNQA-1769 (research snowflake)"
+         ],
+         "score": 6.5
+      },      
+      "giang.trinhthuy": {
+         "reports": [
+            "fix immediate level up bug when picking up giftbox",
+            "improve dragon movement speed",
+            "fix giftbox spawn location algorithm"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            " Dlc for 730gb",
+            "Learn c"
+         ],
+         "score": 6
+      }
+   },
+   "2023-3-2": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "check crash when remove dlc anims and addon on local data",
+            "non-project: meeting lead dev",
+            "non-project: support spa team on premake"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Imlement generating meteorite for dragon flying",
+            "Investigate DLC bug"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support test build 730f",
+            "minor update to AS merge script",
+            "research topics for online class"
+         ],
+         "score": 6
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "send ticket generation result from server to client",
+            "log result in client",
+            "fix giftbox spawn location algorithm"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Update, check, prepare dlc for 730gb",
+            "Learn c"
+         ],
+         "score": 6
+      }
+   },
+   "2023-3-1": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "check crash when remove dlc anims and addon on local data",
+            "non-project: meeting lead dev",
+            "non-project: support spa team on premake"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Imlement generating meteorite for dragon flying",
+            "Investigate DLC bug"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support test build 730f",
+            "minor update to AS merge script",
+            "research topics for online class"
+         ],
+         "score": 6
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "send ticket generation result from server to client",
+            "log result in client",
+            "fix giftbox spawn location algorithm"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Update, check, prepare dlc for 730gb",
+            "Learn c"
+         ],
+         "score": 6
+      }
+   },
+   "2023-2-28": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "weekly: fix sigils issues",
+            "up dlc 730eb",
+            "check new sdks",
+            "nonproject: fix platformToolset",
+            "nonproject: add namespace api to vs c++",
+            "nonproject: release premake 4.4.2"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Implement generating meteorite in dragon flying"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "support build 730fb",
+            "research topics for online class",
+            "IIG English class"
+         ],
+         "score": 6
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "generate tickets when catching gift (cont)"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Update, check dlc and build newest src on trunk root.",
+            "Recheck DMLCNQA-1671 and DMLCNQA-1672 on v730eb "
+         ],
+         "score": 6
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "check build 730 eb and bugs",
+            "learning snowflake and sql"
+         ],
+         "score": 6.5
+      }
+   },
    "2023-2-27": {
       "anh.nguyenviet6": {
          "reports": [
@@ -33,7 +254,7 @@
          ],
          "score": 6.5
       }
-   },	
+   },
    "2023-2-24": {
       "anh.nguyenviet6": {
          "reports": [
@@ -78,7 +299,7 @@
          ],
          "score": 6.5
       }
-   },   
+   },
    "2023-2-23": {
       "anh.nguyenviet6": {
          "reports": [
