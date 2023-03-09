@@ -1,4 +1,127 @@
 {
+   "2023-3-9": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "check signature iap issue on taptap live",
+            "heck issue stuck on huawei login",
+            "New feature: add mockup game state GS_DragonArcade_MainMenu"
+         ],
+         "score": 6.5
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Join anh Dung workshop",
+            "Implement controller virtual keyboard",
+            "Active shield when dragon collider with meteorite",
+            "Refactor actionScript for DragonArcade UI"
+         ],
+         "score": 6.5
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "Check ads gem on 2 inventories",
+            "Build 730h - hb",
+            "Join online class"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "online class - janus",
+            "research add new game state"
+         ],
+         "score": 6
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "add ticket counter",
+            "implement skill cost by tickets"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Update new src, data and rebuild trunk",
+            "Learn c",
+            "Learn online"
+         ],
+         "score": 6
+      }
+   },
+   "2023-3-8": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "check signature iap issue on taptap live"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Join online class",
+            "Implement virtual keyboard (swf)"
+         ],
+         "score": 7
+      },
+      "giang.trinhthuy": {
+         "reports": [
+            "add ticket count vfx when picking up giftbox",
+            "implement speed-up skill"
+         ],
+         "score": 7
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Fix bug ",
+            "Learn online",
+            "Learn c"
+         ],
+         "score": 6
+      }
+   },
+   "2023-3-7": {
+      "anh.nguyenviet6": {
+         "reports": [
+            "Weekly: sigils edit",
+            "Mockup and team meeting",
+            "clean bug base",
+            "change profile visibility for 730gb",
+            "sync SEM template",
+            "check iap issue on taptap live"
+         ],
+         "score": 7
+      },
+      "duc.luutrong": {
+         "reports": [
+            "Changing method controller dragon",
+            "Learning modern cpp"
+         ],
+         "score": 7
+      },
+      "trung.maiduc2": {
+         "reports": [
+            "Check build 730gb",
+            "Check and fix Dungeon error",
+            "Try to use Bantoolb"
+         ],
+         "score": 6.5
+      },
+      "quy.nguyenngoc": {
+         "reports": [
+            "build & research add new game state",
+            "IIG English class",
+            "research topics for online class"
+         ],
+         "score": 6
+      },
+      "anh.buithingoc": {
+         "reports": [
+            "Fixing DMLCNQA-1800 ",
+            "Edit dlc for 730gb on manhattan.",
+            "Learn c"
+         ],
+         "score": 6.5
+      }
+   },
    "2023-3-6": {
       "anh.nguyenviet6": {
          "reports": [
